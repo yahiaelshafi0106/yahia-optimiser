@@ -3,102 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yahya Optimizer | النسخة الرسمية</title>
+    <title>Yahya Optimizer | Gaming Edition</title>
     <style>
-        :root { --primary: #007bff; --bg: #0d0d0d; --card-bg: #161616; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); color: white; text-align: center; margin: 0; padding: 40px 20px; }
-        .container { max-width: 1100px; margin: auto; background: #121212; padding: 40px; border-radius: 30px; border: 1px solid #222; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
-        h1 { color: var(--primary); font-size: 3.2em; margin-bottom: 10px; text-shadow: 0 0 20px rgba(0,123,255,0.4); }
-        .subtitle { color: #888; margin-bottom: 40px; font-size: 1.2em; }
+        :root { --primary: #00d2ff; --secondary: #3a7bd5; --accent: #00ff00; --mac-color: #ff00ff; --linux-color: #f8981d; }
+        
+        body { 
+            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+            color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0; overflow-x: hidden;
+        }
 
-        /* قسم إحصائيات الجيمنج */
-        .stats-wrapper { display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; flex-wrap: wrap; }
-        .stat-box { background: #1a1a1a; padding: 20px; border-radius: 15px; border: 1px solid #333; min-width: 180px; transition: 0.3s; }
-        .stat-box:hover { border-color: var(--primary); transform: scale(1.05); }
-        .stat-num { display: block; font-size: 2.2em; font-weight: bold; }
-        .green { color: #00ff00; } .red { color: #ff4444; }
+        /* تأثيرات الأكشن والخلفية */
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%; pointer-events: none; z-index: 10;
+        }
 
-        /* قسم الشرح */
-        .info-section { background: #1a1a1a; padding: 25px; border-radius: 20px; margin-bottom: 40px; text-align: right; border-right: 6px solid var(--primary); }
-        .info-section h2 { color: var(--primary); margin-top: 0; }
-        .info-section ul { list-style: none; padding: 0; }
-        .info-section li { margin-bottom: 15px; color: #ccc; font-size: 1.1em; }
-        .info-section b { color: white; }
+        .container { max-width: 1200px; margin: auto; padding: 50px 20px; position: relative; z-index: 20; }
 
-        /* أزرار التحميل */
-        .cards-wrapper { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-bottom: 60px; }
-        .card { background: var(--card-bg); padding: 30px; border-radius: 25px; width: 300px; border: 1px solid #333; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .card:hover { border-color: var(--primary); box-shadow: 0 0 25px rgba(0,123,255,0.3); transform: translateY(-10px); }
-        .btn { display: block; background: var(--primary); color: white; padding: 15px; text-decoration: none; border-radius: 12px; font-weight: bold; font-size: 1.1em; margin: 20px 0; transition: 0.2s; }
-        .btn:hover { background: #0056b3; }
+        h1 { 
+            font-size: 4em; font-weight: 900; letter-spacing: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(0, 210, 255, 0.5));
+            margin-bottom: 10px; text-transform: uppercase;
+        }
 
-        /* قسم الفيديو */
-        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
-        .video-card { background: #1a1a1a; padding: 15px; border-radius: 20px; border: 1px solid #222; }
-        .video-card iframe { width: 100%; aspect-ratio: 16/9; border-radius: 15px; border: none; }
-        code { background: #000; padding: 3px 7px; color: #ffcc00; border-radius: 5px; font-family: monospace; }
+        .card {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid #333; border-radius: 15px;
+            padding: 30px; transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+            position: relative; overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.4);
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none; color: white; padding: 15px 30px; border-radius: 8px;
+            font-weight: bold; text-transform: uppercase; cursor: pointer;
+            text-decoration: none; display: inline-block; transition: 0.3s;
+            animation: pulse-blue 2s infinite;
+        }
+
+        @keyframes pulse-blue {
+            0% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 210, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0); }
+        }
+
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin-top: 40px; }
+        .video-card { border: 2px solid #222; background: #000; border-radius: 15px; padding: 15px; transition: 0.3s; }
+        .video-card:hover { border-color: var(--primary); }
+        .video-card p { margin-top: 15px; font-weight: bold; font-size: 0.9em; }
+        iframe { border-radius: 10px; border: none; width: 100%; aspect-ratio: 16/9; }
+
+        .stat-num { font-size: 3.5em; font-weight: bold; text-shadow: 0 0 15px currentColor; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>YAHYA OPTIMIZER</h1>
-        <p class="subtitle">الأداة الاحترافية لرفع فريمات Minecraft و Roblox وتحسين استجابة الأنظمة</p>
+        <header>
+            <h1>YAHYA OPTIMIZER</h1>
+            <p style="color: var(--primary); font-weight: bold; letter-spacing: 2px;">[ STATUS: OPERATIONAL - MAXIMUM PERFORMANCE ]</p>
+        </header>
 
-        <div class="stats-wrapper">
+        <div style="display: flex; justify-content: space-around; margin: 60px 0; flex-wrap: wrap; gap: 20px;">
             <div class="stat-box">
-                <span style="color:#888">قبل التحسين</span>
-                <span class="stat-num red">90 FPS</span>
+                <div class="stat-num" style="color: #ff0055;">90</div>
+                <div style="color: #666; font-weight: bold;">PREVIOUS FPS</div>
             </div>
             <div class="stat-box">
-                <span style="color:#888">بعد التطبيق</span>
-                <span class="stat-num green">200+ FPS</span>
+                <div class="stat-num" style="color: var(--accent);">200+</div>
+                <div style="color: #666; font-weight: bold;">OPTIMIZED FPS</div>
             </div>
             <div class="stat-box">
-                <span style="color:#888">توفير الرام</span>
-                <span class="stat-num" style="color:var(--primary)">35%</span>
+                <div class="stat-num" style="color: var(--primary);">LOW</div>
+                <div style="color: #666; font-weight: bold;">INPUT LAG</div>
             </div>
         </div>
 
-        <div class="info-section">
-            <h2>ماذا يقدم لك Yahya Optimizer؟</h2>
-            <ul>
-                <li>🚀 <b>تحسين الألعاب:</b> ضبط المعالج للوصول لأعلى فريمات ممكنة في Minecraft و Roblox.</li>
-                <li>🌡️ <b>إدارة الحرارة:</b> تحكم ذكي في المراوح (خاص بـ Zorin OS) لمنع هبوط الأداء (Thermal Throttling).</li>
-                <li>🧹 <b>تنظيف الرام:</b> إخلاء الذاكرة من العمليات غير الضرورية كل 5 ثوانٍ لضمان استقرار الجهاز.</li>
-                <li>⚡ <b>تخليل الـ Lag:</b> تحسين استجابة الماوس والكيبورد عبر تعطيل ميزات الويندوز الثقيلة.</li>
-            </ul>
-        </div>
-
-        <div class="cards-wrapper">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
             <div class="card">
-                <h3>🪟 Windows</h3>
-                <a href="optimizer.exe" class="btn">تحميل .EXE</a>
-                <p style="font-size: 0.8em; color: #666;">تشغيل كمسؤول (Administrator)</p>
+                <h2 style="color: #fff;">WINDOWS OS</h2>
+                <p style="color: #888;">أقصى أداء لماين كرافت وروبلوكس على ويندوز.</p>
+                <a href="optimizer.exe" class="btn">DEPLOY EXE</a>
             </div>
-            <div class="card">
-                <h3>🐧 Linux (Zorin OS)</h3>
-                <a href="optimizer_linux" class="btn">تحميل Binary</a>
-                <p style="font-size: 0.8em; color: #666;">استخدم <code>chmod +x</code> للفتح</p>
+            <div class="card" style="border-color: var(--linux-color);">
+                <h2 style="color: #fff;">LINUX / ZORIN</h2>
+                <p style="color: #888;">تحكم كامل في مروحة الجهاز وحرارة المعالج.</p>
+                <a href="optimizer_linux" class="btn" style="background: var(--linux-color); animation: none;">INITIALIZE</a>
             </div>
-            <div class="card">
-                <h3>🍎 macOS</h3>
-                <a href="optimizer_mac" class="btn">تحميل App</a>
-                <p style="font-size: 0.8em; color: #666;">يدعم M1 & Intel</p>
+            <div class="card" style="border-color: var(--mac-color);">
+                <h2 style="color: #fff;">MACOS</h2>
+                <p style="color: #888;">تخطي قيود النظام وأطلق قوة الماك بالكامل.</p>
+                <a href="optimizer_mac" class="btn" style="background: var(--mac-color); animation: none;">UNLEASH APP</a>
             </div>
         </div>
 
-        <h2 style="margin-bottom: 25px;">دليل الفيديو التعليمي</h2>
+        <h2 style="margin-top: 80px; text-transform: uppercase; letter-spacing: 3px;">دليل العمليات الميدانية (System Briefs)</h2>
         <div class="video-grid">
             <div class="video-card">
                 <iframe src="https://www.youtube.com/embed/رابط_فيديو_ويندوز"></iframe>
-                <div style="margin-top:10px">شرح التشغيل على Windows</div>
+                <p style="color: var(--primary);">Windows: التحميل وتشغيل وضع الوحش</p>
             </div>
+
             <div class="video-card">
                 <iframe src="https://www.youtube.com/embed/رابط_فيديو_لينكس"></iframe>
-                <div style="margin-top:10px">شرح التثبيت على Linux</div>
+                <p style="color: var(--linux-color);">Zorin OS: تفعيل الـ Binary وكسر القيود</p>
+            </div>
+
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/NOW5dyA_JgY"></iframe>
+                <p style="color: var(--mac-color);">macOS: تخطي حماية Gatekeeper وتشغيل الأداة</p>
             </div>
         </div>
+
+        <footer style="margin-top: 100px; color: #444; font-size: 0.8em;">
+            &copy; 2024 YAHYA OPTIMIZER | DEVELOPED FOR GAMERS BY YAHYA
+        </footer>
     </div>
 
 </body>

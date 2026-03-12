@@ -3,25 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Yahya Optimizer | الموقع الرسمي</title>
-    <meta name="description" content="الموقع الرسمي لأداة Yahya Optimizer. أقوى أداة مبرمجة بـ C++ لتسريع الألعاب وتحسين أداء Linux و Windows.">
+    <meta name="description" content="الأداة الشاملة Yahya Optimizer لتسريع ويندوز ولينكس. تحسين أداء المعالج وزيادة فريمات الألعاب برمجياً.">
     <meta name="google-site-verification" content="حط_كود_جوجل_هنا" />
     <meta name="author" content="Yahya">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { -webkit-user-select: none; user-select: none; box-sizing: border-box; }
         body { background: #0a0a0a; color: #e0e0e0; font-family: 'Cairo', sans-serif; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .container { text-align: center; background: #151515; padding: 30px; border-radius: 20px; border: 2px solid #00ff00; box-shadow: 0 0 20px rgba(0, 255, 0, 0.1); max-width: 700px; width: 100%; margin-top: 20px; }
+        .container { text-align: center; background: #151515; padding: 30px; border-radius: 20px; border: 2px solid #00ff00; box-shadow: 0 0 20px rgba(0, 255, 0, 0.1); max-width: 800px; width: 100%; margin-top: 20px; }
         h1 { color: #00ff00; text-shadow: 0 0 10px rgba(0, 255, 0, 0.5); font-size: 2.2rem; margin-bottom: 5px; }
         .dev-badge { background: #00ff00; color: #000; padding: 5px 15px; border-radius: 50px; font-weight: bold; font-size: 0.8rem; }
         
-        .main-features { text-align: right; margin-top: 25px; }
-        .feature-card { background: #1f1f1f; padding: 15px; border-radius: 12px; margin-bottom: 15px; border-right: 4px solid #00ff00; }
-        .feature-card h3 { color: #00ff00; margin: 0 0 5px 0; font-size: 1.1rem; }
-        .feature-card p { margin: 0; font-size: 0.9rem; color: #bbb; line-height: 1.5; }
+        .systems-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; text-align: right; }
+        .system-card { background: #1f1f1f; padding: 20px; border-radius: 15px; border-bottom: 4px solid #00ff00; }
+        .system-card h3 { color: #00ff00; margin-top: 0; display: flex; align-items: center; gap: 10px; }
+        .system-card ul { padding-right: 20px; font-size: 0.9rem; color: #ccc; line-height: 1.8; }
 
-        .btn { display: inline-block; background: #00ff00; color: #000; padding: 18px; text-decoration: none; border-radius: 12px; font-weight: bold; margin-top: 20px; width: 100%; font-size: 1.1rem; transition: 0.3s; border: none; cursor: pointer; }
-        .btn:hover { background: #fff; box-shadow: 0 0 25px rgba(0, 255, 0, 0.5); transform: translateY(-3px); }
+        .general-features { margin-top: 30px; text-align: right; background: #252525; padding: 20px; border-radius: 15px; }
+        .general-features h3 { color: #fff; border-right: 4px solid #00ff00; padding-right: 10px; }
+
+        .btn { display: inline-block; background: #00ff00; color: #000; padding: 18px; text-decoration: none; border-radius: 12px; font-weight: bold; margin-top: 30px; width: 100%; font-size: 1.2rem; transition: 0.3s; border: none; cursor: pointer; }
+        .btn:hover { background: #fff; box-shadow: 0 0 30px rgba(0, 255, 0, 0.6); transform: translateY(-3px); }
         footer { margin: 40px 0; color: #444; font-size: 0.8rem; }
+        
+        @media (max-width: 600px) { .systems-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -30,34 +35,40 @@
         <h1>YAHYA OPTIMIZER 🚀</h1>
         <span class="dev-badge">بواسطة المبرمج يحيى</span>
 
-        <div class="main-features">
-            <div class="feature-card">
-                <h3>⚡ تحسين أداء المعالج (CPU Boost)</h3>
-                <p>تفعيل وضع الأداء الأقصى للنواة، مما يساعد في رفع فريمات Minecraft و Roblox بشكل ملحوظ.</p>
+        <p style="margin-top: 20px; color: #aaa;">أداة احترافية واحدة.. تدعم جميع أنظمتك المفضلة</p>
+
+        <div class="systems-grid">
+            <div class="system-card">
+                <h3>🪟 لنظام Windows</h3>
+                <ul>
+                    <li>تنظيف ملفات Temp و Prefetch تلقائياً.</li>
+                    <li>تحسين استهلاك الرامات للألعاب الثقيلة.</li>
+                    <li>إيقاف الخدمات غير الضرورية في الخلفية.</li>
+                    <li>تقليل الـ Input Lag في Minecraft و Roblox.</li>
+                </ul>
             </div>
 
-            <div class="feature-card">
-                <h3>🧹 تنظيف ملفات الكاش (Cache Cleaner)</h3>
-                <p>إزالة الملفات المؤقتة المتراكمة التي تسبب "اللاج" وتهنيج النظام أثناء اللعب.</p>
-            </div>
-
-            <div class="feature-card">
-                <h3>🧠 إدارة الرامات (RAM Management)</h3>
-                <p>تفريغ الذاكرة العشوائية من العمليات غير الضرورية لتركيز كامل قوة الجهاز على اللعبة فقط.</p>
-            </div>
-
-            <div class="feature-card">
-                <h3>🐧 دعم كامل لنظام Zorin OS</h3>
-                <p>أوامر مخصصة لمستخدمي لينكس لتسريع الواجهة وتحسين استجابة النظام (Low Latency).</p>
-            </div>
-
-            <div class="feature-card">
-                <h3>🛡️ كود برمجي آمن (Open Source)</h3>
-                <p>الأداة مبرمجة بلغة C++ مفتوحة المصدر، مما يعني شفافية كاملة وأمان لجهازك.</p>
+            <div class="system-card">
+                <h3>🐧 لنظام Linux (Zorin OS)</h3>
+                <ul>
+                    <li>تحسين مخصص لتوزيعة Zorin OS و Debian.</li>
+                    <li>تفعيل وضع "الأداء العالي" للمعالج عبر التيرمينال.</li>
+                    <li>تنظيف الكاش الخاص بالنظام (APT Cache).</li>
+                    <li>تسريع استجابة الواجهة والـ Desktop Environment.</li>
+                </ul>
             </div>
         </div>
 
-        <a href="optimizer.cpp" download class="btn">تحميل الأداة الآن (ملف C++)</a>
+        <div class="general-features">
+            <h3>🛡️ مميزات إضافية</h3>
+            <p style="font-size: 0.9rem; line-height: 1.6;">
+                • الكود مكتوب بلغة <b>C++</b> لضمان أسرع تنفيذ للأوامر.<br>
+                • مفتوح المصدر بالكامل لتوفير الأمان والشفافية للمستخدم.<br>
+                • تحديثات مستمرة لإضافة أنظمة تحسين جديدة.
+            </p>
+        </div>
+
+        <a href="optimizer.cpp" download class="btn">تحميل الأداة (C++ Source Code)</a>
     </div>
 
     <footer>جميع الحقوق محفوظة © 2026 | تطوير يحيى - مصر</footer>

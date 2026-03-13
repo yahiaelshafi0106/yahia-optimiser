@@ -1,19 +1,24 @@
-#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
+#include <iostream>
 #include <windows.h>
 #include <cstdlib>
+#include <chrono>
+#include <thread>
+
+using namespace std;
+
+void setBeastMode() {
+    system("powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c");
+    system("del /q /f /s %temp%\\* > nul 2>&1");
+    system("ipconfig /flushdns > nul 2>&1");
+}
 
 int main() {
-    MessageBox(NULL, "Yahya Optimizer: Windows Beast Mode ON", "Yahya 2026", MB_OK | MB_ICONINFORMATION);
+    MessageBoxA(NULL, "Yahya Optimizer: System Protected - Beast Mode Starting Now!", "Yahya Optimizer", MB_OK | MB_ICONINFORMATION);
+
     while (true) {
-        system("powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c");
-        system("powercfg /setacvalueindex scheme_current sub_processor procthrottlefree 1");
-        system("del /s /f /q %temp%\\*.* > nul 2>&1");
-        system("del /s /f /q C:\\Windows\\Temp\\*.* > nul 2>&1");
-        system("del /s /f /q C:\\Windows\\Prefetch\\*.* > nul 2>&1");
-        system("ipconfig /flushdns > nul 2>&1");
-        system("netsh int tcp set global autotuninglevel=normal > nul 2>&1");
-        system("netsh interface tcp set global footprints=disabled > nul 2>&1");
-        Sleep(15000);
+        setBeastMode();
+        cout << "\033[1;32mWindows Performance: OPTIMIZED\033[0m" << endl;
+        this_thread::sleep_for(chrono::seconds(10));
     }
     return 0;
 }

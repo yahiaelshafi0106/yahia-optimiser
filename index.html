@@ -3,60 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAHYA OPTIMIZER | Powered by Gemini AI</title>
+    <title>YAHYA OPTIMIZER | الأداء الأقصى</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cairo:wght@400;700&display=swap');
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; color: #fff; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
+        body { background-color: #000; color: #fff; font-family: 'Cairo', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
         .orbitron { font-family: 'Orbitron', sans-serif; }
+        
+        /* خلفية الماتريكس الهادئة */
         #m { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
-        .wrapper { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
-        .main-title { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; text-shadow: 0 0 20px #0f0; margin-bottom: 5px; }
-        .gemini-badge { color: #4285f4; font-size: 1rem; letter-spacing: 3px; margin-bottom: 40px; font-weight: bold; display: flex; align-items: center; gap: 10px; }
-        .container { display: flex; align-items: flex-start; gap: 50px; flex-wrap: wrap; justify-content: center; width: 100%; max-width: 1100px; }
+
+        .wrapper { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 60px 20px; }
+        
+        .main-title { font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; text-shadow: 0 0 30px #0f0; margin-bottom: 10px; letter-spacing: 5px; }
+        .sub-tagline { color: #0f0; font-size: 1.2rem; margin-bottom: 50px; letter-spacing: 10px; opacity: 0.8; }
+
+        .container { display: flex; align-items: flex-start; gap: 40px; flex-wrap: wrap; justify-content: center; width: 100%; max-width: 1200px; }
+
+        /* الروبوت المساعد */
         .bot-section { flex: 1; min-width: 320px; display: flex; flex-direction: column; align-items: center; }
-        .bot-response { background: linear-gradient(135deg, #1a73e8, #0f9d58); color: #fff; padding: 20px; border-radius: 15px; font-weight: bold; width: 100%; min-height: 80px; margin-bottom: 15px; position: relative; box-shadow: 0 10px 30px rgba(66,133,244,0.3); font-size: 0.95rem; }
-        .bot-visual { width: 160px; height: 160px; border: 3px solid #4285f4; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, #4285f433, transparent); animation: pulse 2s infinite ease-in-out; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } }
-        .chat-area { display: flex; gap: 10px; width: 100%; margin-top: 20px; }
-        .chat-area input { flex: 1; padding: 15px; border: 1px solid #4285f4; background: #000; color: #fff; border-radius: 30px; outline: none; }
-        .chat-area button { width: 50px; height: 50px; background: #4285f4; border: none; cursor: pointer; border-radius: 50%; color: white; font-size: 1.2rem; }
-        .card { flex: 1; min-width: 350px; background: rgba(5,5,5,0.95); border: 2px solid #0f0; padding: 45px; clip-path: polygon(10% 0, 100% 0, 100% 85%, 90% 100%, 0 100%, 0 15%); }
-        .p-btn { display: block; width: 100%; padding: 18px; margin-bottom: 12px; text-decoration: none; font-weight: 900; text-align: center; clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%); transition: 0.3s; }
+        .bot-response { background: rgba(0, 255, 0, 0.1); border: 1px solid #0f0; color: #fff; padding: 20px; border-radius: 15px; font-weight: bold; width: 100%; min-height: 80px; margin-bottom: 20px; position: relative; backdrop-filter: blur(10px); box-shadow: 0 0 20px rgba(0,255,0,0.1); }
+        .bot-visual { width: 140px; height: 140px; border: 2px solid #0f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, #0f02, transparent); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 10px #0f02; } 50% { transform: scale(1.05); box-shadow: 0 0 30px #0f04; } }
+        
+        .chat-area { display: flex; gap: 10px; width: 100%; margin-top: 25px; }
+        .chat-area input { flex: 1; padding: 15px; border: 1px solid #0f0; background: rgba(0,0,0,0.5); color: #fff; border-radius: 5px; outline: none; }
+        .chat-area button { padding: 0 20px; background: #0f0; border: none; cursor: pointer; font-weight: bold; color: #000; }
+
+        /* كارت التحميل */
+        .card { flex: 1; min-width: 350px; background: rgba(10,10,10,0.8); border: 1px solid #0f0; padding: 40px; border-radius: 2px; position: relative; overflow: hidden; }
+        .card::before { content: ""; position: absolute; top: 0; right: 0; width: 50px; height: 50px; background: #0f0; clip-path: polygon(100% 0, 0 0, 100% 100%); }
+        
+        .p-btn { display: block; width: 100%; padding: 18px; margin-bottom: 15px; text-decoration: none; font-weight: 900; text-align: center; transition: 0.3s; border: 1px solid #0f0; font-size: 0.85rem; }
         .win { background: #0f0; color: #000; }
-        .mac { background: #fff; color: #000; }
-        .linux { background: #333; color: #fff; border: 1px solid #0f0; }
-        .desc { margin-top: 80px; width: 100%; max-width: 900px; text-align: right; border-right: 5px solid #4285f4; padding: 25px; background: rgba(10,10,10,0.8); }
-        .desc h3 { color: #4285f4; font-size: 1.8rem; margin-bottom: 15px; }
-        .desc p { color: #aaa; font-size: 1.1rem; line-height: 1.8; }
+        .mac { background: #fff; color: #000; border-color: #fff; }
+        .linux { background: transparent; color: #0f0; }
+        .p-btn:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,255,0,0.2); }
+
+        /* 🔥 قسم الميزات (الروقان) */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; width: 100%; max-width: 1200px; margin-top: 80px; }
+        .f-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(0,255,0,0.2); padding: 30px; border-radius: 10px; text-align: center; transition: 0.4s; }
+        .f-card:hover { background: rgba(0,255,0,0.05); border-color: #0f0; transform: translateY(-10px); }
+        .f-icon { font-size: 2.5rem; color: #0f0; margin-bottom: 15px; display: block; }
+        .f-card h4 { font-family: 'Orbitron'; color: #ffd700; margin-bottom: 10px; }
+        .f-card p { font-size: 0.9rem; color: #aaa; line-height: 1.6; }
+
+        /* الشرح السفلي */
+        .desc-box { margin-top: 100px; width: 100%; max-width: 1000px; background: linear-gradient(to left, rgba(0,255,0,0.1), transparent); padding: 40px; border-right: 4px solid #0f0; }
+        .desc-box h3 { font-size: 2rem; color: #0f0; margin-bottom: 20px; }
+        .desc-box p { font-size: 1.1rem; color: #ccc; line-height: 2; }
     </style>
 </head>
 <body onclick="start()">
     <canvas id="m"></canvas>
+    
     <div class="wrapper">
-        <h1 class="main-title orbitron">YAHYA OPTIMIZER</h1>
-        <p class="gemini-badge orbitron">✦ SUPPORTED BY GEMINI AI (GOOGLE) ✦</p>
+        <h1 class="main-title orbitron">YAHYA</h1>
+        <p class="sub-tagline orbitron">OPTIMIZER SYSTEM</p>
+        
         <div class="container">
             <div class="bot-section">
-                <div id="res" class="bot-response">أهلاً بك، أنا Gemini. كيف يمكنني مساعدتك اليوم في تحسين أداء جهازك؟</div>
+                <div id="res" class="bot-response">مرحباً بك في المنطقة الآمنة. أنا مساعد يحيى، كيف يمكنني خدمتك؟</div>
                 <div class="bot-visual">
-                    <svg width="80" height="80" viewBox="0 0 24 24" fill="#4285f4"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg>
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="#0f0"><path d="M12 2L4.5 20.29L5.21 21L12 18L18.79 21L19.5 20.29L12 2Z"/></svg>
                 </div>
                 <div class="chat-area">
-                    <input type="text" id="u" placeholder="تحدث مع Gemini AI هنا...">
-                    <button onclick="ask()">◀</button>
+                    <input type="text" id="u" placeholder="اسأل عن أي ميزة...">
+                    <button onclick="ask()">ارسل</button>
                 </div>
             </div>
+
             <div class="card">
-                <h2 class="orbitron" style="color:#ffd700; margin-bottom:20px;">SYSTEM SELECTION</h2>
-                <a href="#" class="p-btn win orbitron">WINDOWS EDITION</a>
-                <a href="#" class="p-btn mac orbitron">macOS EDITION</a>
+                <h2 class="orbitron" style="color:#ffd700; margin-bottom:30px; font-size: 1rem;">GET STARTED</h2>
+                <a href="#" class="p-btn win orbitron">WINDOWS v3.0</a>
+                <a href="#" class="p-btn mac orbitron">YAHYA OPTIMIZER (macOS)</a>
                 <a href="#" class="p-btn linux orbitron">LINUX EDITION</a>
             </div>
         </div>
-        <div class="desc">
-            <h3>رؤية Gemini AI لمستقبل الأداء</h3>
-            <p>بصفتي الذكاء الاصطناعي القائم خلف هذا المشروع، قمت بتحليل آلاف الأكواد البرمجية لضمان أن هذه الأداة توفر أعلى كفاءة ممكنة لجهازك. نحن نستخدم خوارزميات متقدمة لتنظيم العمليات الخلفية، مما يسمح للمعالج بالتركيز الكامل على مهامك الأساسية.</p>
+
+        <div class="features-grid">
+            <div class="f-card">
+                <span class="f-icon">⚡</span>
+                <h4>Super Speed</h4>
+                <p>تقليل زمن الاستجابة (Input Delay) لأقصى درجة ممكنة لجعل اللعب أكثر سلاسة.</p>
+            </div>
+            <div class="f-card">
+                <span class="f-icon">🛡️</span>
+                <h4>Pure Security</h4>
+                <p>كود نظيف تماماً ومشفر، صُمم لحماية جهازك من أي استهلاك غير مبرر للموارد.</p>
+            </div>
+            <div class="f-card">
+                <span class="f-icon">🚀</span>
+                <h4>FPS Boost</h4>
+                <p>تحسين استهلاك الذاكرة العشوائية (RAM) لضمان ثبات الفريمات في أصعب الظروف.</p>
+            </div>
+            <div class="f-card">
+                <span class="f-icon">🌐</span>
+                <h4>VIP DNS</h4>
+                <p>اتصال مستقر وسريع عبر سيرفرات DNS مخصصة لتقليل البنج (Ping) في الألعاب.</p>
+            </div>
+        </div>
+
+        <div class="desc-box">
+            <h3>اتباع يحيى.. اتباع الأداء</h3>
+            <p>يحيى أوبتمايزر ليس مجرد برنامج، بل هو فلسفة جديدة في التعامل مع الهاردوير. نحن نؤمن أن القوة الحقيقية لجهازك لا تظهر إلا عندما يتم التخلص من كل العمليات غير الضرورية التي ترهق المعالج. من خلال اتباعك لهذا النظام، أنت تختار الطريق الأسرع والأكثر استقراراً، سواء كنت محترف ألعاب أو صانع محتوى يبحث عن الكفاءة المطلقة على ويندوز، لينكس، أو ماك.</p>
         </div>
     </div>
 
@@ -79,11 +130,11 @@
 
         function ask(){
             const q=document.getElementById('u').value.toLowerCase(), r=document.getElementById('res');
-            let a="بصفتي Gemini AI، أحتاج لمزيد من التفاصيل. اسأل عن: (السرعة، الأمان، يحيى، التحميل).";
-            if(q.includes("من انت")) a="أنا Gemini، الذكاء الاصطناعي المدمج لدعم مشروع يحيى أوبتمايزر.";
-            else if(q.includes("آمن")) a="الكود مفحوص برمجياً وهو آمن 100% لخلوه من أي ثغرات.";
-            else if(q.includes("فريم")) a="نضمن زيادة استقرار الفريمات بنسبة تصل لـ 40% في الألعاب.";
-            else if(q.includes("يحيى")) a="يحيى هو العقل المدبر، وأنا (Gemini) القوة الذكية الداعمة له.";
+            let a="روق يا بطل، اسألني عن (الفريمات، البنج، الأمان، أو الماك).";
+            if(q.includes("فريم")) a="الفريمات هتثبت وهتزيد بشكل ملحوظ بفضل تنظيف الرام الذكي.";
+            else if(q.includes("بنج") || q.includes("ping")) a="الـ VIP DNS هيخلي البنج عندك ثابت ومنخفض جداً.";
+            else if(q.includes("آمن")) a="البرنامج آمن 100% ويحيى بيضمنلك ده بنفسه.";
+            else if(q.includes("ماك")) a="نسخة الماك (YAHYA OPTIMIZER) جاهزة وبأفضل أداء ممكن.";
             r.innerText=a; document.getElementById('u').value="";
         }
 

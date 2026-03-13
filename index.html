@@ -3,67 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAHYA OPTIMIZER | THE BEAST UNLEASHED</title>
+    <title>YAHYA OPTIMIZER | THE BEAST MODE</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cairo:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cairo:wght@400;700&display=swap');
 
         :root {
             --neon-blue: #00f2ff;
             --neon-purple: #bc13fe;
-            --bg-dark: #050505;
-            --card-bg: #111;
+            --dark-bg: #020202;
+            --card-bg: #0a0a0a;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
-            background-color: var(--bg-dark);
+            background-color: var(--dark-bg);
             color: #fff;
-            font-family: 'Cairo', sans-serif; /* للعربي */
-            line-height: 1.6;
+            font-family: 'Cairo', sans-serif;
             overflow-x: hidden;
         }
 
-        .orbitron { font-family: 'Orbitron', sans-serif; } /* للإنجليزي والجرافيك */
+        .orbitron { font-family: 'Orbitron', sans-serif; }
 
-        /* --- Header / Hero Section --- */
-        header {
+        /* --- 1. Hero Section (الواجهة الأولى) --- */
+        .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: radial-gradient(circle at center, #1a0033 0%, var(--bg-dark) 70%);
+            background: radial-gradient(circle at center, #110022 0%, var(--dark-bg) 80%);
             position: relative;
         }
 
-        header h1 {
-            font-size: clamp(3rem, 10vw, 5rem);
-            text-shadow: 0 0 20px var(--neon-blue);
-            margin-bottom: 1rem;
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            color: #fff;
+            text-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-purple);
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
         }
 
-        .hero-btn {
+        .hero p {
+            font-size: 1.2rem;
+            color: #aaa;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+
+        .main-btn {
             background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-            color: #fff;
-            padding: 15px 40px;
-            border-radius: 50px;
+            color: white;
+            padding: 20px 50px;
+            border-radius: 5px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             transition: 0.3s;
-            box-shadow: 0 0 20px rgba(188, 19, 254, 0.4);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+            border: none;
+            cursor: pointer;
         }
 
-        .hero-btn:hover { transform: scale(1.1); box-shadow: 0 0 40px var(--neon-blue); }
+        .main-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 0 50px var(--neon-blue);
+        }
 
-        /* --- Features Section --- */
-        .section { padding: 80px 20px; max-width: 1200px; margin: auto; }
+        /* --- 2. Features Section (الشرح) --- */
+        .section { padding: 100px 20px; max-width: 1200px; margin: auto; }
         .section-title {
             text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             color: var(--neon-blue);
             text-transform: uppercase;
         }
@@ -76,108 +90,120 @@
 
         .card {
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            border-bottom: 4px solid var(--neon-purple);
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px solid #222;
             transition: 0.3s;
         }
 
-        .card:hover { transform: translateY(-10px); border-color: var(--neon-blue); }
+        .card:hover { border-color: var(--neon-purple); transform: translateY(-5px); }
+        .card h3 { color: var(--neon-blue); margin-bottom: 15px; font-size: 1.5rem; }
 
-        .card i { font-size: 2.5rem; color: var(--neon-blue); display: block; margin-bottom: 15px; }
-
-        /* --- FAQ Section --- */
-        .faq-item {
-            background: #1a1a1a;
-            margin-bottom: 15px;
+        /* --- 3. FAQ (الأسئلة) --- */
+        .faq-box {
+            background: #080808;
             padding: 20px;
-            border-radius: 10px;
-            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-right: 4px solid var(--neon-purple);
         }
 
-        .faq-item h3 { color: var(--neon-purple); margin-bottom: 10px; }
-
-        /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 50px;
+        /* --- 4. OS Selector (اختار نظامك) --- */
+        .os-selector {
             background: #000;
-            border-top: 1px solid #222;
+            padding: 100px 20px;
+            border-top: 2px solid #111;
+            text-align: center;
         }
 
-        /* --- Animations --- */
-        .glow-text { animation: glow 2s ease-in-out infinite alternate; }
-        @keyframes glow {
-            from { text-shadow: 0 0 10px #fff, 0 0 20px var(--neon-blue); }
-            to { text-shadow: 0 0 20px #fff, 0 0 30px var(--neon-purple); }
+        .os-card {
+            text-decoration: none;
+            color: white;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            padding: 40px;
+            border-radius: 15px;
+            width: 280px;
+            transition: 0.4s;
+            display: inline-block;
+            margin: 15px;
         }
+
+        .os-card:hover {
+            transform: translateY(-15px);
+            border-color: #fff;
+            box-shadow: 0 0 30px rgba(255,255,255,0.1);
+        }
+
+        .os-card i { font-size: 4rem; display: block; margin-bottom: 20px; }
+
+        footer { padding: 50px; text-align: center; color: #333; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1 class="orbitron glow-text">YAHYA OPTIMIZER</h1>
-        <p style="font-size: 1.5rem; color: #aaa; margin-bottom: 2rem;">وداعاً للـ Lag.. أهلاً بـ Beast Mode</p>
-        <a href="#download" class="hero-btn">ابدأ التحميل الآن ⚡</a>
-    </header>
+    <section class="hero">
+        <h1 class="orbitron">YAHYA<span>_</span>O.R</h1>
+        <p class="orbitron">THE ULTIMATE SYSTEM OPTIMIZER</p>
+        <a href="#download" class="main-btn orbitron">GET STARTED</a>
+        <div style="margin-top: 40px; color: #444;">انزل لأسفل لمعرفة المزيد ⬇️</div>
+    </section>
 
-    <div class="section">
-        <h2 class="section-title orbitron">لماذا نحن؟ (Features)</h2>
+    <section class="section">
+        <h2 class="section-title orbitron">لماذا نحن؟</h2>
         <div class="grid">
             <div class="card">
-                <i class="orbitron">🚀</i>
-                <h3>أداء خارق</h3>
-                <p>تفعيل وضع Ultimate Performance لإخراج كل قطرة طاقة من المعالج وكارت الشاشة.</p>
+                <h3>⚡ Beast Power</h3>
+                <p>تفعيل وضع الطاقة القصوى لضمان استقرار الفريمات (FPS) ومنع أي تقطيع مفاجئ أثناء اللعب.</p>
             </div>
             <div class="card">
-                <i class="orbitron">❄️</i>
-                <h3>تبريد ذكي</h3>
-                <p>نظام تحكم في المراوح يجبر الجهاز على البقاء بارداً حتى في أثقل الألعاب.</p>
+                <h3>❄️ Active Cooling</h3>
+                <p>إجبار النظام على تبريد المكونات فوراً عند ارتفاع الحرارة، مما يحافظ على عمر جهازك.</p>
             </div>
             <div class="card">
-                <i class="orbitron">🧹</i>
-                <h3>تنظيف فوري</h3>
-                <p>مسح الرامات (RAM Cache) والملفات المؤقتة أوتوماتيكياً كل 10 ثوانٍ.</p>
+                <h3>🧹 Auto Clean</h3>
+                <p>تنظيف دوري للرامات كل 10 ثوانٍ لتحرير المساحة للتطبيقات الهامة فقط.</p>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="section" style="background: #080808;">
-        <h2 class="section-title orbitron">كيف يعمل؟ (Logic)</h2>
-        <div style="max-width: 800px; margin: auto; font-size: 1.1rem; color: #ccc;">
-            <p>1. البرنامج يعمل كـ **Service** خفية في الخلفية لا تستهلك موارد.</p><br>
-            <p>2. يقوم بمراقبة حرارة المعالج دورياً وتعديل سرعة المراوح يدوياً.</p><br>
-            <p>3. يمنع الويندوز من الدخول في وضع "توفير الطاقة" الذي يقتل الفريمات (FPS).</p>
+    <section class="section" style="background: #050505; max-width: 100%;">
+        <div style="max-width: 1200px; margin: auto;">
+            <h2 class="section-title orbitron">الأسئلة الشائعة</h2>
+            <div class="faq-box">
+                <h3 style="color: var(--neon-purple);">هل البرنامج آمن؟</h3>
+                <p>نعم، الكود مبرمج بلغة C++ ويعمل على تحسين إعدادات النظام الرسمية فقط.</p>
+            </div>
+            <div class="faq-box">
+                <h3 style="color: var(--neon-purple);">لماذا يطلب صلاحيات المسؤول؟</h3>
+                <p>لكي يتمكن من التحكم في خطة الطاقة (Power Plan) وسرعة مراوح التبريد.</p>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div class="section">
-        <h2 class="section-title orbitron">الأسئلة الشائعة (FAQ)</h2>
-        <div class="faq-item">
-            <h3>هل البرنامج آمن؟</h3>
-            <p>نعم، الكود مفتوح المصدر (C++) ولا يقوم بأي عمليات كسر سرعة (Overclock) تضر بالهاردوير.</p>
+    <section id="download" class="os-selector">
+        <h2 class="section-title orbitron">اختار نظامك</h2>
+        <div class="os-grid">
+            <a href="Yahya_Optimizer.exe" class="os-card">
+                <i>🪟</i>
+                <h3 class="orbitron" style="color: var(--neon-blue);">WINDOWS</h3>
+                <p style="color: #555; margin-top: 10px;">Version 1.0.0 (EXE)</p>
+            </a>
+            <a href="Yahya_Optimizer_Linux" class="os-card">
+                <i>🐧</i>
+                <h3 class="orbitron" style="color: #ffcc00;">LINUX</h3>
+                <p style="color: #555; margin-top: 10px;">Version 1.0.0 (Exec)</p>
+            </a>
+            <a href="Yahya_Optimizer_Mac" class="os-card">
+                <i>🍎</i>
+                <h3 class="orbitron" style="color: var(--neon-purple);">MACOS</h3>
+                <p style="color: #555; margin-top: 10px;">Version 1.0.0 (DMG)</p>
+            </a>
         </div>
-        <div class="faq-item">
-            <h3>لماذا تظهر رسالة تحذير عند التشغيل؟</h3>
-            <p>لأن البرنامج يقوم بتعديل إعدادات النظام الحساسة (الطاقة والمراوح) وهذا يتطلب صلاحيات المسؤول.</p>
-        </div>
-        <div class="faq-item">
-            <h3>هل يدعم كل الأجهزة؟</h3>
-            <p>يدعم Windows 10/11، ومعظم توزيعات Linux، وأجهزة macOS الحديثة.</p>
-        </div>
-    </div>
-
-    <div id="download" class="section" style="text-align: center;">
-        <h2 class="section-title orbitron">اختر نظامك (Downloads)</h2>
-        <div class="grid">
-            <a href="Yahya_Optimizer.exe" class="hero-btn" style="margin: 10px;">WINDOWS (.EXE)</a>
-            <a href="Yahya_Optimizer_Linux.AppImage" class="hero-btn" style="margin: 10px; background: #333;">LINUX (.AppImage)</a>
-            <a href="Yahya_Optimizer_Mac.dmg" class="hero-btn" style="margin: 10px; background: #555;">macOS (.DMG)</a>
-        </div>
-    </div>
+    </section>
 
     <footer>
-        <p class="orbitron">© 2026 YAHYA OPTIMIZER TEAM | ALL RIGHTS RESERVED</p>
+        <p class="orbitron">© 2026 YAHYA OPTIMIZER TEAM | BUILT FOR GAMERS</p>
     </footer>
 
 </body>

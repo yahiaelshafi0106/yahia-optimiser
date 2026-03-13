@@ -3,173 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAHYA OPTIMIZER | THE BEAST MODE</title>
+    <title>YAHYA OPTIMIZER | THE ULTIMATE FREE ACCESS</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cairo:wght@400;700&display=swap');
         
-        :root { 
-            --neon-green: #0f0; 
-            --pro-blue: #00d4ff;
-            --premium-gold: #ffd700;
-            --dark-bg: #000;
-        }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--dark-bg); color: #fff; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
+        body { background-color: #000; color: #fff; font-family: 'Cairo', sans-serif; overflow: hidden; }
         .orbitron { font-family: 'Orbitron', sans-serif; }
 
-        /* خلفية الماتريكس الأسطورية */
-        #matrix-canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.25; }
+        /* خلفية الماتريكس - النسخة المطورة */
+        #m { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.2; }
 
-        /* الهيدر بتأثير الجليتش */
-        .hero { height: 45vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .glitch-title { 
-            font-size: clamp(2.5rem, 8vw, 5rem); 
-            text-shadow: 0 0 20px var(--neon-green); 
-            margin-bottom: 10px;
-            animation: glitch 1.5s infinite;
+        .wrapper {
+            height: 100vh; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; text-align: center;
         }
 
-        @keyframes glitch {
-            0% { transform: translate(0); text-shadow: 2px 2px var(--pro-blue); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); text-shadow: -2px -2px var(--premium-gold); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
+        /* عنوان احترافي بتأثير الإضاءة */
+        .main-title {
+            font-size: clamp(3rem, 12vw, 7rem);
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 5px;
+            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 40px #0f0;
+            margin-bottom: 5px;
         }
 
-        /* حاوية العروض المباشرة */
-        .pricing-container {
-            display: flex; justify-content: center; gap: 25px; padding: 40px; flex-wrap: wrap;
+        .tagline {
+            font-size: 1.1rem;
+            color: #0f0;
+            text-transform: uppercase;
+            letter-spacing: 15px;
+            margin-bottom: 40px;
+            font-weight: bold;
         }
 
-        .price-card {
-            background: rgba(5, 5, 5, 0.95); border: 2px solid #222;
-            padding: 30px; width: 340px; position: relative; transition: 0.4s;
-            clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
-            text-align: center;
+        /* كارت التحميل "اللايق" */
+        .hero-card {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            padding: 50px;
+            width: 600px; max-width: 90%;
+            position: relative;
+            box-shadow: 0 0 100px rgba(0, 255, 0, 0.05);
+            /* حواف مقطوعة احترافية */
+            clip-path: polygon(0 15%, 5% 0, 100% 0, 100% 85%, 95% 100%, 0 100%);
         }
 
-        .premium-card { border-color: var(--premium-gold); box-shadow: 0 0 30px rgba(255, 215, 0, 0.2); transform: scale(1.05); }
-        .pro-card { border-color: var(--pro-blue); }
+        .hero-card::before {
+            content: "SYSTEM STATUS: READY";
+            position: absolute; top: 15px; right: 25px;
+            font-family: 'Orbitron'; font-size: 0.7rem; color: #0f0;
+        }
 
-        .price-tag { font-size: 2.2rem; font-weight: 900; margin: 15px 0; font-family: 'Orbitron'; color: var(--premium-gold); }
-        .old-price { text-decoration: line-through; color: #555; font-size: 1.1rem; }
+        .beast-mode {
+            font-size: 1.8rem; font-weight: 900; color: #fff; margin-bottom: 15px;
+        }
 
-        .feature-list { list-style: none; margin: 25px 0; text-align: right; }
-        .feature-list li { margin-bottom: 12px; color: #eee; font-size: 0.95rem; }
-        .feature-list li::before { content: "⚡ "; color: var(--premium-gold); }
+        .features-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+            margin: 30px 0; text-align: right; border-top: 1px solid #222; padding-top: 20px;
+        }
 
-        /* أزرار التحميل المباشر */
-        .btn {
-            display: block; padding: 15px; text-decoration: none; font-weight: bold; text-align: center;
-            font-size: 1.2rem; transition: 0.3s;
+        .f-item { font-size: 0.9rem; color: #888; }
+        .f-item span { color: #0f0; margin-left: 5px; }
+
+        /* زر التحميل العملاق */
+        .btn-main {
+            display: block; width: 100%; padding: 25px;
+            background: #0f0; color: #000; font-weight: 900;
+            font-size: 1.8rem; text-decoration: none; transition: 0.4s;
             clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+            margin-top: 20px;
         }
-        .btn-gold { background: var(--premium-gold); color: #000; box-shadow: 0 0 15px var(--premium-gold); }
-        .btn-blue { background: var(--pro-blue); color: #000; }
+
+        .btn-main:hover {
+            background: #fff; box-shadow: 0 0 50px #fff; transform: scale(1.02);
+        }
 
         /* تحكم الموسيقى */
-        #music-btn {
-            position: fixed; bottom: 20px; left: 20px; background: rgba(0,255,0,0.2);
-            width: 50px; height: 50px; border-radius: 50%; display: flex; 
-            justify-content: center; align-items: center; cursor: pointer; border: 1px solid var(--neon-green);
+        .music-player {
+            position: fixed; bottom: 30px; left: 30px; 
+            cursor: pointer; display: flex; align-items: center; gap: 10px;
+            background: rgba(255,255,255,0.05); padding: 10px 20px; border-radius: 50px;
         }
     </style>
 </head>
-<body onclick="initAudio()">
+<body onclick="play()">
 
-    <canvas id="matrix-canvas"></canvas>
+    <canvas id="m"></canvas>
 
-    <div style="background: red; color: #fff; text-align: center; padding: 8px; font-weight: bold; font-size: 0.9rem;" class="orbitron">
-        ⚠️ عرض الافتتاح: اشترك سنتين بـ 150ج وامتلك النسخة على جهازك للأبد!
-    </div>
+    <div class="wrapper">
+        <h1 class="main-title orbitron">YAHYA</h1>
+        <p class="tagline orbitron">Optimizer</p>
 
-    <section class="hero">
-        <h1 class="glitch-title orbitron">YAHYA OPTIMIZER</h1>
-        <p class="orbitron" style="color: var(--premium-gold); letter-spacing: 7px;">DIRECT ACCESS - NO ACCOUNTS NEEDED</p>
-    </section>
+        <div class="hero-card">
+            <h2 class="beast-mode orbitron">UNLEASH THE POWER</h2>
+            <p style="color: #666; font-size: 1rem;">أقوى محرك تسريع للأجهزة في نسخة واحدة مجانية للجميع.</p>
+            
+            <div class="features-grid">
+                <div class="f-item"><span>▶</span> Kernel Optimization</div>
+                <div class="f-item"><span>▶</span> Zero Input Delay</div>
+                <div class="f-item"><span>▶</span> RAM Deep Cleaning</div>
+                <div class="f-item"><span>▶</span> VIP DNS Servers</div>
+            </div>
 
-    <div class="pricing-container">
-        <div class="price-card premium-card">
-            <h2 class="orbitron" style="color: var(--premium-gold);">PREMIUM</h2>
-            <div class="old-price orbitron">200 EGP</div>
-            <div class="price-tag">150 EGP</div>
-            <p style="color: var(--neon-green); font-weight: bold;">[ صالح لمدة سنتين + ملكية أبدية ]</p>
-            <ul class="feature-list">
-                <li>🚀 كيرنل "وضع الوحش" الكامل</li>
-                <li>🎯 تصفير البنج (VIP DNS)</li>
-                <li>🛠️ دعم فني مباشر من يحيى</li>
-                <li>🔄 تحديثات أبدية مجانية</li>
-            </ul>
-            <a href="https://wa.me/رقمك" class="btn btn-gold orbitron">احصل على النسخة</a>
-        </div>
-
-        <div class="price-card pro-card">
-            <h2 class="orbitron" style="color: var(--pro-blue);">PRO</h2>
-            <div class="price-tag">FREE</div>
-            <p style="color: #888;">[ أداء احترافي مجاني ]</p>
-            <ul class="feature-list">
-                <li>🔹 تنظيف رامات ذكي</li>
-                <li>🔹 تحسين GPU للألعاب</li>
-                <li>🔹 حذف مخلفات الويندوز</li>
-            </ul>
-            <a href="#" class="btn btn-blue orbitron">تحميل مباشر</a>
+            <a href="رابط_التحميل" class="btn-main orbitron">ACCESS DOWNLOAD</a>
+            
+            <p style="margin-top: 20px; color: #333; font-size: 0.7rem;" class="orbitron">BY YAHYA | NO LIMITS | NO COST</p>
         </div>
     </div>
 
-    <div id="music-btn" onclick="toggleMusic()">🎵</div>
+    <div class="music-player" onclick="toggle()">
+        <span id="m-icon" style="font-size: 1.5rem;">🎵</span>
+        <span class="orbitron" style="font-size: 0.7rem; color: #0f0;">AUDIO ON</span>
+    </div>
 
-    <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="bgMusic" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"></audio>
 
     <script>
-        // مصفوفة الماتريكس
-        const canvas = document.getElementById('matrix-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        // Matrix Effect
+        const c = document.getElementById('m');
+        const ctx = c.getContext('2d');
+        c.width = window.innerWidth; c.height = window.innerHeight;
+        const chars = "YAHYA_0101_FPS_BOOST";
+        const f = 16;
+        const drops = Array(Math.floor(c.width/f)).fill(1);
 
-        const chars = "YAHYA_OPTIMIZER_BEAST_MODE_FPS_BOOST_2026";
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
-
-        function drawMatrix() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.font = fontSize + "px Orbitron";
-
-            for (let i = 0; i < drops.length; i++) {
-                const rand = Math.random();
-                if (rand > 0.98) ctx.fillStyle = "#ffd700";
-                else if (rand > 0.95) ctx.fillStyle = "#00d4ff";
-                else ctx.fillStyle = "#0f0";
-
-                const text = chars[Math.floor(Math.random() * chars.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        function draw() {
+            ctx.fillStyle = "rgba(0,0,0,0.05)"; ctx.fillRect(0,0,c.width,c.height);
+            ctx.font = f + "px Orbitron";
+            for(let i=0; i<drops.length; i++) {
+                ctx.fillStyle = (Math.random() > 0.95) ? "#fff" : "#0f0";
+                ctx.fillText(chars[Math.floor(Math.random()*chars.length)], i*f, drops[i]*f);
+                if(drops[i]*f > c.height && Math.random() > 0.98) drops[i] = 0;
                 drops[i]++;
             }
         }
-        setInterval(drawMatrix, 33);
+        setInterval(draw, 33);
 
-        // الموسيقى
-        const music = document.getElementById("bgMusic");
-        let audioStarted = false;
-
-        function initAudio() {
-            if (!audioStarted) {
-                music.play();
-                audioStarted = true;
-            }
-        }
-
-        function toggleMusic() {
-            if (music.paused) music.play();
-            else music.pause();
+        // Sound System
+        const music = document.getElementById('bgMusic');
+        let started = false;
+        function play() { if(!started) { music.play(); started = true; } }
+        function toggle() { 
+            if(music.paused) { music.play(); document.getElementById('m-icon').innerHTML = "🎵"; }
+            else { music.pause(); document.getElementById('m-icon').innerHTML = "🔇"; }
         }
     </script>
 </body>

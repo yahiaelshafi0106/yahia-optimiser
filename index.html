@@ -3,180 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAHYA OPTIMIZER | THE BEAST EDITION</title>
+    <title>YAHYA OPTIMIZER | THE BEAST MODE</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cairo:wght@400;700&display=swap');
         
         :root { 
             --neon-green: #0f0; 
-            --neon-red: #ff0000; 
+            --pro-blue: #00d4ff;
+            --premium-gold: #ffd700;
             --dark-bg: #000;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        
-        body { 
-            background-color: var(--dark-bg); 
-            color: #fff; 
-            font-family: 'Cairo', sans-serif; 
-            overflow-x: hidden;
-            user-select: none;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--dark-bg); color: #fff; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
         .orbitron { font-family: 'Orbitron', sans-serif; }
 
-        #matrix-canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
+        /* خلفية الماتريكس الأسطورية */
+        #matrix-canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.25; }
 
-        /* شاشة البداية */
-        #overlay { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #000; z-index: 9999; display: flex; 
-            flex-direction: column; justify-content: center; align-items: center; 
-            cursor: pointer; transition: 1.2s ease-in-out; 
-        }
-
-        #overlay h2 { color: var(--neon-green); letter-spacing: 5px; animation: pulse 1s infinite; }
-
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-        /* الواجهة الرئيسية */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-
+        /* الهيدر بتأثير الجليتش */
+        .hero { height: 45vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .glitch-title { 
-            font-size: clamp(2.5rem, 10vw, 5.5rem); font-weight: 900; 
-            text-shadow: 0 0 20px var(--neon-green); letter-spacing: 10px; margin-bottom: 20px;
+            font-size: clamp(2.5rem, 8vw, 5rem); 
+            text-shadow: 0 0 20px var(--neon-green); 
+            margin-bottom: 10px;
+            animation: glitch 1.5s infinite;
         }
 
-        .download-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 50px; }
-
-        .os-card { 
-            text-decoration: none; color: #fff; border: 1px solid var(--neon-green); 
-            background: rgba(0, 255, 0, 0.05); padding: 20px 40px; 
-            transition: 0.4s; clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+        @keyframes glitch {
+            0% { transform: translate(0); text-shadow: 2px 2px var(--pro-blue); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); text-shadow: -2px -2px var(--premium-gold); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
         }
 
-        .os-card:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 50px var(--neon-green); }
+        /* حاوية العروض المباشرة */
+        .pricing-container {
+            display: flex; justify-content: center; gap: 25px; padding: 40px; flex-wrap: wrap;
+        }
 
-        /* قسم الشرح والأسئلة */
-        .content-section { max-width: 900px; margin: 50px auto; padding: 20px; background: rgba(0,0,0,0.8); border: 1px solid #111; }
+        .price-card {
+            background: rgba(5, 5, 5, 0.95); border: 2px solid #222;
+            padding: 30px; width: 340px; position: relative; transition: 0.4s;
+            clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
+            text-align: center;
+        }
 
-        .section-title { color: var(--neon-green); text-align: center; margin-bottom: 30px; font-size: 2rem; }
+        .premium-card { border-color: var(--premium-gold); box-shadow: 0 0 30px rgba(255, 215, 0, 0.2); transform: scale(1.05); }
+        .pro-card { border-color: var(--pro-blue); }
 
-        .feature-item { border-right: 4px solid var(--neon-green); padding: 15px; margin-bottom: 20px; background: rgba(10,10,10,0.5); }
+        .price-tag { font-size: 2.2rem; font-weight: 900; margin: 15px 0; font-family: 'Orbitron'; color: var(--premium-gold); }
+        .old-price { text-decoration: line-through; color: #555; font-size: 1.1rem; }
 
-        .faq-item { margin-bottom: 25px; }
-        .faq-item h4 { color: var(--neon-green); margin-bottom: 10px; }
+        .feature-list { list-style: none; margin: 25px 0; text-align: right; }
+        .feature-list li { margin-bottom: 12px; color: #eee; font-size: 0.95rem; }
+        .feature-list li::before { content: "⚡ "; color: var(--premium-gold); }
 
-        /* الفوتر المرعب */
-        footer { padding: 60px 20px; text-align: center; border-top: 2px solid var(--neon-green); margin-top: 50px; }
-        .piracy-warning { 
-            color: var(--neon-red); border: 2px solid var(--neon-red); 
-            display: inline-block; padding: 15px 30px; font-weight: bold;
-            background: rgba(255,0,0,0.1); box-shadow: 0 0 20px rgba(255,0,0,0.3);
+        /* أزرار التحميل المباشر */
+        .btn {
+            display: block; padding: 15px; text-decoration: none; font-weight: bold; text-align: center;
+            font-size: 1.2rem; transition: 0.3s;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+        }
+        .btn-gold { background: var(--premium-gold); color: #000; box-shadow: 0 0 15px var(--premium-gold); }
+        .btn-blue { background: var(--pro-blue); color: #000; }
+
+        /* تحكم الموسيقى */
+        #music-btn {
+            position: fixed; bottom: 20px; left: 20px; background: rgba(0,255,0,0.2);
+            width: 50px; height: 50px; border-radius: 50%; display: flex; 
+            justify-content: center; align-items: center; cursor: pointer; border: 1px solid var(--neon-green);
         }
     </style>
 </head>
-<body>
-
-    <div id="overlay" onclick="startEngine()">
-        <h2 class="orbitron">INITIALIZE SYSTEM</h2>
-        <p style="color: #444; margin-top: 10px;">[ CLICK TO ACTIVATE BEAST MODE ]</p>
-    </div>
-
-    <audio id="sfx-startup" src="https://codeskulptor-demos.commondatastorage.googleapis.com/descent/Crumble%20Sound.mp3"></audio>
-    <audio id="sfx-hover" src="https://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3"></audio>
+<body onclick="initAudio()">
 
     <canvas id="matrix-canvas"></canvas>
 
+    <div style="background: red; color: #fff; text-align: center; padding: 8px; font-weight: bold; font-size: 0.9rem;" class="orbitron">
+        ⚠️ عرض الافتتاح: اشترك سنتين بـ 150ج وامتلك النسخة على جهازك للأبد!
+    </div>
+
     <section class="hero">
-        <h1 class="glitch-title orbitron">YAHYA_OPTIMIZER</h1>
-        <div class="download-grid">
-            <a href="#" class="os-card orbitron" onmouseenter="playClick()"><h3>WINDOWS</h3></a>
-            <a href="#" class="os-card orbitron" onmouseenter="playClick()"><h3>LINUX</h3></a>
-            <a href="#" class="os-card orbitron" onmouseenter="playClick()"><h3>MACOS</h3></a>
-        </div>
-        <p class="orbitron" style="color: #555;">▼ انزل تحت للشرح والأسئلة ▼</p>
+        <h1 class="glitch-title orbitron">YAHYA OPTIMIZER</h1>
+        <p class="orbitron" style="color: var(--premium-gold); letter-spacing: 7px;">DIRECT ACCESS - NO ACCOUNTS NEEDED</p>
     </section>
 
-    <section class="content-section">
-        <h2 class="section-title orbitron">SYSTEM FEATURES</h2>
-        <div class="feature-item">
-            <h3>🚀 أداء خارق (Beast Mode)</h3>
-            <p>يقوم البرنامج بتعطيل العمليات الخلفية غير الضرورية وتركيز قوة المعالج بالكامل على اللعبة أو البرنامج المفتوح.</p>
+    <div class="pricing-container">
+        <div class="price-card premium-card">
+            <h2 class="orbitron" style="color: var(--premium-gold);">PREMIUM</h2>
+            <div class="old-price orbitron">200 EGP</div>
+            <div class="price-tag">150 EGP</div>
+            <p style="color: var(--neon-green); font-weight: bold;">[ صالح لمدة سنتين + ملكية أبدية ]</p>
+            <ul class="feature-list">
+                <li>🚀 كيرنل "وضع الوحش" الكامل</li>
+                <li>🎯 تصفير البنج (VIP DNS)</li>
+                <li>🛠️ دعم فني مباشر من يحيى</li>
+                <li>🔄 تحديثات أبدية مجانية</li>
+            </ul>
+            <a href="https://wa.me/رقمك" class="btn btn-gold orbitron">احصل على النسخة</a>
         </div>
-        <div class="feature-item">
-            <h3>⚡ تقليل البنج (Ping Optimizer)</h3>
-            <p>تحسين إعدادات الشبكة لضمان أقل تأخير ممكن في الألعاب الأونلاين وتثبيت سرعة الاتصال.</p>
-        </div>
-        <div class="feature-item">
-            <h3>🛡️ استقرار النظام</h3>
-            <p>تنظيف ملفات الكاش (Cache) والمؤقتة التي تسبب "اللاغ" المفاجئ وتثبيت الفريمات (FPS).</p>
-        </div>
-    </section>
 
-    <section class="content-section">
-        <h2 class="section-title orbitron">F.A.Q</h2>
-        <div class="faq-item">
-            <h4>• هل البرنامج آمن؟</h4>
-            <p>نعم، يحيى أوبتمايزر يعمل على تحسين إعدادات الويندوز الأصلية ولا يحتوي على أي ملفات ضارة.</p>
+        <div class="price-card pro-card">
+            <h2 class="orbitron" style="color: var(--pro-blue);">PRO</h2>
+            <div class="price-tag">FREE</div>
+            <p style="color: #888;">[ أداء احترافي مجاني ]</p>
+            <ul class="feature-list">
+                <li>🔹 تنظيف رامات ذكي</li>
+                <li>🔹 تحسين GPU للألعاب</li>
+                <li>🔹 حذف مخلفات الويندوز</li>
+            </ul>
+            <a href="#" class="btn btn-blue orbitron">تحميل مباشر</a>
         </div>
-        <div class="faq-item">
-            <h4>• هل أحتاج لمواصفات معينة؟</h4>
-            <p>البرنامج مصمم ليعمل على جميع الأجهزة، من الأجهزة الضعيفة إلى أجهزة الجيمنج الاحترافية.</p>
-        </div>
-        <div class="faq-item">
-            <h4>• كيف أفعّل وضع الوحش؟</h4>
-            <p>بمجرد تحميل النسخة الخاصة بنظامك، افتح البرنامج واضغط على زر "Optimize Now".</p>
-        </div>
-    </section>
+    </div>
 
-    <footer>
-        <div class="piracy-warning">
-            🛡️ تحذير أمني: نظام تتبع القرصنة والسرقة نشط | حقوق يحيى أوبتمايزر محفوظة © 2026
-        </div>
-        <p class="orbitron" style="color: #333; margin-top: 20px; font-size: 0.8rem;">YAHYA_OPTIMIZER_CORE_V1.0</p>
-    </footer>
+    <div id="music-btn" onclick="toggleMusic()">🎵</div>
+
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
-        function playClick() {
-            const sfx = document.getElementById('sfx-hover');
-            sfx.currentTime = 0; sfx.volume = 0.2; sfx.play();
-        }
+        // مصفوفة الماتريكس
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        function startEngine() {
-            document.getElementById('sfx-startup').play();
-            document.getElementById('overlay').style.opacity = '0';
-            setTimeout(() => { document.getElementById('overlay').style.display = 'none'; }, 1000);
-            initMatrix();
-        }
+        const chars = "YAHYA_OPTIMIZER_BEAST_MODE_FPS_BOOST_2026";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
 
-        function initMatrix() {
-            const canvas = document.getElementById('matrix-canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.font = fontSize + "px Orbitron";
 
-            const chars = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄ0123456789$#@%&*";
-            const fontSize = 16;
-            const columns = canvas.width / fontSize;
-            const drops = Array(Math.floor(columns)).fill(1);
+            for (let i = 0; i < drops.length; i++) {
+                const rand = Math.random();
+                if (rand > 0.98) ctx.fillStyle = "#ffd700";
+                else if (rand > 0.95) ctx.fillStyle = "#00d4ff";
+                else ctx.fillStyle = "#0f0";
 
-            function draw() {
-                ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = "#0f0";
-                ctx.font = fontSize + "px Orbitron";
-
-                for (let i = 0; i < drops.length; i++) {
-                    const text = chars[Math.floor(Math.random() * chars.length)];
-                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                    drops[i]++;
-                }
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
             }
-            setInterval(draw, 33);
         }
-        window.addEventListener('resize', () => { location.reload(); });
+        setInterval(drawMatrix, 33);
+
+        // الموسيقى
+        const music = document.getElementById("bgMusic");
+        let audioStarted = false;
+
+        function initAudio() {
+            if (!audioStarted) {
+                music.play();
+                audioStarted = true;
+            }
+        }
+
+        function toggleMusic() {
+            if (music.paused) music.play();
+            else music.pause();
+        }
     </script>
 </body>
 </html>

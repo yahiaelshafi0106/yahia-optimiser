@@ -3,54 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAHYA OPTIMIZER</title>
+    <title>YAHYA OPTIMIZER | Multi-Platform</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cairo:wght@400;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: #000; color: #fff; font-family: 'Cairo', sans-serif; overflow: hidden; }
+        .orbitron { font-family: 'Orbitron', sans-serif; }
         #m { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.25; }
         .wrapper { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .orbitron { font-family: 'Orbitron', sans-serif; }
-        .main-title { font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; text-shadow: 0 0 15px #0f0; animation: glitch 1.5s infinite; }
+        .main-title { font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; text-shadow: 0 0 15px #0f0; animation: glitch 1.5s infinite; text-transform: uppercase; }
         @keyframes glitch { 0%, 100% { transform: skew(0); } 20% { transform: skew(2deg); text-shadow: -2px 0 #ffd700; } 40% { transform: skew(-2deg); text-shadow: 2px 0 #0f0; } }
         .content { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
         .bot-box { position: relative; display: flex; flex-direction: column; align-items: center; }
-        .bubble { position: absolute; top: -90px; background: #0f0; color: #000; padding: 12px; border-radius: 12px; font-weight: bold; width: 200px; opacity: 0; transition: 0.5s; font-size: 0.85rem; }
+        .bubble { position: absolute; top: -90px; background: #0f0; color: #000; padding: 12px; border-radius: 12px; font-weight: bold; width: 220px; opacity: 0; transition: 0.5s; font-size: 0.85rem; box-shadow: 0 0 15px #0f0; }
         .bot { width: 200px; height: 280px; background: rgba(0,0,0,0.8); border: 2px solid #0f0; border-radius: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; animation: float 3s infinite ease-in-out; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         .eyes { display: flex; gap: 15px; }
         .eye { width: 18px; height: 18px; background: #0f0; border-radius: 50%; box-shadow: 0 0 10px #0f0; animation: blink 4s infinite; }
         @keyframes blink { 0%, 45%, 55%, 100% { transform: scaleY(1); } 50% { transform: scaleY(0.1); } }
-        .card { background: rgba(10, 10, 10, 0.9); border: 1px solid #0f0; padding: 40px; width: 550px; max-width: 90%; clip-path: polygon(5% 0, 100% 0, 100% 90%, 95% 100%, 0 100%, 0 10%); box-shadow: 0 0 40px rgba(0,255,0,0.1); }
-        .btn { display: block; width: 100%; padding: 20px; background: #0f0; color: #000; font-weight: 900; font-size: 1.6rem; text-decoration: none; clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%); margin-top: 20px; transition: 0.3s; }
-        .btn:hover { background: #fff; box-shadow: 0 0 30px #fff; transform: scale(1.02); }
+        .card { background: rgba(10, 10, 10, 0.9); border: 1px solid #0f0; padding: 40px; width: 600px; max-width: 90%; clip-path: polygon(5% 0, 100% 0, 100% 90%, 95% 100%, 0 100%, 0 10%); box-shadow: 0 0 40px rgba(0,255,0,0.1); }
+        .btn-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 25px; }
+        .btn { display: block; padding: 15px; background: #0f0; color: #000; font-weight: 900; font-size: 0.9rem; text-decoration: none; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); transition: 0.3s; }
+        .btn:hover { background: #fff; box-shadow: 0 0 30px #fff; transform: translateY(-3px); }
+        .btn.mac { background: #fff; }
+        .btn.linux { background: #333; color: #fff; border: 1px solid #0f0; }
         .m-bar { position: fixed; bottom: 20px; left: 20px; cursor: pointer; border: 1px solid #0f0; padding: 10px 20px; background: rgba(0,255,0,0.1); font-size: 0.7rem; color: #0f0; font-weight: bold; }
     </style>
 </head>
 <body onclick="play()">
     <canvas id="m"></canvas>
     <div class="wrapper">
-        <h1 class="main-title orbitron">YAHYA</h1>
+        <h1 class="main-title orbitron">YAHYA OPTIMIZER</h1>
         <div class="content">
             <div class="bot-box">
-                <div id="b" class="bubble">جاري الفحص...</div>
+                <div id="b" class="bubble">نظام ذكي متكامل...</div>
                 <div class="bot">
                     <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
-                    <p class="orbitron" style="color:#0f0; margin-top:15px; font-size:0.7rem;">HELPER_v3</p>
+                    <p class="orbitron" style="color:#0f0; margin-top:15px; font-size:0.7rem;">SYSTEM_BOT_v3</p>
                 </div>
             </div>
             <div class="card">
-                <h2 class="orbitron" style="color:#ffd700;">FREE ACCESS</h2>
-                <p style="color:#888; margin-top:10px;">أقوى نظام تسريع متاح مجاناً للجميع.</p>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:20px 0; color:#0f0; font-size:0.8rem; text-align:right;">
-                    <div>✔ Boost FPS</div><div>✔ Low Ping</div><div>✔ Ram Clean</div><div>✔ VIP DNS</div>
+                <h2 class="orbitron" style="color:#ffd700;">DOWNLOAD NOW</h2>
+                <p style="color:#888; margin-top:10px;">النسخة الاحترافية مجانية بالكامل لجميع الأنظمة.</p>
+                
+                <div class="btn-group">
+                    <a href="رابط_ويندوز" class="btn orbitron">WINDOWS</a>
+                    <a href="رابط_ماك" class="btn mac orbitron">macOS</a>
+                    <a href="رابط_لينكس" class="btn linux orbitron">LINUX</a>
                 </div>
-                <a href="#" class="btn orbitron">DOWNLOAD</a>
+                
+                <p style="margin-top: 20px; font-size: 0.7rem; color: #333;" class="orbitron">CROSS-PLATFORM ENGINE | BY YAHYA</p>
             </div>
         </div>
     </div>
     <div class="m-bar orbitron" onclick="toggle(event)">AUDIO SYSTEM</div>
     <audio id="au" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3"></audio>
+
     <script>
         const c=document.getElementById('m'), x=c.getContext('2d');
         c.width=window.innerWidth; c.height=window.innerHeight;
@@ -65,10 +73,18 @@
             });
         }
         setInterval(draw,35);
-        const b=document.getElementById('b'), f=["آمن 100%","فريمات زيادة","مجاني للكل","بنج أقل","أحدث نسخة"];
+
+        const b=document.getElementById('b'), f=[
+            "شغال على ويندوز؟ طبعاً!", 
+            "وعلى ماك ولينكس كمان!", 
+            "أمان تامللأجهزة", 
+            "فريماتك في السماء", 
+            "يحيى بيحييكم!"
+        ];
         let i=0; setInterval(()=>{
             b.style.opacity=0; setTimeout(()=>{ b.innerText=f[i]; b.style.opacity=1; i=(i+1)%f.length; },500);
         },4000);
+
         const s=document.getElementById('au'); let p=false;
         function play(){ if(!p){ s.play(); p=true; } }
         function toggle(e){ e.stopPropagation(); s.paused?s.play():s.pause(); }

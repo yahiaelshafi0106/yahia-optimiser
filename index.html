@@ -6,140 +6,135 @@
     <title>YAHYA OPTIMIZER | الأداء الأقصى</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cairo:wght@400;700&display=swap');
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: #000; color: #fff; font-family: 'Cairo', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
         .orbitron { font-family: 'Orbitron', sans-serif; }
-        
-        /* خلفية الماتريكس الهادئة */
         #m { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
-
         .wrapper { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 60px 20px; }
-        
         .main-title { font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; text-shadow: 0 0 30px #0f0; margin-bottom: 10px; letter-spacing: 5px; }
-        .sub-tagline { color: #0f0; font-size: 1.2rem; margin-bottom: 50px; letter-spacing: 10px; opacity: 0.8; }
-
+        .sub-tagline { color: #0f0; font-size: 1.2rem; margin-bottom: 50px; letter-spacing: 10px; opacity: 0.8; text-align: center;}
         .container { display: flex; align-items: flex-start; gap: 40px; flex-wrap: wrap; justify-content: center; width: 100%; max-width: 1200px; }
-
+        
         /* الروبوت المساعد */
         .bot-section { flex: 1; min-width: 320px; display: flex; flex-direction: column; align-items: center; }
-        .bot-response { background: rgba(0, 255, 0, 0.1); border: 1px solid #0f0; color: #fff; padding: 20px; border-radius: 15px; font-weight: bold; width: 100%; min-height: 80px; margin-bottom: 20px; position: relative; backdrop-filter: blur(10px); box-shadow: 0 0 20px rgba(0,255,0,0.1); }
-        .bot-visual { width: 140px; height: 140px; border: 2px solid #0f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, #0f02, transparent); animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 10px #0f02; } 50% { transform: scale(1.05); box-shadow: 0 0 30px #0f04; } }
+        .bot-response { background: rgba(0, 255, 0, 0.1); border: 1px solid #0f0; color: #fff; padding: 20px; border-radius: 15px; font-weight: bold; width: 100%; min-height: 100px; margin-bottom: 20px; position: relative; backdrop-filter: blur(10px); box-shadow: 0 0 20px rgba(0,255,0,0.1); display: flex; align-items: center; justify-content: center; text-align: center; font-size: 1rem; line-height: 1.6; }
+        .bot-visual { width: 100px; height: 100px; border: 2px solid #0f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, #0f02, transparent); animation: pulse 2s infinite; margin-bottom: 10px; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
         
-        .chat-area { display: flex; gap: 10px; width: 100%; margin-top: 25px; }
-        .chat-area input { flex: 1; padding: 15px; border: 1px solid #0f0; background: rgba(0,0,0,0.5); color: #fff; border-radius: 5px; outline: none; }
-        .chat-area button { padding: 0 20px; background: #0f0; border: none; cursor: pointer; font-weight: bold; color: #000; }
+        .chat-area { display: flex; gap: 10px; width: 100%; margin-top: 20px; }
+        .chat-area input { flex: 1; padding: 15px; border: 1px solid #0f0; background: rgba(0,0,0,0.8); color: #fff; border-radius: 5px; outline: none; font-family: 'Cairo'; font-size: 1rem; }
+        .chat-area button { padding: 0 25px; background: #0f0; border: none; cursor: pointer; font-weight: bold; color: #000; border-radius: 5px; transition: 0.3s; }
+        .chat-area button:hover { background: #fff; box-shadow: 0 0 15px #fff; }
 
         /* كارت التحميل */
-        .card { flex: 1; min-width: 350px; background: rgba(10,10,10,0.8); border: 1px solid #0f0; padding: 40px; border-radius: 2px; position: relative; overflow: hidden; }
-        .card::before { content: ""; position: absolute; top: 0; right: 0; width: 50px; height: 50px; background: #0f0; clip-path: polygon(100% 0, 0 0, 100% 100%); }
-        
-        .p-btn { display: block; width: 100%; padding: 18px; margin-bottom: 15px; text-decoration: none; font-weight: 900; text-align: center; transition: 0.3s; border: 1px solid #0f0; font-size: 0.85rem; }
+        .card { flex: 1; min-width: 350px; background: rgba(10,10,10,0.9); border: 1px solid #0f0; padding: 40px; border-radius: 5px; }
+        .p-btn { display: block; width: 100%; padding: 18px; margin-bottom: 15px; text-decoration: none; font-weight: 900; text-align: center; transition: 0.3s; border: 1px solid #0f0; font-size: 0.85rem; border-radius: 3px; }
         .win { background: #0f0; color: #000; }
         .mac { background: #fff; color: #000; border-color: #fff; }
         .linux { background: transparent; color: #0f0; }
         .p-btn:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,255,0,0.2); }
 
-        /* 🔥 قسم الميزات (الروقان) */
+        /* ميزات التطبيق */
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; width: 100%; max-width: 1200px; margin-top: 80px; }
-        .f-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(0,255,0,0.2); padding: 30px; border-radius: 10px; text-align: center; transition: 0.4s; }
-        .f-card:hover { background: rgba(0,255,0,0.05); border-color: #0f0; transform: translateY(-10px); }
+        .f-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(0,255,0,0.2); padding: 30px; border-radius: 10px; text-align: center; transition: 0.3s; }
+        .f-card:hover { border-color: #0f0; background: rgba(0,255,0,0.05); }
         .f-icon { font-size: 2.5rem; color: #0f0; margin-bottom: 15px; display: block; }
-        .f-card h4 { font-family: 'Orbitron'; color: #ffd700; margin-bottom: 10px; }
-        .f-card p { font-size: 0.9rem; color: #aaa; line-height: 1.6; }
 
-        /* الشرح السفلي */
-        .desc-box { margin-top: 100px; width: 100%; max-width: 1000px; background: linear-gradient(to left, rgba(0,255,0,0.1), transparent); padding: 40px; border-right: 4px solid #0f0; }
-        .desc-box h3 { font-size: 2rem; color: #0f0; margin-bottom: 20px; }
-        .desc-box p { font-size: 1.1rem; color: #ccc; line-height: 2; }
+        .desc-box { margin-top: 100px; width: 100%; max-width: 1000px; background: linear-gradient(to left, rgba(0,255,0,0.1), transparent); padding: 40px; border-right: 4px solid #0f0; text-align: right; }
     </style>
 </head>
-<body onclick="start()">
+<body onclick="startMusic()">
     <canvas id="m"></canvas>
-    
     <div class="wrapper">
         <h1 class="main-title orbitron">YAHYA</h1>
         <p class="sub-tagline orbitron">OPTIMIZER SYSTEM</p>
         
         <div class="container">
             <div class="bot-section">
-                <div id="res" class="bot-response">مرحباً بك في المنطقة الآمنة. أنا مساعد يحيى، كيف يمكنني خدمتك؟</div>
+                <div id="res" class="bot-response">أهلاً بك يا بطل! أنا مساعد يحيى، اسألني عن الفريمات، البنج، أو نسخة الماك.</div>
                 <div class="bot-visual">
-                    <svg width="50" height="50" viewBox="0 0 24 24" fill="#0f0"><path d="M12 2L4.5 20.29L5.21 21L12 18L18.79 21L19.5 20.29L12 2Z"/></svg>
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="#0f0"><path d="M12 2L4.5 20.29L5.21 21L12 18L18.79 21L19.5 20.29L12 2Z"/></svg>
                 </div>
                 <div class="chat-area">
-                    <input type="text" id="u" placeholder="اسأل عن أي ميزة...">
-                    <button onclick="ask()">ارسل</button>
+                    <input type="text" id="userInput" placeholder="اكتب سؤالك هنا..." onkeydown="if(event.key==='Enter') askBot()">
+                    <button onclick="askBot()">إرسال</button>
                 </div>
             </div>
 
             <div class="card">
-                <h2 class="orbitron" style="color:#ffd700; margin-bottom:30px; font-size: 1rem;">GET STARTED</h2>
-                <a href="#" class="p-btn win orbitron">WINDOWS v3.0</a>
+                <h2 class="orbitron" style="color:#ffd700; margin-bottom:30px; font-size: 1rem; text-align: center;">تحميل البرنامج</h2>
+                <a href="#" class="p-btn win orbitron">DOWNLOAD FOR WINDOWS</a>
                 <a href="#" class="p-btn mac orbitron">YAHYA OPTIMIZER (macOS)</a>
-                <a href="#" class="p-btn linux orbitron">LINUX EDITION</a>
+                <a href="#" class="p-btn linux orbitron">DOWNLOAD FOR LINUX</a>
             </div>
         </div>
 
         <div class="features-grid">
-            <div class="f-card">
-                <span class="f-icon">⚡</span>
-                <h4>Super Speed</h4>
-                <p>تقليل زمن الاستجابة (Input Delay) لأقصى درجة ممكنة لجعل اللعب أكثر سلاسة.</p>
-            </div>
-            <div class="f-card">
-                <span class="f-icon">🛡️</span>
-                <h4>Pure Security</h4>
-                <p>كود نظيف تماماً ومشفر، صُمم لحماية جهازك من أي استهلاك غير مبرر للموارد.</p>
-            </div>
-            <div class="f-card">
-                <span class="f-icon">🚀</span>
-                <h4>FPS Boost</h4>
-                <p>تحسين استهلاك الذاكرة العشوائية (RAM) لضمان ثبات الفريمات في أصعب الظروف.</p>
-            </div>
-            <div class="f-card">
-                <span class="f-icon">🌐</span>
-                <h4>VIP DNS</h4>
-                <p>اتصال مستقر وسريع عبر سيرفرات DNS مخصصة لتقليل البنج (Ping) في الألعاب.</p>
-            </div>
+            <div class="f-card"><span class="f-icon">⚡</span><h4>Super Speed</h4><p>تقليل الـ Input Delay لأقل مستوى ممكن.</p></div>
+            <div class="f-card"><span class="f-icon">🛡️</span><h4>Pure Security</h4><p>حماية كاملة وكود نظيف 100%.</p></div>
+            <div class="f-card"><span class="f-icon">🚀</span><h4>FPS Boost</h4><p>ثبات واستقرار الفريمات في الألعاب الثقيلة.</p></div>
+            <div class="f-card"><span class="f-icon">🌐</span><h4>VIP DNS</h4><p>بنج منخفض واستجابة سريعة للسيرفرات.</p></div>
         </div>
 
         <div class="desc-box">
             <h3>اتباع يحيى.. اتباع الأداء</h3>
-            <p>يحيى أوبتمايزر ليس مجرد برنامج، بل هو فلسفة جديدة في التعامل مع الهاردوير. نحن نؤمن أن القوة الحقيقية لجهازك لا تظهر إلا عندما يتم التخلص من كل العمليات غير الضرورية التي ترهق المعالج. من خلال اتباعك لهذا النظام، أنت تختار الطريق الأسرع والأكثر استقراراً، سواء كنت محترف ألعاب أو صانع محتوى يبحث عن الكفاءة المطلقة على ويندوز، لينكس، أو ماك.</p>
+            <p>يحيى أوبتمايزر ليس مجرد برنامج، بل هو فلسفة جديدة في التعامل مع الهاردوير. من خلال اتباعك لهذا النظام، أنت تختار الطريق الأسرع والأكثر استقراراً.</p>
         </div>
     </div>
 
     <audio id="au" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio>
 
     <script>
-        const c=document.getElementById('m'), x=c.getContext('2d');
-        c.width=window.innerWidth; c.height=window.innerHeight;
-        const d=Array(Math.floor(c.width/18)).fill(1);
-        function draw(){
-            x.fillStyle="rgba(0,0,0,0.1)"; x.fillRect(0,0,c.width,c.height);
-            x.font="18px Orbitron"; x.fillStyle="#0f0";
-            d.forEach((y,i)=>{
-                x.fillText("10"[Math.floor(Math.random()*2)],i*18,y*18);
-                if(y*18>c.height && Math.random()>0.98) d[i]=0;
-                d[i]++;
+        // مصفوفة الماتريكس
+        const canvas = document.getElementById('m'), ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        const columns = Array(Math.floor(canvas.width/20)).fill(1);
+        function matrix() {
+            ctx.fillStyle = "rgba(0,0,0,0.05)"; ctx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle = "#0f0"; ctx.font = "15px monospace";
+            columns.forEach((y, i) => {
+                const text = String.fromCharCode(Math.random() * 128);
+                ctx.fillText(text, i*20, y*20);
+                if (y*20 > canvas.height && Math.random() > 0.975) columns[i] = 0;
+                columns[i]++;
             });
         }
-        setInterval(draw,35);
+        setInterval(matrix, 50);
 
-        function ask(){
-            const q=document.getElementById('u').value.toLowerCase(), r=document.getElementById('res');
-            let a="روق يا بطل، اسألني عن (الفريمات، البنج، الأمان، أو الماك).";
-            if(q.includes("فريم")) a="الفريمات هتثبت وهتزيد بشكل ملحوظ بفضل تنظيف الرام الذكي.";
-            else if(q.includes("بنج") || q.includes("ping")) a="الـ VIP DNS هيخلي البنج عندك ثابت ومنخفض جداً.";
-            else if(q.includes("آمن")) a="البرنامج آمن 100% ويحيى بيضمنلك ده بنفسه.";
-            else if(q.includes("ماك")) a="نسخة الماك (YAHYA OPTIMIZER) جاهزة وبأفضل أداء ممكن.";
-            r.innerText=a; document.getElementById('u').value="";
+        // نظام الرد المطور
+        function askBot() {
+            const inputField = document.getElementById('userInput');
+            const responseDiv = document.getElementById('res');
+            const query = inputField.value.trim().toLowerCase();
+
+            if (!query) {
+                responseDiv.innerText = "اكتب حاجة يا بطل عشان أرد عليك!";
+                return;
+            }
+
+            let reply = "روق يا وحش، اسألني عن (الفريمات، البنج، الأمان، أو الماك) وهجاوبك فوراً.";
+
+            if (query.includes("فريم") || query.includes("fps") || query.includes("سرعة")) {
+                reply = "الفريمات هتزيد وهتثبت جداً لأننا بنقفل كل العمليات اللي ملهاش لزمة في الخلفية.";
+            } else if (query.includes("بنج") || query.includes("ping") || query.includes("لج")) {
+                reply = "الـ VIP DNS الموجود في يحيى أوبتمايزر بيقلل البنج وبيخلي الاستجابة أسرع بكتير.";
+            } else if (query.includes("آمن") || query.includes("فيروس") || query.includes("خطر")) {
+                reply = "أمان تام! البرنامج مفحوص ومجرب ومفهوش أي ملفات ضارة، يحيى بيضمنلك ده.";
+            } else if (query.includes("ماك") || query.includes("mac")) {
+                reply = "نسخة الماك اسمها YAHYA OPTIMIZER ومصممة خصيصاً عشان تديك أداء جبار على Apple Silicon.";
+            } else if (query.includes("شكرا") || query.includes("حبيبي") || query.includes("تسلم")) {
+                reply = "العفو يا بطل! جرب البرنامج وقولي رأيك في الأداء.";
+            } else if (query.includes("يحيى")) {
+                reply = "يحيى هو المطور اللي صمم الأداة دي عشان يساعد الجيمرز والمحترفين مجاناً.";
+            }
+
+            responseDiv.innerText = reply;
+            inputField.value = ""; // مسح الخانة بعد الرد
         }
 
-        const s=document.getElementById('au'); let p=false;
-        function start(){ if(!p){ s.play(); p=true; } }
+        // تشغيل الموسيقى عند أول ضغطة
+        const music = document.getElementById('au');
+        function startMusic() { music.play(); }
     </script>
 </body>
-</html>
+</html><!DOCTYPE html>

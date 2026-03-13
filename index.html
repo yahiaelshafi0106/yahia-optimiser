@@ -3,124 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yahya Optimizer | التحميل الذكي</title>
+    <title>YAHYA OPTIMIZER | THE BEAST UNLEASHED</title>
     <style>
-        :root {
-            --primary: #00d2ff;
-            --secondary: #3a7bd5;
-            --dark: #0f0f0f;
-            --light: #ffffff;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            background: #0f0f0f;
-            color: var(--light);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2.5rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
-            max-width: 450px;
-            width: 90%;
-        }
-        h1 { margin-bottom: 10px; color: var(--primary); }
-        .main-download { margin-top: 20px; }
-        
-        /* تصميم الأزرار */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: 0.3s;
-            width: 100%;
-        }
-        .btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,210,255,0.4); }
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cairo:wght@400;700&display=swap');
 
-        .other-versions {
-            margin-top: 30px;
-            border-top: 1px solid #333;
-            padding-top: 20px;
+        :root {
+            --neon-blue: #00f2ff;
+            --neon-purple: #bc13fe;
+            --bg-dark: #050505;
+            --card-bg: #111;
         }
-        .small-link {
-            color: #888;
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #fff;
+            font-family: 'Cairo', sans-serif; /* للعربي */
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .orbitron { font-family: 'Orbitron', sans-serif; } /* للإنجليزي والجرافيك */
+
+        /* --- Header / Hero Section --- */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a0033 0%, var(--bg-dark) 70%);
+            position: relative;
+        }
+
+        header h1 {
+            font-size: clamp(3rem, 10vw, 5rem);
+            text-shadow: 0 0 20px var(--neon-blue);
+            margin-bottom: 1rem;
+        }
+
+        .hero-btn {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 50px;
             text-decoration: none;
-            display: block;
-            margin: 10px 0;
-            font-size: 0.9rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            box-shadow: 0 0 20px rgba(188, 19, 254, 0.4);
         }
-        .small-link:hover { color: var(--primary); }
-        
-        #detected-os { color: var(--secondary); font-weight: bold; }
+
+        .hero-btn:hover { transform: scale(1.1); box-shadow: 0 0 40px var(--neon-blue); }
+
+        /* --- Features Section --- */
+        .section { padding: 80px 20px; max-width: 1200px; margin: auto; }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border-bottom: 4px solid var(--neon-purple);
+            transition: 0.3s;
+        }
+
+        .card:hover { transform: translateY(-10px); border-color: var(--neon-blue); }
+
+        .card i { font-size: 2.5rem; color: var(--neon-blue); display: block; margin-bottom: 15px; }
+
+        /* --- FAQ Section --- */
+        .faq-item {
+            background: #1a1a1a;
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .faq-item h3 { color: var(--neon-purple); margin-bottom: 10px; }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 50px;
+            background: #000;
+            border-top: 1px solid #222;
+        }
+
+        /* --- Animations --- */
+        .glow-text { animation: glow 2s ease-in-out infinite alternate; }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #fff, 0 0 20px var(--neon-blue); }
+            to { text-shadow: 0 0 20px #fff, 0 0 30px var(--neon-purple); }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Yahya Optimizer ⚡</h1>
-    <p>تم اكتشاف نظامك: <span id="detected-os">جاري الفحص...</span></p>
+    <header>
+        <h1 class="orbitron glow-text">YAHYA OPTIMIZER</h1>
+        <p style="font-size: 1.5rem; color: #aaa; margin-bottom: 2rem;">وداعاً للـ Lag.. أهلاً بـ Beast Mode</p>
+        <a href="#download" class="hero-btn">ابدأ التحميل الآن ⚡</a>
+    </header>
 
-    <div class="main-download" id="smart-button-container">
+    <div class="section">
+        <h2 class="section-title orbitron">لماذا نحن؟ (Features)</h2>
+        <div class="grid">
+            <div class="card">
+                <i class="orbitron">🚀</i>
+                <h3>أداء خارق</h3>
+                <p>تفعيل وضع Ultimate Performance لإخراج كل قطرة طاقة من المعالج وكارت الشاشة.</p>
+            </div>
+            <div class="card">
+                <i class="orbitron">❄️</i>
+                <h3>تبريد ذكي</h3>
+                <p>نظام تحكم في المراوح يجبر الجهاز على البقاء بارداً حتى في أثقل الألعاب.</p>
+            </div>
+            <div class="card">
+                <i class="orbitron">🧹</i>
+                <h3>تنظيف فوري</h3>
+                <p>مسح الرامات (RAM Cache) والملفات المؤقتة أوتوماتيكياً كل 10 ثوانٍ.</p>
+            </div>
         </div>
-
-    <div class="other-versions">
-        <p style="font-size: 0.8rem; color: #555;">أو اختر نسخة أخرى يدوياً:</p>
-        <a href="Yahya_Optimizer.exe" class="small-link">تحميل نسخة Windows (.exe)</a>
-        <a href="Yahya_Optimizer_Linux.AppImage" class="small-link">تحميل نسخة Linux (.AppImage)</a>
-        <a href="Yahya_Optimizer_Mac.dmg" class="small-link">تحميل نسخة macOS (.dmg)</a>
     </div>
-</div>
 
-<script>
-    function detectOS() {
-        const platform = window.navigator.platform.toLowerCase();
-        const userAgent = window.navigator.userAgent.toLowerCase();
-        const btnContainer = document.getElementById('smart-button-container');
-        const osText = document.getElementById('detected-os');
+    <div class="section" style="background: #080808;">
+        <h2 class="section-title orbitron">كيف يعمل؟ (Logic)</h2>
+        <div style="max-width: 800px; margin: auto; font-size: 1.1rem; color: #ccc;">
+            <p>1. البرنامج يعمل كـ **Service** خفية في الخلفية لا تستهلك موارد.</p><br>
+            <p>2. يقوم بمراقبة حرارة المعالج دورياً وتعديل سرعة المراوح يدوياً.</p><br>
+            <p>3. يمنع الويندوز من الدخول في وضع "توفير الطاقة" الذي يقتل الفريمات (FPS).</p>
+        </div>
+    </div>
 
-        let osName = "نسخة غير معروفة";
-        let downloadLink = "#";
-        let icon = "🚀";
+    <div class="section">
+        <h2 class="section-title orbitron">الأسئلة الشائعة (FAQ)</h2>
+        <div class="faq-item">
+            <h3>هل البرنامج آمن؟</h3>
+            <p>نعم، الكود مفتوح المصدر (C++) ولا يقوم بأي عمليات كسر سرعة (Overclock) تضر بالهاردوير.</p>
+        </div>
+        <div class="faq-item">
+            <h3>لماذا تظهر رسالة تحذير عند التشغيل؟</h3>
+            <p>لأن البرنامج يقوم بتعديل إعدادات النظام الحساسة (الطاقة والمراوح) وهذا يتطلب صلاحيات المسؤول.</p>
+        </div>
+        <div class="faq-item">
+            <h3>هل يدعم كل الأجهزة؟</h3>
+            <p>يدعم Windows 10/11، ومعظم توزيعات Linux، وأجهزة macOS الحديثة.</p>
+        </div>
+    </div>
 
-        if (platform.includes('win')) {
-            osName = "Windows";
-            downloadLink = "Yahya_Optimizer.exe";
-            icon = "🪟";
-        } else if (platform.includes('linux')) {
-            osName = "Linux";
-            downloadLink = "Yahya_Optimizer_Linux.AppImage";
-            icon = "🐧";
-        } else if (platform.includes('mac')) {
-            osName = "macOS";
-            downloadLink = "Yahya_Optimizer_Mac.dmg";
-            icon = "🍎";
-        }
+    <div id="download" class="section" style="text-align: center;">
+        <h2 class="section-title orbitron">اختر نظامك (Downloads)</h2>
+        <div class="grid">
+            <a href="Yahya_Optimizer.exe" class="hero-btn" style="margin: 10px;">WINDOWS (.EXE)</a>
+            <a href="Yahya_Optimizer_Linux.AppImage" class="hero-btn" style="margin: 10px; background: #333;">LINUX (.AppImage)</a>
+            <a href="Yahya_Optimizer_Mac.dmg" class="hero-btn" style="margin: 10px; background: #555;">macOS (.DMG)</a>
+        </div>
+    </div>
 
-        osText.innerText = osName;
-        btnContainer.innerHTML = `
-            <a href="${downloadLink}" class="btn">
-                <span>تحميل لـ ${osName}</span>
-                <span style="margin-right:10px">${icon}</span>
-            </a>
-        `;
-    }
-
-    // تشغيل الفحص عند تحميل الصفحة
-    window.onload = detectOS;
-</script>
+    <footer>
+        <p class="orbitron">© 2026 YAHYA OPTIMIZER TEAM | ALL RIGHTS RESERVED</p>
+    </footer>
 
 </body>
 </html>

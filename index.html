@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAHYA OPTIMIZER | THE BEAST MODE</title>
+    <title>YAHYA OPTIMIZER | DOWNLOAD NOW</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cairo:wght@400;700&display=swap');
 
@@ -25,8 +25,8 @@
 
         .orbitron { font-family: 'Orbitron', sans-serif; }
 
-        /* --- 1. Hero Section (الواجهة الأولى) --- */
-        .hero {
+        /* --- 1. قسم التحميل المباشر (أول حاجة تظهر) --- */
+        .download-hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -34,176 +34,138 @@
             align-items: center;
             text-align: center;
             background: radial-gradient(circle at center, #110022 0%, var(--dark-bg) 80%);
-            position: relative;
+            border-bottom: 2px solid #111;
         }
 
-        .hero h1 {
-            font-size: clamp(3rem, 10vw, 6rem);
+        .download-hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
             color: #fff;
-            text-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-purple);
-            margin-bottom: 20px;
-            letter-spacing: 5px;
-            text-transform: uppercase;
+            text-shadow: 0 0 20px var(--neon-blue);
+            margin-bottom: 10px;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            color: #aaa;
-            margin-bottom: 40px;
-            letter-spacing: 2px;
-        }
-
-        .main-btn {
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-            color: white;
-            padding: 20px 50px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.5rem;
-            transition: 0.3s;
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
-            border: none;
-            cursor: pointer;
-        }
-
-        .main-btn:hover {
-            transform: scale(1.1) translateY(-5px);
-            box-shadow: 0 0 50px var(--neon-blue);
-        }
-
-        /* --- 2. Features Section (الشرح) --- */
-        .section { padding: 100px 20px; max-width: 1200px; margin: auto; }
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-            color: var(--neon-blue);
-            text-transform: uppercase;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 10px;
-            border: 1px solid #222;
-            transition: 0.3s;
-        }
-
-        .card:hover { border-color: var(--neon-purple); transform: translateY(-5px); }
-        .card h3 { color: var(--neon-blue); margin-bottom: 15px; font-size: 1.5rem; }
-
-        /* --- 3. FAQ (الأسئلة) --- */
-        .faq-box {
-            background: #080808;
-            padding: 20px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border-right: 4px solid var(--neon-purple);
-        }
-
-        /* --- 4. OS Selector (اختار نظامك) --- */
-        .os-selector {
-            background: #000;
-            padding: 100px 20px;
-            border-top: 2px solid #111;
-            text-align: center;
+        .os-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 40px;
         }
 
         .os-card {
             text-decoration: none;
             color: white;
-            background: #0a0a0a;
-            border: 1px solid #222;
-            padding: 40px;
+            background: var(--card-bg);
+            border: 2px solid #222;
+            padding: 30px;
             border-radius: 15px;
-            width: 280px;
+            width: 250px;
             transition: 0.4s;
-            display: inline-block;
-            margin: 15px;
+            text-align: center;
         }
 
         .os-card:hover {
             transform: translateY(-15px);
-            border-color: #fff;
-            box-shadow: 0 0 30px rgba(255,255,255,0.1);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
         }
 
-        .os-card i { font-size: 4rem; display: block; margin-bottom: 20px; }
+        .os-card i { font-size: 3.5rem; display: block; margin-bottom: 15px; }
 
-        footer { padding: 50px; text-align: center; color: #333; font-size: 0.8rem; }
+        /* --- 2. قسم الشرح والمميزات (تحت التحميل) --- */
+        .section { padding: 80px 20px; max-width: 1200px; margin: auto; }
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            color: var(--neon-purple);
+            text-transform: uppercase;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: #080808;
+            padding: 30px;
+            border-radius: 10px;
+            border-right: 5px solid var(--neon-blue);
+        }
+
+        /* --- 3. الأسئلة الشائعة --- */
+        .faq-box {
+            background: #111;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        footer { padding: 40px; text-align: center; color: #444; border-top: 1px solid #111; }
     </style>
 </head>
 <body>
 
-    <section class="hero">
-        <h1 class="orbitron">YAHYA<span>_</span>O.R</h1>
-        <p class="orbitron">THE ULTIMATE SYSTEM OPTIMIZER</p>
-        <a href="#download" class="main-btn orbitron">GET STARTED</a>
-        <div style="margin-top: 40px; color: #444;">انزل لأسفل لمعرفة المزيد ⬇️</div>
+    <section class="download-hero">
+        <h1 class="orbitron">CHOOSE YOUR SYSTEM</h1>
+        <p class="orbitron" style="color: var(--neon-purple);">DOWNLOAD YAHYA_O.R V1.0.0</p>
+        
+        <div class="os-grid">
+            <a href="Yahya_Optimizer.exe" class="os-card">
+                <i>🪟</i>
+                <h3 class="orbitron">WINDOWS</h3>
+                <p style="font-size: 0.8rem; color: #555; margin-top: 5px;">Download .exe</p>
+            </a>
+            <a href="Yahya_Optimizer_Linux" class="os-card">
+                <i>🐧</i>
+                <h3 class="orbitron">LINUX</h3>
+                <p style="font-size: 0.8rem; color: #555; margin-top: 5px;">Download Exec</p>
+            </a>
+            <a href="Yahya_Optimizer_Mac" class="os-card">
+                <i>🍎</i>
+                <h3 class="orbitron">MACOS</h3>
+                <p style="font-size: 0.8rem; color: #555; margin-top: 5px;">Download App</p>
+            </a>
+        </div>
+        <div style="margin-top: 40px; color: #444;">انزل لأسفل لقراءة تفاصيل البرنامج ⬇️</div>
     </section>
 
     <section class="section">
-        <h2 class="section-title orbitron">لماذا نحن؟</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>⚡ Beast Power</h3>
-                <p>تفعيل وضع الطاقة القصوى لضمان استقرار الفريمات (FPS) ومنع أي تقطيع مفاجئ أثناء اللعب.</p>
+        <h2 class="section-title orbitron">مميزات الوحش ⚡</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>الأداء الأقصى</h3>
+                <p>تفعيل أقوى خطط الطاقة لتحقيق استجابة فورية في الألعاب الثقيلة.</p>
             </div>
-            <div class="card">
-                <h3>❄️ Active Cooling</h3>
-                <p>إجبار النظام على تبريد المكونات فوراً عند ارتفاع الحرارة، مما يحافظ على عمر جهازك.</p>
+            <div class="feature-card">
+                <h3>تبريد ذكي</h3>
+                <p>إدارة مراوح الجهاز لضمان عدم هبوط الأداء (Thermal Throttling).</p>
             </div>
-            <div class="card">
-                <h3>🧹 Auto Clean</h3>
-                <p>تنظيف دوري للرامات كل 10 ثوانٍ لتحرير المساحة للتطبيقات الهامة فقط.</p>
+            <div class="feature-card">
+                <h3>تنظيف تلقائي</h3>
+                <p>تفريغ الذاكرة العشوائية باستمرار لتركيز كامل القوة على لعبتك فقط.</p>
             </div>
         </div>
     </section>
 
     <section class="section" style="background: #050505; max-width: 100%;">
-        <div style="max-width: 1200px; margin: auto;">
-            <h2 class="section-title orbitron">الأسئلة الشائعة</h2>
+        <div style="max-width: 1200px; margin: auto; padding: 0 20px;">
+            <h2 class="section-title orbitron">أسئلة تهمك</h2>
             <div class="faq-box">
-                <h3 style="color: var(--neon-purple);">هل البرنامج آمن؟</h3>
-                <p>نعم، الكود مبرمج بلغة C++ ويعمل على تحسين إعدادات النظام الرسمية فقط.</p>
+                <h3 style="color: var(--neon-blue);">هل التطبيق مجاني؟</h3>
+                <p>نعم، التطبيق مفتوح المصدر ومتاح للجميع مجاناً للأبد.</p>
             </div>
             <div class="faq-box">
-                <h3 style="color: var(--neon-purple);">لماذا يطلب صلاحيات المسؤول؟</h3>
-                <p>لكي يتمكن من التحكم في خطة الطاقة (Power Plan) وسرعة مراوح التبريد.</p>
+                <h3 style="color: var(--neon-blue);">هل يحتاج إنترنت؟</h3>
+                <p>لا، البرنامج يعمل بالكامل "أوفلاين" للحفاظ على استقرار الشبكة في ألعابك.</p>
             </div>
-        </div>
-    </section>
-
-    <section id="download" class="os-selector">
-        <h2 class="section-title orbitron">اختار نظامك</h2>
-        <div class="os-grid">
-            <a href="Yahya_Optimizer.exe" class="os-card">
-                <i>🪟</i>
-                <h3 class="orbitron" style="color: var(--neon-blue);">WINDOWS</h3>
-                <p style="color: #555; margin-top: 10px;">Version 1.0.0 (EXE)</p>
-            </a>
-            <a href="Yahya_Optimizer_Linux" class="os-card">
-                <i>🐧</i>
-                <h3 class="orbitron" style="color: #ffcc00;">LINUX</h3>
-                <p style="color: #555; margin-top: 10px;">Version 1.0.0 (Exec)</p>
-            </a>
-            <a href="Yahya_Optimizer_Mac" class="os-card">
-                <i>🍎</i>
-                <h3 class="orbitron" style="color: var(--neon-purple);">MACOS</h3>
-                <p style="color: #555; margin-top: 10px;">Version 1.0.0 (DMG)</p>
-            </a>
         </div>
     </section>
 
     <footer>
-        <p class="orbitron">© 2026 YAHYA OPTIMIZER TEAM | BUILT FOR GAMERS</p>
+        <p class="orbitron">© 2026 YAHYA OPTIMIZER | DESIGNED FOR THE ELITE</p>
     </footer>
 
 </body>

@@ -6,221 +6,176 @@
     <title>YAHYA OPTIMIZER | THE BEAST MODE</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cairo:wght@400;700&display=swap');
-
-        :root {
-            --neon-blue: #00f2ff;
-            --neon-purple: #bc13fe;
+        
+        :root { 
+            --neon-green: #0f0; 
+            --neon-red: #ff0000; 
             --dark-bg: #000;
+            --glow: 0 0 15px #0f0;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-
-        body {
-            background-color: var(--dark-bg);
-            color: #fff;
-            font-family: 'Cairo', sans-serif;
-            overflow-x: hidden;
+        
+        body { 
+            background-color: var(--dark-bg); 
+            color: #fff; 
+            font-family: 'Orbitron', sans-serif; 
+            overflow-x: hidden; 
             user-select: none;
         }
 
-        /* خلفية المصفوفة (الديدان) */
-        #matrix-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            z-index: -1;
-            opacity: 0.25;
+        #matrix-canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
+
+        /* شاشة البداية */
+        #overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: #000; z-index: 9999; display: flex; 
+            flex-direction: column; justify-content: center; align-items: center; 
+            cursor: pointer; transition: 1.5s cubic-bezier(0.4, 0, 0.2, 1); 
         }
 
-        .orbitron { font-family: 'Orbitron', sans-serif; }
-
-        /* --- الواجهة الرئيسية للتحميل --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
+        .loading-text {
+            color: var(--neon-green); font-size: 1.5rem; letter-spacing: 10px;
+            text-shadow: var(--glow); animation: blink 0.8s infinite;
         }
 
-        .glitch-title {
-            font-size: clamp(2rem, 8vw, 5rem);
-            font-weight: 900;
-            color: white;
-            text-shadow: 2px 2px var(--neon-blue), -2px -2px var(--neon-purple);
-            animation: glitch 1.5s infinite;
-            margin-bottom: 10px;
-            letter-spacing: 5px;
-            text-transform: uppercase;
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+
+        .glitch-title { 
+            font-size: clamp(2rem, 10vw, 6rem); font-weight: 900; 
+            color: #fff; text-shadow: 0 0 20px #0f0;
+            letter-spacing: 8px; margin-bottom: 20px;
+            animation: pulse-glow 2s infinite;
         }
 
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
+        @keyframes pulse-glow {
+            0%, 100% { text-shadow: 0 0 20px #0f0; transform: scale(1); }
+            50% { text-shadow: 0 0 50px #0f0, 0 0 100px #0f0; transform: scale(1.02); }
         }
 
-        .subtitle {
-            font-family: 'Orbitron';
-            color: var(--neon-blue);
-            font-size: 1.1rem;
-            margin-bottom: 50px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .download-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; z-index: 100; }
+
+        .os-card { 
+            text-decoration: none; color: #fff; border: 1px solid var(--neon-green); 
+            background: rgba(0, 40, 0, 0.1); padding: 30px 50px; 
+            position: relative; transition: 0.4s; overflow: hidden;
+            clip-path: polygon(15% 0, 100% 0, 100% 75%, 85% 100%, 0 100%, 0 25%);
         }
 
-        .download-grid {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            z-index: 10;
+        .os-card:hover { 
+            background: var(--neon-green); color: #000; 
+            box-shadow: 0 0 50px var(--neon-green); transform: translateY(-10px);
         }
 
-        .download-card {
-            text-decoration: none;
-            color: white;
-            background: rgba(10, 10, 10, 0.7);
-            border: 2px solid #222;
-            padding: 35px;
-            border-radius: 10px;
-            width: 280px;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(15px);
-            text-align: center;
+        footer { padding: 60px 20px; text-align: center; background: linear-gradient(transparent, #050505); border-top: 1px solid #111; margin-top: 50px; }
+
+        .security-seal {
+            display: inline-block; border: 2px solid var(--neon-red); padding: 10px 25px;
+            margin-bottom: 15px; color: var(--neon-red); font-family: 'Cairo', sans-serif; font-weight: bold;
         }
 
-        .download-card:hover {
-            transform: scale(1.08) rotate(-2deg);
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 50px rgba(0, 242, 255, 0.3);
-        }
-
-        .download-card i { font-size: 4rem; display: block; margin-bottom: 15px; }
-
-        /* --- قسم الشرح --- */
-        .details-section {
-            padding: 100px 20px;
-            max-width: 1100px;
-            margin: auto;
-        }
-
-        .feature-box {
-            background: rgba(15, 15, 15, 0.9);
-            border-right: 8px solid var(--neon-purple);
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-
-        .section-header {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-            color: var(--neon-blue);
-        }
-
-        footer { padding: 40px; text-align: center; color: #444; border-top: 1px solid #111; }
+        .copyright { color: #555; font-size: 0.9rem; font-family: 'Cairo'; line-height: 1.8; }
     </style>
 </head>
 <body>
 
+    <div id="overlay" onclick="startSystem()">
+        <div class="loading-text">INITIALIZING...</div>
+        <p style="color: #444; margin-top: 20px; font-size: 0.8rem;">[ CLICK TO RUN YAHYA_OPTIMIZER ]</p>
+    </div>
+
+    <audio id="startup-sound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+    <audio id="hover-sound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
+    <audio id="bg-sound" loop src="https://assets.mixkit.co/active_storage/sfx/2555/2555-preview.mp3"></audio>
+
     <canvas id="matrix-canvas"></canvas>
 
     <section class="hero">
-        <h1 class="orbitron glitch-title">YAHYA_OPTIMIZER</h1>
-        <p class="subtitle">PROJECT: BEAST MODE ACTIVE</p>
-
+        <h1 class="glitch-title">YAHYA_OPTIMIZER</h1>
+        <p style="color: var(--neon-green); letter-spacing: 10px; font-size: 0.8rem; margin-bottom: 40px;">// SYSTEM SECURED //</p>
+        
         <div class="download-grid">
-            <a href="Yahya_Optimizer.exe" class="download-card">
-                <i>🪟</i>
-                <h3 class="orbitron">WINDOWS</h3>
-                <p style="color: #666; margin-top: 10px;">Version 1.0.0 EXE</p>
-            </a>
-            <a href="Yahya_Optimizer_Linux" class="download-card">
-                <i>🐧</i>
-                <h3 class="orbitron">LINUX</h3>
-                <p style="color: #666; margin-top: 10px;">Kernel Optimizer</p>
-            </a>
-            <a href="Yahya_Optimizer_Mac" class="download-card">
-                <i>🍎</i>
-                <h3 class="orbitron">MACOS</h3>
-                <p style="color: #666; margin-top: 10px;">Stable Release</p>
-            </a>
-        </div>
-        <div style="margin-top: 40px; color: #555;" class="orbitron">SCROLL FOR SPECS ⬇️</div>
-    </section>
-
-    <section class="details-section">
-        <h2 class="section-header orbitron">SYSTEM FEATURES</h2>
-        <div class="feature-box">
-            <h3>⚡ MAX PERFORMANCE</h3>
-            <p>تفعيل أقوى خطط الطاقة لتحقيق أقصى استجابة في الألعاب بضغطة واحدة.</p>
-        </div>
-        <div class="feature-box">
-            <h3>❄️ THERMAL CONTROL</h3>
-            <p>إدارة ذكية للمراوح تمنع ارتفاع الحرارة المفاجئ الذي يسبب هبوط الفريمات.</p>
+            <a href="Yahya_Optimizer.exe" class="os-card" onmouseenter="playHover()"><h3>WINDOWS</h3></a>
+            <a href="Yahya_Optimizer_Linux" class="os-card" onmouseenter="playHover()"><h3>LINUX</h3></a>
+            <a href="Yahya_Optimizer_Mac" class="os-card" onmouseenter="playHover()"><h3>MACOS</h3></a>
         </div>
     </section>
 
     <footer>
-        <p class="orbitron">© 2026 YAHYA_OPTIMIZER | BUILT FOR THE ELITE</p>
+        <div class="security-seal">🛡️ نظام حماية السيرفر نشط</div>
+        <div class="copyright">
+            <p style="color: var(--neon-red); font-size: 1.1rem; margin-bottom: 10px;">⚠️ تحذير: ممنوع القرصنة أو السرقة ⚠️</p>
+            <p>جميع حقوق الكود والملفات محفوظة لـ يحيى أوبتمايزر © 2026</p>
+            <p>أي محاولة تلاعب بالرسيفر ستؤدي لحظر الـ IP الخاص بك فوراً.</p>
+        </div>
     </footer>
 
     <script>
-        const canvas = document.getElementById('matrix-canvas');
-        const ctx = canvas.getContext('2d');
+        const hoverSfx = document.getElementById('hover-sound');
+        
+        function playHover() {
+            hoverSfx.currentTime = 0;
+            hoverSfx.volume = 0.2; // خفض الصوت عشان ميبقاش مزعج
+            hoverSfx.play();
+        }
 
-        function setupCanvas() {
+        function startSystem() {
+            // تشغيل صوت البداية
+            const startupSfx = document.getElementById('startup-sound');
+            startupSfx.volume = 0.5;
+            startupSfx.play();
+            
+            // تشغيل صوت الخلفية الهادئ
+            const bgSfx = document.getElementById('bg-sound');
+            bgSfx.volume = 0.1;
+            bgSfx.play();
+
+            // تأثير الاختفاء
+            document.getElementById('overlay').style.transform = 'scale(1.5)';
+            document.getElementById('overlay').style.opacity = '0';
+            setTimeout(() => { document.getElementById('overlay').style.display = 'none'; }, 1000);
+            
+            initMatrix();
+        }
+
+        function initMatrix() {
+            const canvas = document.getElementById('matrix-canvas');
+            const ctx = canvas.getContext('2d');
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-        }
-        setupCanvas();
 
-        const chars = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄ0123456789$#@%&*µ¶§ø±";
-        const hiddenWords = ["YAHYA", "OPTIMIZER", "BEAST", "X-99", "POWER"];
-        
-        const fontSize = 18;
-        let columns = Math.floor(canvas.width / fontSize);
-        let drops = Array(columns).fill(1);
+            const chars = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄ0123456789$#@%&*";
+            const hidden = ["YAHYA", "OPTIMIZER", "SECURE"];
+            const fontSize = 16;
+            const columns = canvas.width / fontSize;
+            const drops = Array(Math.floor(columns)).fill(1);
 
-        function drawMatrix() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            function draw() {
+                ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            ctx.font = "bold " + fontSize + "px Orbitron";
+                for (let i = 0; i < drops.length; i++) {
+                    let text;
+                    if (Math.random() > 0.997) {
+                        text = hidden[Math.floor(Math.random() * hidden.length)];
+                        ctx.fillStyle = "#fff";
+                        ctx.font = "bold 20px Orbitron";
+                    } else {
+                        text = chars[Math.floor(Math.random() * chars.length)];
+                        ctx.fillStyle = "#0f0";
+                        ctx.font = "16px Orbitron";
+                    }
 
-            for (let i = 0; i < drops.length; i++) {
-                let text;
-                if (Math.random() > 0.996) {
-                    text = hiddenWords[Math.floor(Math.random() * hiddenWords.length)];
-                    ctx.fillStyle = "#fff";
-                    ctx.shadowBlur = 15;
-                    ctx.shadowColor = "#0f0";
-                } else {
-                    text = chars[Math.floor(Math.random() * chars.length)];
-                    ctx.fillStyle = "#0f0";
-                    ctx.shadowBlur = 0;
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                    drops[i]++;
                 }
-
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
             }
+            setInterval(draw, 35);
         }
-
-        setInterval(drawMatrix, 33);
-        window.addEventListener('resize', () => {
-            setupCanvas();
-            columns = Math.floor(canvas.width / fontSize);
-            drops = Array(columns).fill(1);
-        });
+        window.addEventListener('resize', () => { location.reload(); });
     </script>
 </body>
 </html>

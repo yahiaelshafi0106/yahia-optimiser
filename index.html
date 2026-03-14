@@ -39,15 +39,17 @@
         .video-container { width: 100%; max-width: 500px; border-radius: 10px; overflow: hidden; border: 1px solid #0f0; display: none; margin-top: 10px; }
         .video-container iframe { width: 100%; aspect-ratio: 16/9; border: none; }
 
-        /* 📥 كروت التحميل */
-        .download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; width: 100%; max-width: 1100px; margin-bottom: 60px; }
+        /* 📥 كروت التحميل لجميع الأنظمة */
+        .download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; width: 100%; max-width: 1200px; margin-bottom: 60px; }
         .card { background: rgba(20,20,20,0.9); border: 1px solid #0f0; padding: 40px; border-radius: 10px; text-align: center; transition: 0.3s; }
-        .card:hover { transform: translateY(-10px); }
-        .dl-link { display: block; padding: 18px; margin-top: 20px; text-decoration: none; font-weight: 900; border-radius: 5px; }
+        .card:hover { transform: translateY(-10px); border-color: #fff; }
+        .dl-link { display: block; padding: 18px; margin-top: 20px; text-decoration: none; font-weight: 900; border-radius: 5px; transition: 0.3s; }
         .win { background: #0f0; color: #000; }
         .mac { background: #fff; color: #000; }
+        .lin { background: transparent; color: #0f0; border: 1px solid #0f0; }
+        .lin:hover { background: #0f0; color: #000; }
 
-        /* 🛡️ قسم الكوبي رايت (منع النسخ) */
+        /* 🛡️ قسم الكوبي رايت */
         .copyright-footer { margin-top: auto; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(0, 255, 0, 0.1); width: 100%; background: rgba(5,5,5,0.8); }
         .copy-text { color: #0f0; font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 10px; }
         .warning-text { color: #555; font-size: 0.8rem; font-weight: bold; }
@@ -67,26 +69,36 @@
             </div>
             
             <div class="chat-area">
-                <input type="text" id="userInput" placeholder="اسأل الـ AI عن الفريمات أو طريقة التحميل...">
+                <input type="text" id="userInput" placeholder="اسأل الـ AI عن الفريمات، التحميل، أو اللينكس...">
                 <button onclick="askAI()">ارسل</button>
             </div>
 
             <div class="faq-box">
                 <button class="faq-btn" onclick="quickAsk('طريقة')">إزاي أحمل؟</button>
                 <button class="faq-btn" onclick="quickAsk('فريمات')">الفريمات هتزيد؟</button>
+                <button class="faq-btn" onclick="quickAsk('لينكس')">عن نسخة لينكس</button>
                 <button class="faq-btn" onclick="quickAsk('آمن')">هل الأداة آمنة؟</button>
-                <button class="faq-btn" onclick="quickAsk('يحيى')">مين يحيى؟</button>
             </div>
         </div>
 
         <div class="download-grid">
-            <div class="card"><h3 class="orbitron">WINDOWS</h3><a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/Yahya_Optimizer.exe" class="dl-link win">DOWNLOAD EXE</a></div>
-            <div class="card"><h3 class="orbitron">macOS</h3><a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/YahyaOptimizer" class="dl-link mac">YAHYA OPTIMIZER</a></div>
+            <div class="card">
+                <h3 class="orbitron">WINDOWS</h3>
+                <a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/Yahya_Optimizer.exe" class="dl-link win">DOWNLOAD EXE</a>
+            </div>
+            <div class="card">
+                <h3 class="orbitron">macOS</h3>
+                <a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/YahyaOptimizer" class="dl-link mac">YAHYA OPTIMIZER</a>
+            </div>
+            <div class="card">
+                <h3 class="orbitron">LINUX</h3>
+                <a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/Yahya_Optimizer_Linux" class="dl-link lin">LINUX EDITION</a>
+            </div>
         </div>
 
         <footer class="copyright-footer">
             <p class="copy-text orbitron">&copy; 2026 YAHYA OPTIMIZER. ALL RIGHTS RESERVED.</p>
-            <p class="warning-text">يمنع منعاً باتاً نسخ تصميم الموقع أو إعادة توزيع الأداة دون ذكر المطور الرسمي (يحيى). انتهاك حقوق الملكية يعرضك للمساءلة.</p>
+            <p class="warning-text">يمنع منعاً باتاً نسخ تصميم الموقع أو إعادة توزيع الأداة دون ذكر المطور الرسمي (يحيى). جميع الحقوق محفوظة ومحمية برمجياً.</p>
         </footer>
     </div>
 
@@ -96,19 +108,19 @@
         // قاعدة بيانات الـ AI والردود الشائعة
         const responses = {
             "طريقة": {
-                text: "لتحميل الأداة، اضغط على زر DOWNLOAD المخصص لنظامك. شاهد هذا الفيديو التعليمي للمساعدة:",
+                text: "لتحميل الأداة، اختر الزر المناسب لنظام تشغيلك. لمزيد من التفاصيل حول التحميل من GitHub شاهد الفيديو:",
                 video: "https://www.youtube.com/embed/eWiPHP0us_0"
             },
             "فريمات": {
-                text: "نعم! الأوبتمايزر بيقوم بإيقاف العمليات الخلفية غير الضرورية ورفع أولوية الألعاب، مما يؤدي لزيادة ملحوظة في FPS.",
+                text: "نعم! يعمل الأوبتمايزر على تنظيف العمليات الخلفية وتهيئة النظام ليعطي الأولوية القصوى للألعاب، مما يرفع الـ FPS بشكل ملحوظ.",
+                video: null
+            },
+            "لينكس": {
+                text: "نسخة اللينكس Yahya_Optimizer_Linux مصممة لتعمل بكفاءة عالية على توزيعات Debian و Arch لتحسين استهلاك الموارد.",
                 video: null
             },
             "آمن": {
-                text: "الأداة آمنة 100%. الكود مفتوح المصدر جزئياً للفحص، ولا يحتوي على أي برمجيات خبيثة، هدفه فقط تحسين الأداء.",
-                video: null
-            },
-            "يحيى": {
-                text: "يحيى هو المطور ومؤسس هذا النظام، هدفه توفير أقصى أداء ممكن لأجهزة الجيمرز مجاناً.",
+                text: "الأداة آمنة تماماً ومهمتها الوحيدة هي الأداء. تم فحص الملفات والتأكد من خلوها من أي مخاطر.",
                 video: null
             }
         };
@@ -117,9 +129,9 @@
             const input = document.getElementById('userInput').value.trim().toLowerCase();
             if (input.includes("طريقة") || input.includes("تحميل") || input.includes("ازاي")) quickAsk('طريقة');
             else if (input.includes("فريم")) quickAsk('فريمات');
+            else if (input.includes("لينكس") || input.includes("linux")) quickAsk('لينكس');
             else if (input.includes("آمن")) quickAsk('آمن');
-            else if (input.includes("يحيى")) quickAsk('يحيى');
-            else document.getElementById('botText').innerText = "أنا هنا لمساعدتك! حاول سؤال عن التحميل أو الأداء.";
+            else document.getElementById('botText').innerText = "أنا هنا لمساعدتك! اسأل عن نسخة اللينكس أو الأداء.";
             document.getElementById('userInput').value = "";
         }
 
@@ -139,7 +151,7 @@
             }
         }
 
-        // ماتريكس باك جراوند
+        // مصفوفة الماتريكس
         const canvas = document.getElementById('matrix-bg'), ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         const columns = Array(Math.floor(canvas.width/20)).fill(1);

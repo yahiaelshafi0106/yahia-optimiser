@@ -11,49 +11,42 @@
         body { background-color: #000; color: #fff; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
         .orbitron { font-family: 'Orbitron', sans-serif; }
         
-        /* الماتريكس */
         #matrix-bg { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
 
         .wrapper { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
         .main-title { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; text-shadow: 0 0 20px #0f0; margin-bottom: 5px; }
 
-        /* 🤖 قسم الروبوت والصورة المدمج */
+        /* 🤖 قسم الروبوت والفيديو الثابت */
         .ai-container { 
             display: flex; flex-wrap: wrap; gap: 20px; width: 100%; max-width: 900px; 
             background: rgba(0, 255, 0, 0.05); border: 1px solid #0f0; padding: 25px; 
             border-radius: 20px; backdrop-filter: blur(10px); margin-bottom: 40px; align-items: center;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.1);
         }
         
         .ai-image { flex: 1; min-width: 250px; text-align: center; }
         .ai-image img { width: 100%; max-width: 300px; border-radius: 15px; border: 2px solid #0f0; box-shadow: 0 0 20px #0f0; }
 
         .ai-chat { flex: 2; min-width: 300px; display: flex; flex-direction: column; gap: 15px; }
-        .bot-response-box { background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px; border-left: 4px solid #0f0; min-height: 100px; position: relative; }
+        .bot-response-box { background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px; border-left: 4px solid #0f0; }
         
-        .input-group { display: flex; gap: 10px; }
-        .input-group input { flex: 1; padding: 12px; border: 1px solid #0f0; background: #000; color: #fff; border-radius: 5px; outline: none; }
-        .input-group button { padding: 0 20px; background: #0f0; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; transition: 0.3s; }
-        .input-group button:hover { background: #fff; box-shadow: 0 0 10px #fff; }
+        .video-title { color: #fff; text-align: center; margin-bottom: 10px; border-bottom: 1px solid #0f0; padding-bottom: 5px; }
+        .video-box { width: 100%; border: 1px solid #0f0; border-radius: 10px; overflow: hidden; display: block; }
+        .video-box iframe { width: 100%; aspect-ratio: 16/9; }
 
-        /* 📥 كروت التحميل المحدثة */
+        .input-group { display: flex; gap: 10px; margin-top: 15px; }
+        .input-group input { flex: 1; padding: 12px; border: 1px solid #0f0; background: #000; color: #fff; border-radius: 5px; outline: none; }
+        .input-group button { padding: 0 20px; background: #0f0; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; }
+
+        /* 📥 كروت التحميل بناءً على طلبك */
         .download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; width: 100%; max-width: 1000px; margin-bottom: 50px; }
-        .card { background: rgba(20,20,20,0.9); border: 1px solid #0f0; padding: 30px; border-radius: 10px; text-align: center; transition: 0.4s; }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 0 20px #0f0; border-color: #fff; }
-        .dl-link { display: block; padding: 15px; margin-top: 15px; text-decoration: none; font-weight: bold; border-radius: 5px; transition: 0.3s; text-transform: uppercase; }
+        .card { background: rgba(20,20,20,0.9); border: 1px solid #0f0; padding: 30px; border-radius: 10px; text-align: center; transition: 0.3s; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 0 15px #0f0; }
+        .dl-link { display: block; padding: 15px; margin-top: 15px; text-decoration: none; font-weight: bold; border-radius: 5px; }
         .win { background: #0f0; color: #000; }
         .mac { background: #fff; color: #000; }
         .lin { border: 1px solid #0f0; color: #0f0; }
 
-        /* فيديو الشرح */
-        .video-box { width: 100%; max-width: 500px; display: none; margin-top: 15px; border: 1px solid #0f0; border-radius: 10px; overflow: hidden; }
-        .video-box iframe { width: 100%; aspect-ratio: 16/9; }
-
-        .faq-btn { background: none; border: 1px solid #0f0; color: #0f0; padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 0.75rem; transition: 0.3s; }
-        .faq-btn:hover { background: #0f0; color: #000; }
-
-        /* 🛡️ الحقوق */
-        footer { margin-top: auto; padding: 30px; text-align: center; border-top: 1px solid rgba(0,255,0,0.2); width: 100%; color: #555; font-size: 0.8rem; }
+        footer { margin-top: auto; padding: 30px; text-align: center; border-top: 1px solid rgba(0,255,0,0.2); width: 100%; color: #555; }
     </style>
 </head>
 <body onclick="playMusic()">
@@ -61,7 +54,7 @@
     
     <div class="wrapper">
         <h1 class="main-title orbitron">YAHYA OPTIMIZER</h1>
-        <p style="color:#0f0; letter-spacing: 5px; margin-bottom: 30px; font-weight: bold;">MAXIMUM PERFORMANCE SYSTEM</p>
+        <p style="color:#0f0; letter-spacing: 5px; margin-bottom: 30px;">MAXIMUM PERFORMANCE SYSTEM</p>
 
         <div class="ai-container">
             <div class="ai-image">
@@ -69,20 +62,15 @@
             </div>
             <div class="ai-chat">
                 <div class="bot-response-box">
-                    <p id="botText">نظام يحيى الذكي جاهز.. اسألني عن الفريمات، الأمان، أو الفرق بين نظام (جيب) و (دي زد)!</p>
-                    <div id="videoArea" class="video-box">
-                        <iframe id="eduVid" src="" allowfullscreen></iframe>
+                    <p id="botText" style="color:#0f0; margin-bottom:10px;">مساعد يحيى الذكي:</p>
+                    <h3 class="orbitron video-title">ازاي تفتح الملف (Extract)</h3>
+                    <div class="video-box">
+                        <iframe id="eduVid" src="https://www.youtube.com/embed/fT4vGdfL-8U" allowfullscreen></iframe>
                     </div>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="userIn" placeholder="اسأل الخبير يحيى...">
+                    <input type="text" id="userIn" placeholder="اسأل عن الفريمات، الأمان، أو يحيى المطور...">
                     <button onclick="askAI()">ارسل</button>
-                </div>
-                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;">
-                    <button class="faq-btn" onclick="quickAsk('فريمات')">زيادة FPS</button>
-                    <button class="faq-btn" onclick="quickAsk('تشغيل')">طريقة التشغيل</button>
-                    <button class="faq-btn" onclick="quickAsk('تردد')">نظام دي زد (GZ)</button>
-                    <button class="faq-btn" onclick="quickAsk('آمن')">هل هو آمن؟</button>
                 </div>
             </div>
         </div>
@@ -90,111 +78,51 @@
         <div class="download-grid">
             <div class="card">
                 <h3 class="orbitron">WINDOWS</h3>
-                <p style="color:#666; font-size: 0.8rem;">نظام دوت جيب المستقر</p>
+                <p style="color:#666; font-size:0.8rem;">نظام جيب ZIP</p>
                 <a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/Yahya_Optimizer.zip" class="dl-link win">DOWNLOAD .ZIP</a>
             </div>
             <div class="card">
-                <h3 class="orbitron">macOS GZ</h3>
-                <p style="color:#666; font-size: 0.8rem;">نظام تردد دي زد</p>
-                <a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/YahyaOptimizer.tar.gz" class="dl-link mac">DOWNLOAD .GZ</a>
+                <h3 class="orbitron">macOS XZ</h3>
+                <p style="color:#666; font-size:0.8rem;">نظام تردد ديزل</p>
+                <a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/YahyaOptimizer.tar.xz" class="dl-link mac">DOWNLOAD .XZ</a>
             </div>
             <div class="card">
-                <h3 class="orbitron">LINUX GZ</h3>
-                <p style="color:#666; font-size: 0.8rem;">إطار المكواة دي زد</p>
-                <a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/Yahya_Optimizer_Linux.tar.gz" class="dl-link lin">DOWNLOAD .GZ</a>
+                <h3 class="orbitron">LINUX XZ</h3>
+                <p style="color:#666; font-size:0.8rem;">إطار المكواة ديزل</p>
+                <a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/Yahya_Optimizer_Linux.tar.xz" class="dl-link lin">DOWNLOAD .XZ</a>
             </div>
         </div>
 
         <footer>
             <p class="orbitron" style="color:#0f0;">&copy; 2026 YAHYA OPTIMIZER | DEVELOPED BY YAHYA</p>
-            <p>جميع الحقوق محفوظة. تم استخدام أنظمة "جيب" و "دي زد" لضمان أقصى حماية وسرعة تردد.</p>
+            <p>جميع الحقوق محفوظة. تم استخدام أنظمة "جيب" و "ديزل XZ" لأقصى أداء.</p>
         </footer>
     </div>
 
     <audio id="au" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio>
 
     <script>
-        // عقل الروبوت المتطور (Mega Brain) مع أكثر من 10 ردود ذكية
         const megaBrain = {
-            "فريمات": {
-                keywords: ["فريمات", "fps", "لاج", "سرعة", "بطء", "تعليق"],
-                answer: "يحيى أوبتمايزر بيعمل Deep Clean للرامات وبيقفل العمليات اللي بتسحب قوة المعالج، وده بيضمن لك استقرار الفريمات ورفع الـ FPS بنسبة كبيرة."
-            },
-            "آمن": {
-                keywords: ["آمن", "فيروس", "حماية", "خطر", "تأكد", "تحذير"],
-                answer: "الأداة نظيفة 100%. نظام (جيب) للويندوز ونظام (دي زد) للينكس والماك بيحموا الملفات من رسائل المتصفح الخاطئة، حمل وأنت مطمن!"
-            },
-            "تشغيل": {
-                keywords: ["تشغيل", "شغل", "ازاي", "طريقة", "فك", "الضغط"],
-                answer: "الموضوع بسيط: حمل الملف، فك الضغط (Extract)، وشغل البرنامج كمسؤول (Run as Admin). شوف الفيديو ده للخطوات:",
-                vid: "https://www.youtube.com/embed/fT4vGdfL-8U"
-            },
-            "تردد": {
-                keywords: ["دي زد", "gz", "تردد", "ديزل", "جي زد"],
-                answer: "نظام دي زد (tar.gz) هو نظام التردد العالي للينكس والماك، بيضغط الكود بشكل احترافي عشان يشتغل عندك بكامل طاقته بدون تدخل النظام."
-            },
-            "جيب": {
-                keywords: ["جيب", "zip", "ويندوز"],
-                answer: "نظام دوت جيب (ZIP) مخصص للويندوز، بيخليك تتخطى رسالة 'تأكد من أمان الملف' اللي بتظهر في المتصفحات وبيديك تحميل سريع."
-            },
-            "يحيى": {
-                keywords: ["يحيى", "مين", "المطور", "yahya"],
-                answer: "المطور يحيى هو اللي صمم الأداة دي عشان يساعد الجيمرز في تحويل أجهزتهم لطلقة وتوفير أحسن أداء في الألعاب."
-            },
-            "باند": {
-                keywords: ["باند", "حظر", "العاب", "فورتنايت", "ببجي"],
-                answer: "الأداة آمنة تماماً على حساباتك، لأنها بتعدل في إعدادات الويندوز لتحسين الأداء مش في ملفات الألعاب نفسها."
-            },
-            "مجاني": {
-                keywords: ["سعر", "فلوس", "بكام", "مجاني"],
-                answer: "يحيى أوبتمايزر أداة مجانية تماماً وهتفضل كدة، عشان الكل يستفيد من أقصى قوة لجهازه."
-            },
-            "تحديث": {
-                keywords: ["تحديث", "جديد", "اصدار"],
-                answer: "إحنا دايماً بنطور الأداة، اتأكد إنك بتحمل أحدث اصدار من الموقع هنا عشان تستفيد من ميزات التردد الجديدة."
-            },
-            "شكرا": {
-                keywords: ["شكرا", "تسلم", "عاش", "حبيبي"],
-                answer: "حبيبي يا بطل! ده واجبي، استمتع بأقوى أداء لجهازك ولو محتاج حاجة تانية أنا هنا."
-            }
+            "فريمات": { keywords: ["فريمات", "fps", "لاج"], answer: "يحيى أوبتمايزر بيعمل Deep Clean للرامات وبيقفل العمليات اللي بتسحب قوة المعالج، وده بيعلي الفريمات جداً." },
+            "آمن": { keywords: ["آمن", "فيروس", "حماية"], answer: "الأداة نظيفة 100%. نظام ZIP و XZ بيضمنوا لك تحميل آمن بعيد عن تحذيرات المتصفح." },
+            "يحيى": { keywords: ["يحيى", "مين", "المطور"], answer: "يحيى هو المطور العبقري اللي صمم الأداة دي عشان يحل مشاكل اللاج للجيمرز العرب." },
+            "باند": { keywords: ["باند", "حظر"], answer: "الأداة آمنة تماماً، لأنها بتعدل في إعدادات النظام مش في ملفات اللعبة." },
+            "شكرا": { keywords: ["شكرا", "تسلم", "عاش"], answer: "حبيبي يا بطل! استمتع بأقوى أداء." }
         };
 
         function askAI() {
             const input = document.getElementById('userIn').value.trim().toLowerCase();
             let found = false;
-
             for (let key in megaBrain) {
                 if (megaBrain[key].keywords.some(word => input.includes(word))) {
-                    displayResponse(megaBrain[key]);
-                    found = true;
-                    break;
+                    document.getElementById('botText').innerText = megaBrain[key].answer;
+                    found = true; break;
                 }
             }
-
-            if (!found && input !== "") {
-                document.getElementById('botText').innerText = "سؤالك ذكي! أنا متخصص في (الفريمات، الأمان، التشغيل، وأنظمة جيب ودي زد). جرب تسأل عنهم!";
-            }
+            if (!found && input !== "") { document.getElementById('botText').innerText = "اسألني عن الفريمات أو الأمان أو المطور!"; }
             document.getElementById('userIn').value = "";
         }
 
-        function quickAsk(key) {
-            if (megaBrain[key]) displayResponse(megaBrain[key]);
-        }
-
-        function displayResponse(data) {
-            document.getElementById('botText').innerText = data.answer;
-            const vArea = document.getElementById('videoArea');
-            const vFrame = document.getElementById('eduVid');
-            if(data.vid) {
-                vArea.style.display = "block";
-                vFrame.src = data.vid;
-            } else {
-                vArea.style.display = "none";
-                vFrame.src = "";
-            }
-        }
-
-        // تأثير الماتريكس
         const canvas = document.getElementById('matrix-bg'), ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         const columns = Array(Math.floor(canvas.width/20)).fill(1);
@@ -209,7 +137,6 @@
         }
         setInterval(draw, 50);
         function playMusic() { document.getElementById('au').play(); }
-        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
     </script>
 </body>
 </html>

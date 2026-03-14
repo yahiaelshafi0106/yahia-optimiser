@@ -6,38 +6,28 @@
     <title>YAHYA OPTIMIZER | الأداء الأقصى</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cairo:wght@400;700&display=swap');
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: #000; color: #fff; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
         .orbitron { font-family: 'Orbitron', sans-serif; }
-        
         #matrix-bg { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
-
         .wrapper { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
         .main-title { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; text-shadow: 0 0 20px #0f0; margin-bottom: 5px; }
-
-        /* 🤖 قسم الروبوت والشرح */
         .ai-container { 
             display: flex; flex-wrap: wrap; gap: 20px; width: 100%; max-width: 900px; 
             background: rgba(0, 255, 0, 0.05); border: 1px solid #0f0; padding: 25px; 
             border-radius: 20px; backdrop-filter: blur(10px); margin-bottom: 40px; align-items: center;
         }
-        
         .ai-image { flex: 1; min-width: 250px; text-align: center; }
         .ai-image img { width: 100%; max-width: 300px; border-radius: 15px; border: 2px solid #0f0; box-shadow: 0 0 20px #0f0; }
-
         .ai-chat { flex: 2; min-width: 300px; display: flex; flex-direction: column; gap: 15px; }
-        .bot-response-box { background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px; border-left: 4px solid #0f0; }
-        
+        .bot-response-box { background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px; border-left: 4px solid #0f0; min-height: 150px; }
         .instruction-box { background: rgba(0, 255, 0, 0.1); border: 1px dashed #0f0; padding: 15px; border-radius: 8px; margin-top: 10px; }
-        .step { margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
-        .step-num { background: #0f0; color: #000; font-weight: bold; padding: 2px 8px; border-radius: 50%; font-size: 0.8rem; }
-
+        .step { margin-bottom: 8px; display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; }
+        .step-num { background: #0f0; color: #000; font-weight: bold; padding: 2px 8px; border-radius: 50%; }
         .input-group { display: flex; gap: 10px; margin-top: 15px; }
         .input-group input { flex: 1; padding: 12px; border: 1px solid #0f0; background: #000; color: #fff; border-radius: 5px; outline: none; }
-        .input-group button { padding: 0 20px; background: #0f0; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; }
-
-        /* 📥 كروت التحميل */
+        .input-group button { padding: 0 20px; background: #0f0; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; transition: 0.3s; }
+        .input-group button:hover { background: #fff; color: #000; }
         .download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; width: 100%; max-width: 1000px; margin-bottom: 50px; }
         .card { background: rgba(20,20,20,0.9); border: 1px solid #0f0; padding: 30px; border-radius: 10px; text-align: center; transition: 0.3s; }
         .card:hover { transform: translateY(-10px); box-shadow: 0 0 15px #0f0; }
@@ -45,87 +35,81 @@
         .win { background: #0f0; color: #000; }
         .mac { background: #fff; color: #000; }
         .lin { border: 1px solid #0f0; color: #0f0; }
-
-        /* ⚖️ الحقوق */
         footer { margin-top: auto; padding: 30px; text-align: center; border-top: 1px solid rgba(0,255,0,0.2); width: 100%; }
         .copyright { color: #0f0; font-family: 'Orbitron', sans-serif; letter-spacing: 2px; }
     </style>
 </head>
 <body onclick="playMusic()">
     <canvas id="matrix-bg"></canvas>
-    
     <div class="wrapper">
         <h1 class="main-title orbitron">YAHYA OPTIMIZER</h1>
         <p style="color:#0f0; letter-spacing: 5px; margin-bottom: 30px;">MAXIMUM PERFORMANCE SYSTEM</p>
-
         <div class="ai-container">
-            <div class="ai-image">
-                <img src="a4e663ca-7d96-49e5-ab7c-90c953061062" alt="Yahya Optimizer Interface">
-            </div>
+            <div class="ai-image"><img src="input_file_0.png" alt="Yahya Optimizer"></div>
             <div class="ai-chat">
                 <div class="bot-response-box">
                     <p id="botText" style="color:#0f0; margin-bottom:10px; font-weight: bold;">مساعد يحيى الذكي:</p>
-                    <h3 class="orbitron" style="color: #fff; font-size: 1.1rem; margin-bottom: 10px;">ازاي تفتح الملف (Extract)</h3>
-                    
-                    <div class="instruction-box">
-                        <div class="step"><span class="step-num">1</span><p>حمل الملف من الكروت اللي تحت (ZIP أو XZ).</p></div>
-                        <div class="step"><span class="step-num">2</span><p>كليك يمين على الملف واختار <b>(Extract Here)</b>.</p></div>
-                        <div class="step"><span class="step-num">3</span><p>افتح الفولدر وشغل <b>Yahya Optimizer</b> كمسؤول.</p></div>
+                    <div id="defaultContent">
+                        <h3 class="orbitron" style="color: #fff; font-size: 1.1rem; margin-bottom: 10px;">ازاي تفتح الملف (Extract)</h3>
+                        <div class="instruction-box">
+                            <div class="step"><span class="step-num">1</span><p>حمل الملف المناسب (ZIP للويندوز أو XZ للماك).</p></div>
+                            <div class="step"><span class="step-num">2</span><p>كليك يمين واختار <b>Extract Here</b> (فك الضغط).</p></div>
+                            <div class="step"><span class="step-num">3</span><p>شغل <b>Yahya Optimizer</b> كمسؤول.</p></div>
+                        </div>
                     </div>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="userIn" placeholder="اسأل عن الفريمات، الأمان، أو يحيى المطور...">
+                    <input type="text" id="userIn" placeholder="اسأل عن الفريمات، الأمان، يحيى، الباند، التردد...">
                     <button onclick="askAI()">ارسل</button>
                 </div>
             </div>
         </div>
-
         <div class="download-grid">
-            <div class="card">
-                <h3 class="orbitron">WINDOWS</h3>
-                <p style="color:#666; font-size:0.8rem;">نظام جيب ZIP</p>
-                <a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/Yahya_Optimizer.zip" class="dl-link win">DOWNLOAD .ZIP</a>
-            </div>
-            <div class="card">
-                <h3 class="orbitron">macOS XZ</h3>
-                <p style="color:#666; font-size:0.8rem;">نظام تردد ديزل</p>
-                <a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/YahyaOptimizer.tar.xz" class="dl-link mac">DOWNLOAD .XZ</a>
-            </div>
-            <div class="card">
-                <h3 class="orbitron">LINUX XZ</h3>
-                <p style="color:#666; font-size:0.8rem;">إطار المكواة ديزل</p>
-                <a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/Yahya_Optimizer_Linux.tar.xz" class="dl-link lin">DOWNLOAD .XZ</a>
-            </div>
+            <div class="card"><h3 class="orbitron">WINDOWS</h3><a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/Yahya_Optimizer.zip" class="dl-link win">DOWNLOAD .ZIP</a></div>
+            <div class="card"><h3 class="orbitron">macOS XZ</h3><a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/YahyaOptimizer.tar.xz" class="dl-link mac">DOWNLOAD .XZ</a></div>
+            <div class="card"><h3 class="orbitron">LINUX XZ</h3><a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/Yahya_Optimizer_Linux.tar.xz" class="dl-link lin">DOWNLOAD .XZ</a></div>
         </div>
-
         <footer>
             <p class="copyright">&copy; 2026 YAHYA OPTIMIZER | DEVELOPED BY YAHYA</p>
-            <p style="color: #555; font-size: 0.8rem; margin-top: 5px;">جميع الحقوق محفوظة للمطور يحيى. يمنع نسخ التصميم أو الكود.</p>
+            <p style="color: #555; font-size: 0.8rem; margin-top: 10px;">جميع الحقوق محفوظة. يمنع نسخ الكود أو التصميم.</p>
         </footer>
     </div>
-
     <audio id="au" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio>
-
     <script>
+        // 🧠 عقل الروبوت المتكامل بكل الأسئلة السريعة
         const megaBrain = {
-            "فريمات": { keywords: ["فريمات", "fps", "لاج"], answer: "يحيى أوبتمايزر بيعمل Deep Clean للرامات وبيقفل العمليات اللي بتسحب قوة المعالج." },
-            "آمن": { keywords: ["آمن", "فيروس", "حماية"], answer: "الأداة نظيفة 100%. نظام ZIP و XZ بيضمنوا لك تحميل آمن." },
-            "تردد": { keywords: ["دي زد", "xz", "تردد", "ديزل"], answer: "نظام XZ (الديزل) هو أحدث تقنيات التردد لضغط الملفات بأعلى جودة." },
-            "يحيى": { keywords: ["يحيى", "مين", "المطور"], answer: "يحيى هو المطور العبقري اللي تعب عشان يطلعلكم الأداة دي." },
-            "باند": { keywords: ["باند", "حظر"], answer: "الأداة آمنة تماماً ولا تسبب أي حظر لأنها تعدل في النظام فقط." },
-            "شكرا": { keywords: ["شكرا", "تسلم", "عاش"], answer: "حبيبي يا يحيى! إحنا في الخدمة دايماً." }
+            "فريمات": { keywords: ["فريمات", "fps", "لاج", "تقطيع"], answer: "يحيى أوبتمايزر بيعمل Deep Clean للرامات وبيقفل العمليات اللي بتسحب قوة المعالج، وده بيعلي الفريمات جداً." },
+            "آمن": { keywords: ["آمن", "فيروس", "حماية", "خطر"], answer: "الأداة نظيفة 100%. نظام ZIP و XZ بيضمنوا لك تحميل آمن بعيد عن تحذيرات المتصفح." },
+            "يحيى": { keywords: ["يحيى", "مين", "المطور"], answer: "يحيى هو المطور العبقري صاحب الرؤية اللي صمم الأداة دي لخدمة الجيمرز." },
+            "باند": { keywords: ["باند", "حظر", "مط رود"], answer: "الأداة آمنة تماماً، لأنها بتعدل في إعدادات النظام مش في ملفات اللعبة، فمستحيل تاخد باند." },
+            "تردد": { keywords: ["تردد", "xz", "ديزل", "ضغط"], answer: "نظام XZ (الديزل) هو أحدث تقنيات الضغط والتردد لضمان أخف مساحة وأعلى أداء." },
+            "سعر": { keywords: ["سعر", "فلوس", "بكام", "مجاني"], answer: "يحيى أوبتمايزر أداة مجانية تماماً وهتفضل كدة لكل الناس." },
+            "طريقة": { keywords: ["طريقة", "شغل", "ازاي"], answer: "حمل الملف، فك الضغط (Extract)، وشغل البرنامج كمسؤول.. الموضوع بسيط!" },
+            "شكرا": { keywords: ["شكرا", "تسلم", "عاش", "بطل"], answer: "حبيبي يا صاحبي! ده أقل حاجة أقدمها لك، استمتع بالأداء." },
+            "تحديث": { keywords: ["تحديث", "جديد", "نسخة"], answer: "إحنا بنحدث الأداة باستمرار، تابع الموقع هنا عشان تنزل آخر إصدار دايماً." },
+            "مشكلة": { keywords: ["مشكلة", "عطل", "غلط"], answer: "لو واجهت أي مشكلة، اتأكد إنك فاتح البرنامج كمسؤول (Run as Admin) وكل حاجة هتظبط." }
         };
 
         function askAI() {
             const input = document.getElementById('userIn').value.trim().toLowerCase();
+            const botBox = document.getElementById('botText');
+            const defaultContent = document.getElementById('defaultContent');
             let found = false;
+
+            if (input === "") return;
+
             for (let key in megaBrain) {
                 if (megaBrain[key].keywords.some(word => input.includes(word))) {
-                    document.getElementById('botText').innerText = "مساعد يحيى: " + megaBrain[key].answer;
+                    defaultContent.style.display = "none";
+                    botBox.innerText = "رد المساعد: " + megaBrain[key].answer;
+                    botBox.style.color = "#0f0";
                     found = true; break;
                 }
             }
-            if (!found && input !== "") { document.getElementById('botText').innerText = "اسألني عن الفريمات، الأمان، أو المطور!"; }
+            if (!found) {
+                defaultContent.style.display = "none";
+                botBox.innerText = "مساعد يحيى: معنديش رد للسؤال ده حالياً، بس الأكيد إن الأوبتمايزر هيظبط لك الفريمات!";
+            }
             document.getElementById('userIn').value = "";
         }
 

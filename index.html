@@ -8,150 +8,133 @@
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cairo:wght@400;700&display=swap');
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; color: #fff; font-family: 'Cairo', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+        body { background-color: #000; color: #fff; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
         .orbitron { font-family: 'Orbitron', sans-serif; }
         
-        /* تأثير الماتريكس */
+        /* الماتريكس */
         #matrix-bg { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
 
-        .wrapper { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 60px 20px; }
-        
-        .main-title { font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; text-shadow: 0 0 30px #0f0; margin-bottom: 10px; letter-spacing: 5px; }
-        .sub-tagline { color: #0f0; font-size: 1.2rem; margin-bottom: 50px; letter-spacing: 10px; opacity: 0.8; }
+        .wrapper { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
+        .main-title { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; text-shadow: 0 0 20px #0f0; margin-bottom: 5px; }
 
-        /* 🤖 منطقة الـ AI والأسئلة الشائعة */
-        .bot-section { width: 100%; max-width: 700px; margin-bottom: 50px; text-align: center; }
-        .bot-response { 
-            background: rgba(0, 255, 0, 0.1); border: 1px solid #0f0; padding: 25px; border-radius: 15px; 
-            min-height: 120px; margin-bottom: 20px; backdrop-filter: blur(10px); box-shadow: 0 0 20px rgba(0,255,0,0.1);
-            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px;
+        /* 🤖 قسم الروبوت والصورة */
+        .ai-container { 
+            display: flex; flex-wrap: wrap; gap: 20px; width: 100%; max-width: 900px; 
+            background: rgba(0, 255, 0, 0.05); border: 1px solid #0f0; padding: 25px; 
+            border-radius: 20px; backdrop-filter: blur(10px); margin-bottom: 40px; align-items: center;
         }
         
-        .chat-area { display: flex; gap: 10px; margin-bottom: 15px; }
-        .chat-area input { flex: 1; padding: 15px; border: 1px solid #0f0; background: rgba(0,0,0,0.8); color: #fff; border-radius: 5px; outline: none; }
-        .chat-area button { padding: 0 25px; background: #0f0; border: none; cursor: pointer; font-weight: bold; color: #000; border-radius: 5px; }
+        .ai-image { flex: 1; min-width: 250px; text-align: center; }
+        .ai-image img { width: 100%; max-width: 300px; border-radius: 15px; border: 2px solid #0f0; box-shadow: 0 0 20px #0f0; }
 
-        .faq-box { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-        .faq-btn { background: rgba(0, 255, 0, 0.05); border: 1px solid #0f0; color: #0f0; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; transition: 0.3s; }
-        .faq-btn:hover { background: #0f0; color: #000; }
+        .ai-chat { flex: 2; min-width: 300px; display: flex; flex-direction: column; gap: 15px; }
+        .bot-response-box { background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px; border-left: 4px solid #0f0; min-height: 100px; }
+        
+        .input-group { display: flex; gap: 10px; }
+        .input-group input { flex: 1; padding: 12px; border: 1px solid #0f0; background: #000; color: #fff; border-radius: 5px; outline: none; }
+        .input-group button { padding: 0 20px; background: #0f0; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; }
 
-        /* مشغل الفيديو التعليمي */
-        .video-container { width: 100%; max-width: 500px; border-radius: 10px; overflow: hidden; border: 1px solid #0f0; display: none; margin-top: 10px; }
-        .video-container iframe { width: 100%; aspect-ratio: 16/9; border: none; }
-
-        /* 📥 كروت التحميل لجميع الأنظمة */
-        .download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; width: 100%; max-width: 1200px; margin-bottom: 60px; }
-        .card { background: rgba(20,20,20,0.9); border: 1px solid #0f0; padding: 40px; border-radius: 10px; text-align: center; transition: 0.3s; }
-        .card:hover { transform: translateY(-10px); border-color: #fff; }
-        .dl-link { display: block; padding: 18px; margin-top: 20px; text-decoration: none; font-weight: 900; border-radius: 5px; transition: 0.3s; }
+        /* 📥 كروت التحميل */
+        .download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; width: 100%; max-width: 1000px; margin-bottom: 50px; }
+        .card { background: rgba(20,20,20,0.9); border: 1px solid #0f0; padding: 30px; border-radius: 10px; text-align: center; transition: 0.3s; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 0 15px #0f0; }
+        .dl-link { display: block; padding: 15px; margin-top: 15px; text-decoration: none; font-weight: bold; border-radius: 5px; }
         .win { background: #0f0; color: #000; }
         .mac { background: #fff; color: #000; }
-        .lin { background: transparent; color: #0f0; border: 1px solid #0f0; }
-        .lin:hover { background: #0f0; color: #000; }
+        .lin { border: 1px solid #0f0; color: #0f0; }
 
-        /* 🛡️ قسم الكوبي رايت */
-        .copyright-footer { margin-top: auto; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(0, 255, 0, 0.1); width: 100%; background: rgba(5,5,5,0.8); }
-        .copy-text { color: #0f0; font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 10px; }
-        .warning-text { color: #555; font-size: 0.8rem; font-weight: bold; }
+        /* فيديو الشرح */
+        .video-box { width: 100%; max-width: 500px; display: none; margin-top: 15px; border: 1px solid #0f0; border-radius: 10px; overflow: hidden; }
+        .video-box iframe { width: 100%; aspect-ratio: 16/9; }
+
+        /* 🛡️ الحقوق */
+        footer { margin-top: auto; padding: 30px; text-align: center; border-top: 1px solid rgba(0,255,0,0.2); width: 100%; color: #555; font-size: 0.8rem; }
     </style>
 </head>
 <body onclick="playMusic()">
     <canvas id="matrix-bg"></canvas>
     
     <div class="wrapper">
-        <h1 class="main-title orbitron">YAHYA</h1>
-        <p class="sub-tagline orbitron">OPTIMIZER SYSTEM</p>
-        
-        <div class="bot-section">
-            <div id="botResponseBox" class="bot-response">
-                <span id="botText">أهلاً بك في نظام يحيى.. كيف يمكنني مساعدتك اليوم؟</span>
-                <div id="videoArea" class="video-container"></div>
-            </div>
-            
-            <div class="chat-area">
-                <input type="text" id="userInput" placeholder="اسأل الـ AI عن الفريمات، التحميل، أو اللينكس...">
-                <button onclick="askAI()">ارسل</button>
-            </div>
+        <h1 class="main-title orbitron">YAHYA OPTIMIZER</h1>
+        <p style="color:#0f0; letter-spacing: 5px; margin-bottom: 30px;">THE FUTURE OF PERFORMANCE</p>
 
-            <div class="faq-box">
-                <button class="faq-btn" onclick="quickAsk('طريقة')">إزاي أحمل؟</button>
-                <button class="faq-btn" onclick="quickAsk('فريمات')">الفريمات هتزيد؟</button>
-                <button class="faq-btn" onclick="quickAsk('لينكس')">عن نسخة لينكس</button>
-                <button class="faq-btn" onclick="quickAsk('آمن')">هل الأداة آمنة؟</button>
+        <div class="ai-container">
+            <div class="ai-image">
+                <img src="input_file_0.png" alt="Yahya Optimizer Interface">
+            </div>
+            <div class="ai-chat">
+                <div class="bot-response-box">
+                    <p id="botText">أهلاً يا بطل! أنا مساعد يحيى الذكي. اسألني عن الفريمات، الأمان، أو إزاي تفك ضغط الملف.</p>
+                    <div id="videoArea" class="video-box">
+                        <iframe id="eduVid" src="" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="userIn" placeholder="اكتب سؤالك هنا...">
+                    <button onclick="askAI()">ارسل</button>
+                </div>
+                <div style="display:flex; gap:5px; flex-wrap:wrap;">
+                    <button class="faq-btn" style="background:none; border:1px solid #0f0; color:#0f0; padding:5px 10px; border-radius:15px; cursor:pointer; font-size:0.7rem;" onclick="quickAsk('تشغيل')">طريقة التشغيل</button>
+                    <button class="faq-btn" style="background:none; border:1px solid #0f0; color:#0f0; padding:5px 10px; border-radius:15px; cursor:pointer; font-size:0.7rem;" onclick="quickAsk('فريمات')">زيادة الـ FPS</button>
+                </div>
             </div>
         </div>
 
         <div class="download-grid">
-            <div class="card">
-                <h3 class="orbitron">WINDOWS</h3>
-                <a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/Yahya_Optimizer.exe" class="dl-link win">DOWNLOAD EXE</a>
-            </div>
-            <div class="card">
-                <h3 class="orbitron">macOS</h3>
-                <a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/YahyaOptimizer" class="dl-link mac">YAHYA OPTIMIZER</a>
-            </div>
-            <div class="card">
-                <h3 class="orbitron">LINUX</h3>
-                <a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/Yahya_Optimizer_Linux" class="dl-link lin">LINUX EDITION</a>
-            </div>
+            <div class="card"><h3 class="orbitron">WINDOWS</h3><a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/Yahya_Optimizer.zip" class="dl-link win">DOWNLOAD ZIP</a></div>
+            <div class="card"><h3 class="orbitron">macOS</h3><a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/YahyaOptimizer.zip" class="dl-link mac">DOWNLOAD ZIP</a></div>
+            <div class="card"><h3 class="orbitron">LINUX</h3><a href="https://github.com/yahiaelshafi0106/yahia-optimiser/raw/main/Yahya_Optimizer_Linux.zip" class="dl-link lin">DOWNLOAD ZIP</a></div>
         </div>
 
-        <footer class="copyright-footer">
-            <p class="copy-text orbitron">&copy; 2026 YAHYA OPTIMIZER. ALL RIGHTS RESERVED.</p>
-            <p class="warning-text">يمنع منعاً باتاً نسخ تصميم الموقع أو إعادة توزيع الأداة دون ذكر المطور الرسمي (يحيى). جميع الحقوق محفوظة ومحمية برمجياً.</p>
+        <footer>
+            <p class="orbitron" style="color:#0f0;">&copy; 2026 YAHYA OPTIMIZER | ALL RIGHTS RESERVED</p>
+            <p>جميع الحقوق محفوظة. تم ضغط الملفات لتوفير أقصى درجات الأمان وسرعة التحميل.</p>
         </footer>
     </div>
 
-    <audio id="bgMusic" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio>
+    <audio id="au" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio>
 
     <script>
-        // قاعدة بيانات الـ AI والردود الشائعة
-        const responses = {
-            "طريقة": {
-                text: "لتحميل الأداة، اختر الزر المناسب لنظام تشغيلك. لمزيد من التفاصيل حول التحميل من GitHub شاهد الفيديو:",
-                video: "https://www.youtube.com/embed/eWiPHP0us_0"
+        // عقل الروبوت المتخصص
+        const aiBrain = {
+            "تشغيل": {
+                text: "للتشغيل بدون مشاكل: حمل ملف الـ ZIP، فك الضغط (Extract)، وشغل البرنامج كمسؤول. شوف الفيديو ده:",
+                vid: "https://www.youtube.com/embed/fT4vGdfL-8U"
             },
             "فريمات": {
-                text: "نعم! يعمل الأوبتمايزر على تنظيف العمليات الخلفية وتهيئة النظام ليعطي الأولوية القصوى للألعاب، مما يرفع الـ FPS بشكل ملحوظ.",
-                video: null
-            },
-            "لينكس": {
-                text: "نسخة اللينكس Yahya_Optimizer_Linux مصممة لتعمل بكفاءة عالية على توزيعات Debian و Arch لتحسين استهلاك الموارد.",
-                video: null
+                text: "الأداة بتعمل تحسين للويندوز وبتقفل الخدمات اللي بتسحب رامات، وده بيخلي الفريمات تعلى وتثبت معاك جداً.",
+                vid: null
             },
             "آمن": {
-                text: "الأداة آمنة تماماً ومهمتها الوحيدة هي الأداء. تم فحص الملفات والتأكد من خلوها من أي مخاطر.",
-                video: null
+                text: "آمن 100%. استخدمنا ZIP عشان المتصفح ميعملش بلوك، والملف مفحوص وجاهز للاستخدام.",
+                vid: null
             }
         };
 
         function askAI() {
-            const input = document.getElementById('userInput').value.trim().toLowerCase();
-            if (input.includes("طريقة") || input.includes("تحميل") || input.includes("ازاي")) quickAsk('طريقة');
-            else if (input.includes("فريم")) quickAsk('فريمات');
-            else if (input.includes("لينكس") || input.includes("linux")) quickAsk('لينكس');
-            else if (input.includes("آمن")) quickAsk('آمن');
-            else document.getElementById('botText').innerText = "أنا هنا لمساعدتك! اسأل عن نسخة اللينكس أو الأداء.";
-            document.getElementById('userInput').value = "";
+            const input = document.getElementById('userIn').value.trim().toLowerCase();
+            if (input.includes("ازاي") || input.includes("شغل") || input.includes("فك")) quickAsk('تشغيل');
+            else if (input.includes("فريم") || input.includes("fps")) quickAsk('فريمات');
+            else if (input.includes("آمن") || input.includes("تحذير")) quickAsk('آمن');
+            else document.getElementById('botText').innerText = "اسألني عن (طريقة التشغيل، الفريمات، أو الأمان) وهرد عليك فوراً!";
+            document.getElementById('userIn').value = "";
         }
 
         function quickAsk(key) {
-            const data = responses[key];
-            const textEl = document.getElementById('botText');
-            const videoEl = document.getElementById('videoArea');
-            
-            textEl.innerText = data.text;
-            
-            if(data.video) {
-                videoEl.style.display = "block";
-                videoEl.innerHTML = `<iframe src="${data.video}" allowfullscreen></iframe>`;
+            const data = aiBrain[key];
+            document.getElementById('botText').innerText = data.text;
+            const vArea = document.getElementById('videoArea');
+            const vFrame = document.getElementById('eduVid');
+            if(data.vid) {
+                vArea.style.display = "block";
+                vFrame.src = data.vid;
             } else {
-                videoEl.style.display = "none";
-                videoEl.innerHTML = "";
+                vArea.style.display = "none";
+                vFrame.src = "";
             }
         }
 
-        // مصفوفة الماتريكس
+        // تأثير الماتريكس
         const canvas = document.getElementById('matrix-bg'), ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         const columns = Array(Math.floor(canvas.width/20)).fill(1);
@@ -165,7 +148,7 @@
             });
         }
         setInterval(draw, 50);
-        function playMusic() { document.getElementById('bgMusic').play(); }
+        function playMusic() { document.getElementById('au').play(); }
     </script>
 </body>
 </html>

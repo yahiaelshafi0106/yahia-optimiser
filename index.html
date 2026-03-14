@@ -16,7 +16,7 @@
         .wrapper { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
         .main-title { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; text-shadow: 0 0 20px #0f0; margin-bottom: 5px; }
 
-        /* 🤖 قسم الروبوت والصورة - ميزة محفوظة */
+        /* 🤖 قسم الروبوت والشرح */
         .ai-container { 
             display: flex; flex-wrap: wrap; gap: 20px; width: 100%; max-width: 900px; 
             background: rgba(0, 255, 0, 0.05); border: 1px solid #0f0; padding: 25px; 
@@ -29,14 +29,15 @@
         .ai-chat { flex: 2; min-width: 300px; display: flex; flex-direction: column; gap: 15px; }
         .bot-response-box { background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px; border-left: 4px solid #0f0; }
         
-        .video-title { color: #fff; text-align: center; margin-bottom: 10px; border-bottom: 1px solid #0f0; padding-bottom: 5px; }
-        .video-box { width: 100%; border: 1px solid #0f0; border-radius: 10px; overflow: hidden; display: block; }
-        .video-box iframe { width: 100%; aspect-ratio: 16/9; }
+        .instruction-box { background: rgba(0, 255, 0, 0.1); border: 1px dashed #0f0; padding: 15px; border-radius: 8px; margin-top: 10px; }
+        .step { margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
+        .step-num { background: #0f0; color: #000; font-weight: bold; padding: 2px 8px; border-radius: 50%; font-size: 0.8rem; }
 
         .input-group { display: flex; gap: 10px; margin-top: 15px; }
         .input-group input { flex: 1; padding: 12px; border: 1px solid #0f0; background: #000; color: #fff; border-radius: 5px; outline: none; }
         .input-group button { padding: 0 20px; background: #0f0; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; }
 
+        /* 📥 كروت التحميل */
         .download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; width: 100%; max-width: 1000px; margin-bottom: 50px; }
         .card { background: rgba(20,20,20,0.9); border: 1px solid #0f0; padding: 30px; border-radius: 10px; text-align: center; transition: 0.3s; }
         .card:hover { transform: translateY(-10px); box-shadow: 0 0 15px #0f0; }
@@ -45,7 +46,9 @@
         .mac { background: #fff; color: #000; }
         .lin { border: 1px solid #0f0; color: #0f0; }
 
-        footer { margin-top: auto; padding: 30px; text-align: center; border-top: 1px solid rgba(0,255,0,0.2); width: 100%; color: #555; }
+        /* ⚖️ الحقوق */
+        footer { margin-top: auto; padding: 30px; text-align: center; border-top: 1px solid rgba(0,255,0,0.2); width: 100%; }
+        .copyright { color: #0f0; font-family: 'Orbitron', sans-serif; letter-spacing: 2px; }
     </style>
 </head>
 <body onclick="playMusic()">
@@ -57,14 +60,17 @@
 
         <div class="ai-container">
             <div class="ai-image">
-                <img src="input_file_0.png" alt="Yahya Optimizer Interface">
+                <img src="a4e663ca-7d96-49e5-ab7c-90c953061062" alt="Yahya Optimizer Interface">
             </div>
             <div class="ai-chat">
                 <div class="bot-response-box">
-                    <p id="botText" style="color:#0f0; margin-bottom:10px;">مساعد يحيى الذكي:</p>
-                    <h3 class="orbitron video-title">ازاي تفتح الملف (Extract)</h3>
-                    <div class="video-box">
-                        <iframe id="eduVid" src="https://www.youtube.com/embed/fT4vGdfL-8U" allowfullscreen></iframe>
+                    <p id="botText" style="color:#0f0; margin-bottom:10px; font-weight: bold;">مساعد يحيى الذكي:</p>
+                    <h3 class="orbitron" style="color: #fff; font-size: 1.1rem; margin-bottom: 10px;">ازاي تفتح الملف (Extract)</h3>
+                    
+                    <div class="instruction-box">
+                        <div class="step"><span class="step-num">1</span><p>حمل الملف من الكروت اللي تحت (ZIP أو XZ).</p></div>
+                        <div class="step"><span class="step-num">2</span><p>كليك يمين على الملف واختار <b>(Extract Here)</b>.</p></div>
+                        <div class="step"><span class="step-num">3</span><p>افتح الفولدر وشغل <b>Yahya Optimizer</b> كمسؤول.</p></div>
                     </div>
                 </div>
                 <div class="input-group">
@@ -93,24 +99,21 @@
         </div>
 
         <footer>
-            <p class="orbitron" style="color:#0f0;">&copy; 2026 YAHYA OPTIMIZER | DEVELOPED BY YAHYA</p>
-            <p>جميع الحقوق محفوظة. تم الحفاظ على كافة الميزات مع إصلاح الفيديو.</p>
+            <p class="copyright">&copy; 2026 YAHYA OPTIMIZER | DEVELOPED BY YAHYA</p>
+            <p style="color: #555; font-size: 0.8rem; margin-top: 5px;">جميع الحقوق محفوظة للمطور يحيى. يمنع نسخ التصميم أو الكود.</p>
         </footer>
     </div>
 
     <audio id="au" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio>
 
     <script>
-        // ميزة الـ Mega Brain (الردود الـ 10 محفوظة بالكامل)
         const megaBrain = {
             "فريمات": { keywords: ["فريمات", "fps", "لاج"], answer: "يحيى أوبتمايزر بيعمل Deep Clean للرامات وبيقفل العمليات اللي بتسحب قوة المعالج." },
             "آمن": { keywords: ["آمن", "فيروس", "حماية"], answer: "الأداة نظيفة 100%. نظام ZIP و XZ بيضمنوا لك تحميل آمن." },
-            "تردد": { keywords: ["دي زد", "xz", "تردد", "ديزل"], answer: "نظام XZ هو التطوير الجديد لنظام التردد، بيخلي الملفات أخف وأسرع." },
-            "يحيى": { keywords: ["يحيى", "مين", "المطور"], answer: "المطور يحيى هو العقل المدبر وراء الأداة لتحسين أداء الجيمرز العرب." },
-            "باند": { keywords: ["باند", "حظر"], answer: "الأداة آمنة تماماً على حساباتك، لأنها بتعدل في إعدادات النظام." },
-            "تشغيل": { keywords: ["تشغيل", "شغل", "ازاي"], answer: "حمل الملف، فك الضغط (Extract)، وشغل البرنامج كمسؤول." },
-            "مجاني": { keywords: ["سعر", "فلوس", "بكام"], answer: "يحيى أوبتمايزر أداة مجانية تماماً وهتفضل كدة." },
-            "شكرا": { keywords: ["شكرا", "تسلم", "عاش"], answer: "العفو يا وحش! استمتع بالأداء الأسطوري." }
+            "تردد": { keywords: ["دي زد", "xz", "تردد", "ديزل"], answer: "نظام XZ (الديزل) هو أحدث تقنيات التردد لضغط الملفات بأعلى جودة." },
+            "يحيى": { keywords: ["يحيى", "مين", "المطور"], answer: "يحيى هو المطور العبقري اللي تعب عشان يطلعلكم الأداة دي." },
+            "باند": { keywords: ["باند", "حظر"], answer: "الأداة آمنة تماماً ولا تسبب أي حظر لأنها تعدل في النظام فقط." },
+            "شكرا": { keywords: ["شكرا", "تسلم", "عاش"], answer: "حبيبي يا يحيى! إحنا في الخدمة دايماً." }
         };
 
         function askAI() {
@@ -118,11 +121,11 @@
             let found = false;
             for (let key in megaBrain) {
                 if (megaBrain[key].keywords.some(word => input.includes(word))) {
-                    document.getElementById('botText').innerText = megaBrain[key].answer;
+                    document.getElementById('botText').innerText = "مساعد يحيى: " + megaBrain[key].answer;
                     found = true; break;
                 }
             }
-            if (!found && input !== "") { document.getElementById('botText').innerText = "اسألني عن الفريمات أو الأمان أو المطور!"; }
+            if (!found && input !== "") { document.getElementById('botText').innerText = "اسألني عن الفريمات، الأمان، أو المطور!"; }
             document.getElementById('userIn').value = "";
         }
 

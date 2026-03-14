@@ -3,102 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yahia Optimizer | Full AI Edition</title>
+    <title>Yahia Optimizer | الموقع الرسمي</title>
     <style>
-        /* الخلفية الجديدة المحترمة مع الحفاظ على كل المحتوى */
+        /* الخلفية التقنية المحترمة */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #05050a; /* أسود فخم */
+            background-color: #05050a;
             color: #ffffff;
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
             position: relative;
-            overflow-x: hidden;
         }
 
-        /* شبكة تقنية هادئة جداً وراقيّة */
         body::before {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
-                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
+                linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
             z-index: -1;
         }
 
         .container {
-            max-width: 1000px;
             width: 90%;
+            max-width: 1000px;
             text-align: center;
-            padding: 50px 20px;
+            padding: 50px 0;
         }
 
         h1 {
             font-size: 3.5rem;
             color: #00d4ff;
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-            margin-bottom: 10px;
+            margin-bottom: 0;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
         }
 
-        /* هنا كل المميزات اللي كانت موجودة بدون اختصار */
-        .features-section {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+        .ai-tag {
+            color: #39ff14;
+            letter-spacing: 5px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        /* قائمة المميزات كاملة بدون اختصار */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            margin-top: 40px;
+            margin-top: 30px;
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            padding: 25px;
-            border-radius: 15px;
-            width: 280px;
-            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #1a1a2e;
+            text-align: right;
         }
 
-        .feature-card:hover {
-            border-color: #39ff14;
-            transform: translateY(-5px);
-        }
+        .feature-card h3 { color: #00d4ff; margin-top: 0; }
 
-        .feature-card h3 {
-            color: #39ff14;
-            margin-bottom: 10px;
-        }
-
-        /* الأزرار الكاملة بدون دمج */
-        .buttons-group {
+        /* أزرار التحميل المباشرة */
+        .download-section {
             margin-top: 50px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
             align-items: center;
         }
 
         .btn {
-            display: inline-block;
-            width: 300px;
-            padding: 15px;
-            border-radius: 10px;
             text-decoration: none;
+            padding: 15px 50px;
+            border-radius: 5px;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            width: 250px;
             transition: 0.3s;
         }
 
-        .btn-main { background: #007bff; color: white; }
-        .btn-ai { background: transparent; border: 2px solid #39ff14; color: #39ff14; }
-        .btn-secondary { background: #333; color: #ccc; }
+        .btn-download {
+            background-color: #007bff;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+        }
 
-        .btn:hover { opacity: 0.8; transform: scale(1.02); }
+        .btn-ai {
+            background-color: transparent;
+            border: 2px solid #39ff14;
+            color: #39ff14;
+        }
+
+        .btn:hover { transform: scale(1.05); opacity: 0.9; }
 
     </style>
 </head>
@@ -106,31 +108,30 @@
 
     <div class="container">
         <h1>YAHIA OPTIMIZER</h1>
-        <p style="font-size: 1.3rem; color: #aaa;">نظام الذكاء الاصطناعي الكامل لتحسين أداء الحاسوب</p>
+        <div class="ai-tag">ARTIFICIAL INTELLIGENCE SYSTEM</div>
 
-        <div class="features-section">
+        <div class="features">
             <div class="feature-card">
-                <h3>ذكاء اصطناعي AI</h3>
-                <p>تحليل ذكي لكل عمليات النظام وتخصيص الموارد للألعاب بشكل آلي.</p>
+                <h3>الذكاء الاصطناعي</h3>
+                <p>تخصيص كامل لموارد الجهاز باستخدام خوارزميات الذكاء الاصطناعي لضمان أعلى أداء.</p>
             </div>
             <div class="feature-card">
                 <h3>تحسين المراوح</h3>
-                <p>التحكم الكامل في سرعة التبريد للحفاظ على استقرار المعالج.</p>
+                <p>نظام تبريد ذكي يستجيب لحرارة المعالج بشكل لحظي لمنع الـ Lag.</p>
             </div>
             <div class="feature-card">
-                <h3>رفع الفريمات FPS</h3>
-                <p>إزالة القيود عن كارت الشاشة للحصول على أعلى سلاسة ممكنة.</p>
+                <h3>رفع الفريمات (FPS)</h3>
+                <p>تعديلات تقنية عميقة في النظام لزيادة عدد الفريمات في جميع الألعاب.</p>
             </div>
             <div class="feature-card">
-                <h3>تنظيف شامل</h3>
-                <p>مسح الملفات المؤقتة وتسريع إقلاع النظام بضغطة واحدة.</p>
+                <h3>تنظيف الذاكرة</h3>
+                <p>تفريغ الـ RAM وتنظيف الملفات المؤقتة التي تسبب ثقل في الجهاز.</p>
             </div>
         </div>
 
-        <div class="buttons-group">
-            <a href="#" class="btn btn-main">تحميل النسخة الكاملة</a>
-            <a href="#" class="btn btn-ai">تفعيل محرك الذكاء الاصطناعي</a>
-            <a href="#" class="btn btn-secondary">مشاهدة سجل التحديثات</a>
+        <div class="download-section">
+            <a href="Yahia_Optimizer.zip" download class="btn btn-download">تحميل ملف ZIP</a>
+            <a href="Yahia_Optimizer.exe" download class="btn btn-ai">تحميل ملف EXE</a>
         </div>
     </div>
 

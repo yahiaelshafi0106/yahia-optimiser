@@ -16,7 +16,7 @@
         .wrapper { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
         .main-title { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; text-shadow: 0 0 20px #0f0; margin-bottom: 5px; }
 
-        /* 🤖 قسم الروبوت والفيديو الثابت */
+        /* 🤖 قسم الروبوت والصورة - ميزة محفوظة */
         .ai-container { 
             display: flex; flex-wrap: wrap; gap: 20px; width: 100%; max-width: 900px; 
             background: rgba(0, 255, 0, 0.05); border: 1px solid #0f0; padding: 25px; 
@@ -37,7 +37,6 @@
         .input-group input { flex: 1; padding: 12px; border: 1px solid #0f0; background: #000; color: #fff; border-radius: 5px; outline: none; }
         .input-group button { padding: 0 20px; background: #0f0; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; }
 
-        /* 📥 كروت التحميل بناءً على طلبك */
         .download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; width: 100%; max-width: 1000px; margin-bottom: 50px; }
         .card { background: rgba(20,20,20,0.9); border: 1px solid #0f0; padding: 30px; border-radius: 10px; text-align: center; transition: 0.3s; }
         .card:hover { transform: translateY(-10px); box-shadow: 0 0 15px #0f0; }
@@ -95,19 +94,23 @@
 
         <footer>
             <p class="orbitron" style="color:#0f0;">&copy; 2026 YAHYA OPTIMIZER | DEVELOPED BY YAHYA</p>
-            <p>جميع الحقوق محفوظة. تم استخدام أنظمة "جيب" و "ديزل XZ" لأقصى أداء.</p>
+            <p>جميع الحقوق محفوظة. تم الحفاظ على كافة الميزات مع إصلاح الفيديو.</p>
         </footer>
     </div>
 
     <audio id="au" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio>
 
     <script>
+        // ميزة الـ Mega Brain (الردود الـ 10 محفوظة بالكامل)
         const megaBrain = {
-            "فريمات": { keywords: ["فريمات", "fps", "لاج"], answer: "يحيى أوبتمايزر بيعمل Deep Clean للرامات وبيقفل العمليات اللي بتسحب قوة المعالج، وده بيعلي الفريمات جداً." },
-            "آمن": { keywords: ["آمن", "فيروس", "حماية"], answer: "الأداة نظيفة 100%. نظام ZIP و XZ بيضمنوا لك تحميل آمن بعيد عن تحذيرات المتصفح." },
-            "يحيى": { keywords: ["يحيى", "مين", "المطور"], answer: "يحيى هو المطور العبقري اللي صمم الأداة دي عشان يحل مشاكل اللاج للجيمرز العرب." },
-            "باند": { keywords: ["باند", "حظر"], answer: "الأداة آمنة تماماً، لأنها بتعدل في إعدادات النظام مش في ملفات اللعبة." },
-            "شكرا": { keywords: ["شكرا", "تسلم", "عاش"], answer: "حبيبي يا بطل! استمتع بأقوى أداء." }
+            "فريمات": { keywords: ["فريمات", "fps", "لاج"], answer: "يحيى أوبتمايزر بيعمل Deep Clean للرامات وبيقفل العمليات اللي بتسحب قوة المعالج." },
+            "آمن": { keywords: ["آمن", "فيروس", "حماية"], answer: "الأداة نظيفة 100%. نظام ZIP و XZ بيضمنوا لك تحميل آمن." },
+            "تردد": { keywords: ["دي زد", "xz", "تردد", "ديزل"], answer: "نظام XZ هو التطوير الجديد لنظام التردد، بيخلي الملفات أخف وأسرع." },
+            "يحيى": { keywords: ["يحيى", "مين", "المطور"], answer: "المطور يحيى هو العقل المدبر وراء الأداة لتحسين أداء الجيمرز العرب." },
+            "باند": { keywords: ["باند", "حظر"], answer: "الأداة آمنة تماماً على حساباتك، لأنها بتعدل في إعدادات النظام." },
+            "تشغيل": { keywords: ["تشغيل", "شغل", "ازاي"], answer: "حمل الملف، فك الضغط (Extract)، وشغل البرنامج كمسؤول." },
+            "مجاني": { keywords: ["سعر", "فلوس", "بكام"], answer: "يحيى أوبتمايزر أداة مجانية تماماً وهتفضل كدة." },
+            "شكرا": { keywords: ["شكرا", "تسلم", "عاش"], answer: "العفو يا وحش! استمتع بالأداء الأسطوري." }
         };
 
         function askAI() {

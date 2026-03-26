@@ -3,145 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yahya Optimizer | v3.0</title>
+    <title>Yahya Optimizer | v4.0 Platinum Edition</title>
     <style>
-        /* إعدادات الخلفية المطابقة للصورة 100% */
+        :root {
+            --glow-color: #00d4ff;
+            --safe-green: #3fb950;
+            --danger-red: #f85149;
+            --bg-dark: #030812;
+            --card-bg: rgba(15, 25, 35, 0.9);
+            --text-main: #ffffff;
+            --text-muted: #888888;
+        }
+
         body {
             margin: 0; padding: 0;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            background-color: #030812; /* لون غامق جداً يطابق الصورة */
-            color: #ffffff;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             display: flex; flex-direction: column; align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* رسم الشبكة الهندسية (Grid) المضيئة في الخلفية */
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
-                linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
-            background-size: 60px 60px;
+                linear-gradient(rgba(0, 212, 255, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.06) 1px, transparent 1px);
+            background-size: 50px 50px;
             z-index: -1;
+            opacity: 0.8;
         }
 
-        /* التوهج الجانبي في الأركان */
         body::after {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 10% 20%, rgba(0, 212, 255, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(0, 212, 255, 0.08) 0%, transparent 40%);
+                radial-gradient(circle at 15% 25%, rgba(0, 212, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(0, 212, 255, 0.1) 0%, transparent 40%);
             z-index: -2;
         }
 
-        .container { width: 90%; max-width: 1100px; text-align: center; padding-top: 50px; z-index: 1; }
+        .container { width: 90%; max-width: 1200px; text-align: center; padding: 40px 0; z-index: 1; }
 
-        /* اسم الموقع (v3.0) */
+        .header-section { margin-bottom: 40px; }
+
         .main-title {
-            font-size: 3.5rem; font-weight: 800; letter-spacing: 3px;
-            margin-bottom: 25px; color: #fff;
-            text-shadow: 0 0 25px rgba(0, 212, 255, 0.8);
+            font-size: 4rem; font-weight: 900; letter-spacing: 5px;
+            margin: 0; color: #fff;
+            text-shadow: 0 0 35px var(--glow-color);
             text-transform: uppercase;
         }
 
-        /* مستطيل التنبيه المضيء */
-        #smart-alert {
-            background: rgba(0, 212, 255, 0.03);
-            border: 2px solid #00d4ff;
-            color: #fff; padding: 12px 40px;
-            border-radius: 8px; display: inline-block;
-            margin-bottom: 45px; font-weight: bold;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        .version-badge {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--glow-color);
+            color: var(--glow-color);
+            padding: 5px 20px; border-radius: 20px;
+            font-size: 1rem; font-weight: bold; letter-spacing: 2px;
+            display: inline-block; margin-top: 10px;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
         }
 
-        .download-grid {
+        #smart-alert {
+            background: rgba(0, 212, 255, 0.04);
+            border: 2px solid var(--glow-color);
+            color: #fff; padding: 15px 40px;
+            border-radius: 10px; display: inline-block;
+            margin-bottom: 35px; font-weight: bold;
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.4);
+            transition: 0.3s ease;
+        }
+
+        .system-stats {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px; margin-bottom: 50px;
+            gap: 20px; margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px; padding: 20px;
+            display: flex; align-items: center; justify-content: space-around;
+            transition: 0.3s;
+        }
+        .stat-card:hover { border-color: var(--glow-color); box-shadow: 0 0 15px rgba(0, 212, 255, 0.2); }
+
+        .stat-icon { font-size: 2rem; color: var(--glow-color); }
+        .stat-info { text-align: right; }
+        .stat-label { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; }
+        .stat-value { font-size: 1.6rem; font-weight: bold; color: #fff; }
+        .status-ok { color: var(--safe-green) !important; text-shadow: 0 0 10px var(--safe-green); }
+
+        .download-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px; margin-bottom: 50px;
         }
 
         .download-card {
-            background: rgba(15, 25, 35, 0.9);
+            background: var(--card-bg);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px; padding: 30px;
-            transition: 0.3s; position: relative;
+            border-radius: 15px; padding: 35px;
+            transition: 0.4s ease; position: relative;
+            overflow: hidden;
         }
+        .download-card:hover { transform: translateY(-5px); border-color: rgba(0, 212, 255, 0.3); }
 
-        /* التوهج للنسخة المكتشفة */
         .detected-card {
-            border: 2px solid #00d4ff !important;
-            box-shadow: 0 0 35px rgba(0, 212, 255, 0.4);
-            transform: translateY(-8px);
+            border: 2px solid var(--glow-color) !important;
+            box-shadow: 0 0 45px rgba(0, 212, 255, 0.5);
         }
 
         .detected-tag {
-            position: absolute; top: -14px; left: 20px;
-            background: #00d4ff; color: #000;
-            padding: 2px 10px; border-radius: 4px;
-            font-size: 0.75rem; font-weight: bold;
+            position: absolute; top: 0; left: 0;
+            background: var(--glow-color); color: #000;
+            padding: 6px 20px; font-size: 0.8rem; font-weight: bold;
+            border-bottom-right-radius: 15px; text-transform: uppercase;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
         }
 
-        .download-card h3 { font-size: 1.8rem; margin: 10px 0; }
-        .download-card p { color: #888; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.4; }
+        .download-card h3 { font-size: 2rem; margin: 15px 0 10px; letter-spacing: 1px; }
+        .download-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; line-height: 1.5; }
 
         .btn {
-            display: block; width: 100%; padding: 12px;
+            display: block; width: 100%; padding: 15px;
             border-radius: 8px; text-decoration: none; font-weight: bold;
-            color: #fff; background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.2); transition: 0.3s;
+            color: #fff; background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.4);
+            transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
+            box-sizing: border-box;
         }
-        .btn:hover { background: #00d4ff; color: #000; }
+        .btn:hover { background: var(--glow-color); color: #000; box-shadow: 0 0 25px var(--glow-color); }
 
-        .guide-section {
-            text-align: right; margin-top: 40px; padding: 30px;
-            background: rgba(255, 255, 255, 0.02); border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        .features-showcase {
+            background: rgba(15, 25, 35, 0.6);
+            border-radius: 15px; padding: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+            margin-top: 20px; text-align: right;
         }
-        .guide-section h3 { color: #fbbc05; font-size: 1.5rem; margin-bottom: 15px; }
-        .step { color: #aaa; margin: 10px 0; font-size: 1rem; }
-        .step b { color: #00d4ff; }
+        .features-showcase h3 { color: #fbbc05; font-size: 1.6rem; margin-top: 0; margin-bottom: 20px; }
 
-        /* بصمة جيميناي الرسمية */
+        .features-list {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .feat-item {
+            color: var(--text-muted); font-size: 1rem;
+            display: flex; align-items: center;
+        }
+        .feat-item::before {
+            content: "✦"; color: var(--glow-color);
+            margin-left: 10px; font-size: 1.1rem;
+            text-shadow: 0 0 8px var(--glow-color);
+        }
+        .feat-item b { color: var(--glow-color); margin: 0 3px; }
+
+        .all-features-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 10px; margin-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;
+        }
+        .all-feat-badge {
+            background: rgba(0, 212, 255, 0.03);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            color: var(--text-muted); font-size: 0.75rem;
+            padding: 6px; border-radius: 4px; text-align: center;
+            transition: 0.2s;
+        }
+        .all-feat-badge.active {
+            border-color: rgba(0, 212, 255, 0.4);
+            color: rgba(255,255,255,0.9);
+            background: rgba(0, 212, 255, 0.08);
+        }
+        .all-feat-badge.special {
+            border-color: var(--glow-color);
+            color: var(--glow-color);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+        }
+
         .gemini-footer {
-            margin: 60px 0 40px; font-size: 2.2rem; font-weight: 800;
+            margin: 70px 0 40px; font-size: 2.6rem; font-weight: 900;
             background: linear-gradient(90deg, #4285f4, #9b72cb, #d96570, #f4af54);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="main-title">YAHYA OPTIMIZER v3.0</div>
+        <div class="header-section">
+            <h1 class="main-title">YAHYA OPTIMIZER</h1>
+            <div class="version-badge">v4.0 PLATINUM EDITION</div>
+        </div>
         
-        <div id="smart-alert">جاري فحص توافق النظام... 🚀</div>
+        <div id="smart-alert">جاري تحليل بيئة النظام... 🚀</div>
+
+        <div class="system-stats">
+            <div class="stat-card">
+                <div class="stat-icon">🌡️</div>
+                <div class="stat-info">
+                    <div class="stat-label">حرارة المعالج (Safeguard)</div>
+                    <div class="stat-value status-ok" id="cpu-temp">42°C</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⏳</div>
+                <div class="stat-info">
+                    <div class="stat-label">تجديد النشاط (ميزة 30)</div>
+                    <div class="stat-value" id="refresh-timer">10:00</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🚀</div>
+                <div class="stat-info">
+                    <div class="stat-label">الوضع الحالي</div>
+                    <div class="stat-value status-ok">Ultra Low Latency</div>
+                </div>
+            </div>
+        </div>
 
         <div class="download-grid">
             <div id="win-card" class="download-card">
                 <h3>Windows 🖥️</h3>
-                <p>مود الطلقة (0.5ms)<br>(WINDOWS) مود الطلقة</p>
-                <a href="#" class="btn">التحميل</a>
+                <p>مود الطلقة (0.5ms)<br>تحسين Kernal و RAM العميق<br>40 ميزة مفعلة</p>
+                <a href="#" class="btn">التحميل الآن</a>
             </div>
 
             <div id="mac-card" class="download-card">
                 <h3>macOS 🍎</h3>
-                <p>مود الطلقة (0.5ms)<br>(macOS) مود الطلقة</p>
-                <a href="#" class="btn">التحميل</a>
+                <p>مود الطلقة (0.5ms)<br>تحسين Purge و Thermal<br>40 ميزة مفعلة</p>
+                <a href="#" class="btn">التحميل الآن</a>
             </div>
 
             <div id="linux-card" class="download-card">
                 <h3>Linux 🐧</h3>
-                <p>مود الطلقة (0.5ms)<br>(LINUX) مود الطلقة</p>
-                <a href="#" class="btn">التحميل</a>
+                <p>مود الطلقة (0.5ms)<br>تحسين Bash و Swap و Governor<br>40 ميزة مفعلة</p>
+                <a href="#" class="btn">التحميل الآن</a>
             </div>
         </div>
 
-        <div class="guide-section">
-            <h3>📂 كيفية التشغيل (v3.0):</h3>
-            <div class="step">1. قم بفك ضغط الملف فورا باستدام كلك يمين و extract للحصول على ملف الـ v3.0.</div>
-            <div class="step">2. شغل البرنامج كمسؤول لضمان تفعيل كافة ميزات التحسين.</div>
-            <div class="step">3. استمتع بتجربة أداء Yahya Optimizer الاستثنائية.</div>
+        <div class="features-showcase">
+            <h3>📂 ترسانة ميزات البلاتينيوم (v4.0):</h3>
+            <div class="features-list">
+                <div class="feat-item">مُجدد النشاط تلقائياً كل<b>10 دقائق</b> لحماية الأجهزة الضعيفة.</div>
+                <div class="feat-item">مراقبة حرارة القطع (Safeguard) وتفعيل<b>Ultra Cooling</b> تلقائياً.</div>
+                <div class="feat-item">زرار الإنقاذ السريع<b>(Panic Button)</b> عبر الاختصار<b>CTRL + SHIFT + Y</b>.</div>
+                <div class="feat-item">تحسين الـ Kernel للعمليات والإنترنت لتقليل الـ<b>Ping</b> والـ<b>Input Lag</b>.</div>
+            </div>
+            
+            <div class="all-features-grid" id="all-features-grid">
+                </div>
         </div>
 
         <div class="gemini-footer">Powered by Google Gemini</div>
@@ -152,25 +264,47 @@
             const platform = navigator.platform.toLowerCase();
             const alert = document.getElementById('smart-alert');
             
+            const grid = document.getElementById('all-features-grid');
+            for (let i = 1; i <= 40; i++) {
+                let badge = document.createElement('div');
+                badge.className = 'all-feat-badge active';
+                let text = `ميزة ${i}`;
+                if (i === 14) { text = '🌡️ مراقب الحرارة'; badge.className = 'all-feat-badge special'; }
+                if (i === 30) { text = '⏳ مُجدد النشاط 10د'; badge.className = 'all-feat-badge special'; }
+                if (i === 40) { text = '🚨 زرار الإنقاذ'; badge.className = 'all-feat-badge special'; }
+                badge.innerText = text;
+                grid.appendChild(badge);
+            }
+
+            let timeLeft = 600;
+            const timerEl = document.getElementById('refresh-timer');
+            setInterval(() => {
+                if(timeLeft <= 0) timeLeft = 600;
+                timeLeft--;
+                let m = Math.floor(timeLeft / 60);
+                let s = timeLeft % 60;
+                timerEl.innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+            }, 1000);
+            
             setTimeout(() => {
                 let targetId = "";
-                if (platform.includes('win')) {
-                    alert.innerText = "تم اكتشاف ويندوز! نسختك v3.0 جاهزة بالأسفل 🚀";
-                    targetId = "win-card";
-                } else if (platform.includes('mac')) {
-                    alert.innerText = "تم اكتشاف ماك! نسختك v3.0 جاهزة بالأسفل 🍎";
-                    targetId = "mac-card";
-                } else if (platform.includes('linux')) {
-                    alert.innerText = "تم اكتشاف لينكس! نسختك v3.0 جاهزة بالأسفل 🐧";
-                    targetId = "linux-card";
-                }
+                let osName = "";
+                if (platform.includes('win')) { osName = "ويندوز"; targetId = "win-card"; }
+                else if (platform.includes('mac')) { osName = "ماك"; targetId = "mac-card"; }
+                else if (platform.includes('linux')) { osName = "لينكس"; targetId = "linux-card"; }
 
                 if(targetId) {
+                    alert.innerText = `تم اكتشاف نظام ${osName}! نسخة البلاتينيوم v4.0 جاهزة بالأسفل 🚀`;
+                    alert.style.borderColor = "var(--safe-green)";
+                    alert.style.boxShadow = "0 0 25px var(--safe-green)";
+                    
                     const card = document.getElementById(targetId);
                     card.classList.add('detected-card');
                     card.insertAdjacentHTML('afterbegin', '<div class="detected-tag">🚀 نسختك المناسبة</div>');
+                } else {
+                    alert.innerText = "اختار نسختك v4.0 Platinum حسب نظام تشغيلك 👇";
                 }
-            }, 600);
+            }, 800);
         };
     </script>
 </body>

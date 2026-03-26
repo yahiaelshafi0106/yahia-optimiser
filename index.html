@@ -27,7 +27,6 @@
 
         .wrapper { max-width: 1100px; margin: 50px auto; padding: 20px; }
 
-        /* الهيدر العملاق */
         header {
             text-align: center;
             padding: 40px 0;
@@ -54,7 +53,6 @@
             vertical-align: middle;
         }
 
-        /* حالة الاتصال الاحترافية */
         .status-container {
             background: var(--card-gradient);
             padding: 25px;
@@ -71,7 +69,7 @@
             width: 15px;
             height: 15px;
             border-radius: 50%;
-            background: #ff3333; /* الافتراضي أحمر */
+            background: #ff3333;
             box-shadow: 0 0 15px #ff3333;
         }
 
@@ -79,7 +77,6 @@
         .status-text { font-size: 1.3rem; font-weight: bold; color: #ff3333; }
         .status-online .status-text { color: #00ff00; }
 
-        /* منطقة التحميل والمواصفات */
         .main-panel {
             display: grid;
             grid-template-columns: 1.5fr 1fr;
@@ -96,7 +93,6 @@
             text-align: center;
         }
 
-        /* تأثير الجلو للزرار الأساسي */
         .btn-glow {
             display: block;
             width: 100%;
@@ -118,7 +114,6 @@
             100% { box-shadow: 0 0 15px rgba(0, 255, 204, 0.4); }
         }
 
-        /* الأزرار الفرعية الصغيرة */
         .sub-downloads {
             display: flex;
             gap: 10px;
@@ -138,7 +133,6 @@
 
         .btn-sub:hover { border-color: var(--main-color); color: #fff; }
 
-        /* سهم المواصفات المطور */
         .specs-dropdown {
             background: #0a0a0a;
             border-radius: 15px;
@@ -170,7 +164,6 @@
             font-size: 0.9rem;
         }
 
-        /* شبكة الـ 40 ميزة */
         .features-section h2 {
             text-align: center;
             color: var(--main-color);
@@ -224,10 +217,7 @@
         <div class="download-card">
             <span style="color: #888;">النظام المكتشف: <b id="os-detected">جاري الفحص...</b></span>
             <h2 style="margin: 15px 0;">جاهز لرفع كفاءة جهازك؟</h2>
-            
-            <div id="dl-actions">
-                </div>
-            
+            <div id="dl-actions"></div>
             <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.5;">* يتم تحميل الإصدار المتوافق مع Dell Inspiron 3521</p>
         </div>
 
@@ -241,7 +231,7 @@
                 <div class="spec-item"><span>المعالج:</span> <b>Intel Core i3</b></div>
                 <div class="spec-item"><span>كرت الشاشة:</span> <b>Intel HD 4000</b></div>
                 <div class="spec-item"><span>الرامات المتاحة:</span> <b id="ram-size">--</b> GB</div>
-                <div class="spec-item"><span>الهدف:</span> <b style="color: var(--main-color)">170 FPS STABLE</b></div>
+                <div class="spec-item"><span>الهدف الحالي:</span> <b style="color: var(--main-color)">170 FPS STABLE</b></div>
                 <div class="spec-item"><span>دقة العرض:</span> <b id="res">--</b></div>
             </div>
         </div>
@@ -271,21 +261,14 @@
 
         if (platform.includes("linux")) {
             main = { name: "Linux (Zorin OS)", file: "Yahya_Optimizer_Linux.tar.xz" };
-            others = [
-                { name: "Windows", file: "Yahya_Optimizer_Win.zip" },
-                { name: "macOS", file: "Yahya_Optimizer_Mac.tar.xz" }
-            ];
+            others = [{ name: "Windows", file: "Yahya_Optimizer_Win.zip" }, { name: "macOS", file: "Yahya_Optimizer_Mac.tar.xz" }];
         } else if (platform.includes("mac")) {
             main = { name: "macOS", file: "Yahya_Optimizer_Mac.tar.xz" };
-            others = [
-                { name: "Windows", file: "Yahya_Optimizer_Win.zip" },
-                { name: "Linux", file: "Yahya_Optimizer_Linux.tar.xz" }
-            ];
+            others = [{ name: "Windows", file: "Yahya_Optimizer_Win.zip" }, { name: "Linux", file: "Yahya_Optimizer_Linux.tar.xz" }];
         }
 
         osDetected.innerText = main.name;
 
-        // وضع الزر الكبير المنور والزرارين الصغيرين
         dlActions.innerHTML = `
             <a href="${main.file}" class="btn-glow">تحميل نسختك الموصى بها (${main.name}) 🚀</a>
             <div class="sub-downloads">
@@ -294,11 +277,9 @@
             </div>
         `;
 
-        // الهاردوير
         document.getElementById('ram-size').innerText = navigator.deviceMemory || "4";
         document.getElementById('res').innerText = screen.width + "x" + screen.height;
 
-        // ميزاتك الـ 40 (النص الكامل)
         const featuresList = [
             "أولوية قصوى للمعالج (CPU Priority)", "تقليل زمن استجابة الشبكة (Ping)", "وضع استجابة الألعاب الفوري",
             "تنظيف ذاكرة الوصول العشوائي (RAM)", "تعطيل العمليات الخلفية للويندوز", "زيادة معدل الإطارات (FPS Boost)",
@@ -332,15 +313,26 @@
         arrow.innerText = (data.style.display === "block") ? "▲" : "▼";
     }
 
+    // فحص ذكي لحالة البرنامج وربطه بالهاردوير
     async function monitorApp() {
+        const statusCont = document.getElementById('status-container');
+        const statusText = document.getElementById('status-text');
+
         try {
             const response = await fetch('http://localhost:12345/status');
             if (response.ok) {
-                document.getElementById('status-container').className = "status-container status-online";
-                document.getElementById('status-text').innerText = "الحالة: متصل بنجاح - BEAST MODE ACTIVE! 🔥";
+                statusCont.className = "status-container status-online";
+                statusText.innerText = "الحالة: متصل بنجاح - تم التعرف على Dell 3521 (Beast Mode) 🔥";
+            } else {
+                throw new Error();
             }
-        } catch (error) {}
+        } catch (error) {
+            statusCont.className = "status-container";
+            statusText.innerText = "الحالة: المحرك خامل (Idle) - يرجى تشغيل السكريبت ⚠️";
+        }
     }
+    
+    // الفحص كل 3 ثواني
     setInterval(monitorApp, 3000);
 
     window.onload = setupPage;

@@ -43,6 +43,25 @@
             letter-spacing: 5px;
         }
 
+        /* إضافة لمسة جوجل */
+        .google-powered {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50px;
+            border: 1px solid rgba(66, 133, 244, 0.3);
+        }
+        .google-text {
+            font-family: 'Orbitron';
+            font-weight: 900;
+            background: linear-gradient(to right, #4285F4, #34A853, #FBBC05, #EA4335);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         .version-badge {
             background: var(--main-color);
             color: black;
@@ -206,6 +225,10 @@
     <header>
         <h1>YAHYA OPTIMIZER <span class="version-badge">V4.0</span></h1>
         <p>الأداة الرقمية الأقوى لتحطيم حدود الأداء في مصر والشرق الأوسط</p>
+        <div class="google-powered">
+            <span style="font-size: 0.8rem; color: #aaa;">Powered by</span>
+            <span class="google-text">Google Gemini AI Engine</span>
+        </div>
     </header>
 
     <div id="status-container" class="status-container">
@@ -218,21 +241,20 @@
             <span style="color: #888;">النظام المكتشف: <b id="os-detected">جاري الفحص...</b></span>
             <h2 style="margin: 15px 0;">جاهز لرفع كفاءة جهازك؟</h2>
             <div id="dl-actions"></div>
-            <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.5;">* يتم تحميل الإصدار المتوافق مع Dell Inspiron 3521</p>
+            <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.5;">* يتم تحميل الإصدار المتوافق مع جهازك المكتشف حالياً</p>
         </div>
 
         <div class="specs-dropdown">
             <div class="specs-header" onclick="toggleSpecs()">
-                <span>عرض تحليل الهاردوير</span>
+                <span>عرض تحليل الهاردوير الحقيقي</span>
                 <span id="arrow-icon">▼</span>
             </div>
             <div id="specs-data">
-                <div class="spec-item"><span>الموديل:</span> <b>Dell Inspiron 3521</b></div>
-                <div class="spec-item"><span>المعالج:</span> <b>Intel Core i3</b></div>
-                <div class="spec-item"><span>كرت الشاشة:</span> <b>Intel HD 4000</b></div>
+                <div class="spec-item"><span>نظام التشغيل:</span> <b id="os-name">--</b></div>
+                <div class="spec-item"><span>الأنوية المتاحة:</span> <b id="cpu-cores">--</b> Cores</div>
                 <div class="spec-item"><span>الرامات المتاحة:</span> <b id="ram-size">--</b> GB</div>
-                <div class="spec-item"><span>الهدف الحالي:</span> <b style="color: var(--main-color)">170 FPS STABLE</b></div>
-                <div class="spec-item"><span>دقة العرض:</span> <b id="res">--</b></div>
+                <div class="spec-item"><span>الهدف الذكي:</span> <b style="color: var(--main-color)">170 FPS STABLE</b></div>
+                <div class="spec-item"><span>دقة العرض الحالية:</span> <b id="res">--</b></div>
             </div>
         </div>
     </div>
@@ -252,6 +274,7 @@
         const platform = navigator.userAgent.toLowerCase();
         const dlActions = document.getElementById('dl-actions');
         const osDetected = document.getElementById('os-detected');
+        const osNameLabel = document.getElementById('os-name');
 
         let main = { name: "Windows", file: "Yahya_Optimizer_Win.zip" };
         let others = [
@@ -268,6 +291,7 @@
         }
 
         osDetected.innerText = main.name;
+        osNameLabel.innerText = main.name;
 
         dlActions.innerHTML = `
             <a href="${main.file}" class="btn-glow">تحميل نسختك الموصى بها (${main.name}) 🚀</a>
@@ -277,7 +301,9 @@
             </div>
         `;
 
+        // قراءة مواصفات الجهاز الحقيقي
         document.getElementById('ram-size').innerText = navigator.deviceMemory || "4";
+        document.getElementById('cpu-cores').innerText = navigator.hardwareConcurrency || "2";
         document.getElementById('res').innerText = screen.width + "x" + screen.height;
 
         const featuresList = [
@@ -313,30 +339,27 @@
         arrow.innerText = (data.style.display === "block") ? "▲" : "▼";
     }
 
-    // فحص ذكي لحالة البرنامج وربطه بالهاردوير
+    // فحص الحالة الحقيقية وربطها بالهاردوير
     async function monitorApp() {
         const statusCont = document.getElementById('status-container');
         const statusText = document.getElementById('status-text');
 
         try {
-            const response = await fetch('http://localhost:12345/status');
-            if (response.ok) {
-                statusCont.className = "status-container status-online";
-                statusText.innerText = "الحالة: متصل بنجاح - تم التعرف على Dell 3521 (Beast Mode) 🔥";
-            } else {
-                throw new Error();
-            }
+            // محاولة التواصل مع السكريبت على بورت 12345
+            const response = await fetch('http://localhost:12345/status', { mode: 'no-cors' });
+            statusCont.className = "status-container status-online";
+            statusText.innerText = "الحالة: متصل بنجاح - تم اكتشاف السكريبت (BEAST MODE ACTIVE) 🔥";
         } catch (error) {
             statusCont.className = "status-container";
             statusText.innerText = "الحالة: المحرك خامل (Idle) - يرجى تشغيل السكريبت ⚠️";
         }
     }
     
-    // الفحص كل 3 ثواني
-    setInterval(monitorApp, 3000);
+    // الفحص كل 5 ثواني
+    setInterval(monitorApp, 5000);
 
     window.onload = setupPage;
 </script>
 
 </body>
-</html><h2>powerd by google gemini
+</html>

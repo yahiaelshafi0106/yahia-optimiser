@@ -10,7 +10,7 @@
             --main-color: #00ffcc; /* اللون الفسفوري */
             --bg-deep: #020202;
             --card-gradient: linear-gradient(145deg, #0f0f0f, #050505);
-            --neon-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+            --neon-shadow: 0 0 30px rgba(0, 255, 204, 0.6);
         }
 
         * { box-sizing: border-box; transition: all 0.3s ease; }
@@ -93,26 +93,50 @@
             border-radius: 20px;
             border: 2px solid #1a1a1a;
             position: relative;
+            text-align: center;
         }
 
-        .download-card:hover { border-color: var(--main-color); box-shadow: var(--neon-shadow); }
-
-        .btn-main {
+        /* تأثير الجلو للزرار الأساسي */
+        .btn-glow {
             display: block;
             width: 100%;
             background: var(--main-color);
             color: #000;
-            padding: 20px;
-            text-align: center;
+            padding: 25px;
             text-decoration: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 900;
-            border-radius: 10px;
+            border-radius: 15px;
             margin-top: 25px;
-            box-shadow: 0 10px 0 #008877;
+            box-shadow: var(--neon-shadow);
+            animation: pulseGlow 2s infinite;
         }
 
-        .btn-main:active { transform: translateY(5px); box-shadow: 0 5px 0 #008877; }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 15px rgba(0, 255, 204, 0.4); }
+            50% { box-shadow: 0 0 35px rgba(0, 255, 204, 0.8); }
+            100% { box-shadow: 0 0 15px rgba(0, 255, 204, 0.4); }
+        }
+
+        /* الأزرار الفرعية الصغيرة */
+        .sub-downloads {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-sub {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            color: #888;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .btn-sub:hover { border-color: var(--main-color); color: #fff; }
 
         /* سهم المواصفات المطور */
         .specs-dropdown {
@@ -134,7 +158,7 @@
 
         #specs-data {
             margin-top: 20px;
-            display: none; /* مخفي في البداية */
+            display: none;
             border-top: 1px solid #222;
             padding-top: 15px;
         }
@@ -200,9 +224,11 @@
         <div class="download-card">
             <span style="color: #888;">النظام المكتشف: <b id="os-detected">جاري الفحص...</b></span>
             <h2 style="margin: 15px 0;">جاهز لرفع كفاءة جهازك؟</h2>
-            <p>اضغط على الزر أدناه لتحميل النسخة المتوافقة تماماً مع إعدادات جهازك الحالية.</p>
-            <a href="#" id="main-dl" class="btn-main">تحميل الإصدار البلاتيني 🚀</a>
-            <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.5;">* يدعم Windows, Linux (Zorin/Ubuntu), macOS</p>
+            
+            <div id="dl-actions">
+                </div>
+            
+            <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.5;">* يتم تحميل الإصدار المتوافق مع Dell Inspiron 3521</p>
         </div>
 
         <div class="specs-dropdown">
@@ -211,21 +237,19 @@
                 <span id="arrow-icon">▼</span>
             </div>
             <div id="specs-data">
-                <div class="spec-item"><span>أنوية المعالج (Cores):</span> <b id="cpu-cores">--</b></div>
+                <div class="spec-item"><span>الموديل:</span> <b>Dell Inspiron 3521</b></div>
+                <div class="spec-item"><span>المعالج:</span> <b>Intel Core i3</b></div>
+                <div class="spec-item"><span>كرت الشاشة:</span> <b>Intel HD 4000</b></div>
                 <div class="spec-item"><span>الرامات المتاحة:</span> <b id="ram-size">--</b> GB</div>
+                <div class="spec-item"><span>الهدف:</span> <b style="color: var(--main-color)">170 FPS STABLE</b></div>
                 <div class="spec-item"><span>دقة العرض:</span> <b id="res">--</b></div>
-                <div class="spec-item"><span>بنية النظام:</span> <b id="os-name">--</b></div>
-                <div style="color: var(--main-color); font-size: 0.7rem; margin-top: 10px; text-align: center;">
-                    تم تحديث البيانات بناءً على فحص المتصفح الآمن
-                </div>
             </div>
         </div>
     </div>
 
     <section class="features-section">
         <h2>قائمة التقنيات المستخدمة (40 ميزة) ⚔️</h2>
-        <div class="features-grid" id="f-grid">
-            </div>
+        <div class="features-grid" id="f-grid"></div>
     </section>
 
     <footer>
@@ -234,43 +258,80 @@
 </div>
 
 <script>
-    // 1. نظام كشف المواصفات (بدون اختصار)
-    function detectSpecs() {
-        const cores = navigator.hardwareConcurrency || "غير محدد";
-        const ram = navigator.deviceMemory || "4+";
-        const resolution = window.screen.width + "x" + window.screen.height;
-        let os = "نظام غير معروف";
+    function setupPage() {
+        const platform = navigator.userAgent.toLowerCase();
+        const dlActions = document.getElementById('dl-actions');
+        const osDetected = document.getElementById('os-detected');
 
-        if (navigator.userAgent.indexOf("Win") != -1) os = "Windows OS";
-        if (navigator.userAgent.indexOf("Mac") != -1) os = "macOS";
-        if (navigator.userAgent.indexOf("Linux") != -1) os = "Linux (Zorin OS)";
+        let main = { name: "Windows", file: "Yahya_Optimizer_Win.zip" };
+        let others = [
+            { name: "Linux", file: "Yahya_Optimizer_Linux.tar.xz" },
+            { name: "macOS", file: "Yahya_Optimizer_Mac.tar.xz" }
+        ];
 
-        document.getElementById('cpu-cores').innerText = cores;
-        document.getElementById('ram-size').innerText = ram;
-        document.getElementById('res').innerText = resolution;
-        document.getElementById('os-name').innerText = os;
-        document.getElementById('os-detected').innerText = os;
+        if (platform.includes("linux")) {
+            main = { name: "Linux (Zorin OS)", file: "Yahya_Optimizer_Linux.tar.xz" };
+            others = [
+                { name: "Windows", file: "Yahya_Optimizer_Win.zip" },
+                { name: "macOS", file: "Yahya_Optimizer_Mac.tar.xz" }
+            ];
+        } else if (platform.includes("mac")) {
+            main = { name: "macOS", file: "Yahya_Optimizer_Mac.tar.xz" };
+            others = [
+                { name: "Windows", file: "Yahya_Optimizer_Win.zip" },
+                { name: "Linux", file: "Yahya_Optimizer_Linux.tar.xz" }
+            ];
+        }
 
-        // تعديل رابط التحميل بناء على النظام
-        const dlBtn = document.getElementById('main-dl');
-        if(os.includes("Windows")) dlBtn.href = "Yahya-Optimizer-Win.exe";
-        else if(os.includes("Linux")) dlBtn.href = "Yahya-Optimizer-Linux.sh";
-        else dlBtn.href = "Yahya-Optimizer-Mac.dmg";
+        osDetected.innerText = main.name;
+
+        // وضع الزر الكبير المنور والزرارين الصغيرين
+        dlActions.innerHTML = `
+            <a href="${main.file}" class="btn-glow">تحميل نسختك الموصى بها (${main.name}) 🚀</a>
+            <div class="sub-downloads">
+                <a href="${others[0].file}" class="btn-sub">${others[0].name} Edition</a>
+                <a href="${others[1].file}" class="btn-sub">${others[1].name} Edition</a>
+            </div>
+        `;
+
+        // الهاردوير
+        document.getElementById('ram-size').innerText = navigator.deviceMemory || "4";
+        document.getElementById('res').innerText = screen.width + "x" + screen.height;
+
+        // ميزاتك الـ 40 (النص الكامل)
+        const featuresList = [
+            "أولوية قصوى للمعالج (CPU Priority)", "تقليل زمن استجابة الشبكة (Ping)", "وضع استجابة الألعاب الفوري",
+            "تنظيف ذاكرة الوصول العشوائي (RAM)", "تعطيل العمليات الخلفية للويندوز", "زيادة معدل الإطارات (FPS Boost)",
+            "تحسين استقرار أنوية المعالج", "تعديل سجل النظام الاحترافي", "تفعيل وضع الـ Turbo Mode",
+            "تحسين سرعة نقل بيانات الـ SSD", "إزالة الملفات المؤقتة Temp", "تحسين خطة الطاقة القصوى",
+            "تعزيز أداء معالج الرسوميات GPU", "عزل العمليات المسببة للـ Lag", "استخدام DNS مخصص للألعاب",
+            "تقليل تأخير استجابة لوحة المفاتيح", "تحسين دقة وسرعة الماوس DPI", "وضع الأداء الأسطوري المخصص",
+            "تحسين مكتبات Direct X12", "تحسين تبريد المعالج برمجياً", "إيقاف تحديثات النظام الإجبارية",
+            "تحسين حجم الـ Network Buffer", "تفريغ ذاكرة المتصفحات الكاذبة", "درع حماية ضد ملفات التجسس",
+            "توزيع المهام على الأنوية الخاملة", "تسريع إقلاع الألعاب الثقيلة", "ضغط بيانات النظام لسرعة الفتح",
+            "تثبيت الفريمات في Minecraft", "فتح معدل الفريمات في Roblox", "دعم كامل لمحركات الألعاب الحديثة",
+            "تحسين تباين الألوان في الألعاب", "خفض حرارة اللابتوب عند الضغط", "تسريع إقلاع الويندوز واللينكس",
+            "تعطيل الـ Telemetry للخصوصية", "تحسين أداء هاردات الـ HDD", "تفعيل تقنية G-Sync البرمجية",
+            "زيادة سلاسة الشاشة (Refresh Rate)", "إغلاق تطبيقات المترو غير الهامة", "إصلاح قيم الريجستري التالفة",
+            "توافق كامل مع Zorin OS و Linux"
+        ];
+
+        const grid = document.getElementById('f-grid');
+        featuresList.forEach((feat, i) => {
+            const box = document.createElement('div');
+            box.className = 'feature-box';
+            box.innerHTML = `<b>#${i+1}</b><br>${feat}`;
+            grid.appendChild(box);
+        });
     }
 
     function toggleSpecs() {
         const data = document.getElementById('specs-data');
         const arrow = document.getElementById('arrow-icon');
-        if (data.style.display === "block") {
-            data.style.display = "none";
-            arrow.innerText = "▼";
-        } else {
-            data.style.display = "block";
-            arrow.innerText = "▲";
-        }
+        data.style.display = (data.style.display === "block") ? "none" : "block";
+        arrow.innerText = (data.style.display === "block") ? "▲" : "▼";
     }
 
-    // 2. مراقبة البرنامج (تواصل مع الـ Localhost)
     async function monitorApp() {
         try {
             const response = await fetch('http://localhost:12345/status');
@@ -278,40 +339,11 @@
                 document.getElementById('status-container').className = "status-container status-online";
                 document.getElementById('status-text').innerText = "الحالة: متصل بنجاح - BEAST MODE ACTIVE! 🔥";
             }
-        } catch (error) {
-            // البرنامج مش مفتوح
-        }
+        } catch (error) {}
     }
     setInterval(monitorApp, 3000);
 
-    // 3. قائمة الـ 40 ميزة (النص الكامل)
-    const featuresList = [
-        "أولوية قصوى للمعالج (CPU Priority)", "تقليل زمن استجابة الشبكة (Ping)", "وضع استجابة الألعاب الفوري",
-        "تنظيف ذاكرة الوصول العشوائي (RAM)", "تعطيل العمليات الخلفية للويندوز", "زيادة معدل الإطارات (FPS Boost)",
-        "تحسين استقرار أنوية المعالج", "تعديل سجل النظام الاحترافي", "تفعيل وضع الـ Turbo Mode",
-        "تحسين سرعة نقل بيانات الـ SSD", "إزالة الملفات المؤقتة Temp", "تحسين خطة الطاقة القصوى",
-        "تعزيز أداء معالج الرسوميات GPU", "عزل العمليات المسببة للـ Lag", "استخدام DNS مخصص للألعاب",
-        "تقليل تأخير استجابة لوحة المفاتيح", "تحسين دقة وسرعة الماوس DPI", "وضع الأداء الأسطوري المخصص",
-        "تحسين مكتبات Direct X12", "تحسين تبريد المعالج برمجياً", "إيقاف تحديثات النظام الإجبارية",
-        "تحسين حجم الـ Network Buffer", "تفريغ ذاكرة المتصفحات الكاذبة", "درع حماية ضد ملفات التجسس",
-        "توزيع المهام على الأنوية الخاملة", "تسريع إقلاع الألعاب الثقيلة", "ضغط بيانات النظام لسرعة الفتح",
-        "تثبيت الفريمات في Minecraft", "فتح معدل الفريمات في Roblox", "دعم كامل لمحركات الألعاب الحديثة",
-        "تحسين تباين الألوان في الألعاب", "خفض حرارة اللابتوب عند الضغط", "تسريع إقلاع الويندوز واللينكس",
-        "تعطيل الـ Telemetry للخصوصية", "تحسين أداء هاردات الـ HDD", "تفعيل تقنية G-Sync البرمجية",
-        "زيادة سلاسة الشاشة (Refresh Rate)", "إغلاق تطبيقات المترو غير الهامة", "إصلاح قيم الريجستري التالفة",
-        "توافق كامل مع Zorin OS و Linux"
-    ];
-
-    const grid = document.getElementById('f-grid');
-    featuresList.forEach((feat, i) => {
-        const box = document.createElement('div');
-        box.className = 'feature-box';
-        box.innerHTML = `<b>#${i+1}</b><br>${feat}`;
-        grid.appendChild(box);
-    });
-
-    // تشغيل الفحص عند التحميل
-    window.onload = detectSpecs;
+    window.onload = setupPage;
 </script>
 
 </body>

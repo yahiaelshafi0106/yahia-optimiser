@@ -3,224 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yahya Optimizer v4.0 | Beast Edition</title>
+    <title>Yahya Optimizer v4.0 | Official Platinum Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Cairo:wght@300;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon: #00ffcc;
-            --bg-dark: #050505;
-            --card-bg: #0f0f0f;
-            --text: #e0e0e0;
+            --main-color: #00ffcc; /* اللون الفسفوري */
+            --bg-deep: #020202;
+            --card-gradient: linear-gradient(145deg, #0f0f0f, #050505);
+            --neon-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
         }
+
+        * { box-sizing: border-box; transition: all 0.3s ease; }
+
         body {
-            background-color: var(--bg-dark);
-            color: var(--text);
-            font-family: 'Orbitron', 'Segoe UI', sans-serif; /* لو الخط مش عندك هيستخدم Segoe UI */
+            background-color: var(--bg-deep);
+            color: #ffffff;
+            font-family: 'Cairo', 'Orbitron', sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 50%, #0a1a1a 0%, #020202 100%);
         }
-        .container { max-width: 1000px; margin: auto; }
-        
-        /* تأثير العنوان المتوهج */
-        h1 { 
-            color: var(--neon); 
-            text-shadow: 0 0 15px var(--neon); 
-            font-size: 2.5rem;
-            margin-bottom: 5px;
-            letter-spacing: 2px;
-        }
-        .subtitle { opacity: 0.6; margin-bottom: 30px; font-weight: 200; }
 
-        /* حالة البرنامج بشكل "فخم" */
-        #status-box {
-            padding: 20px;
-            border-radius: 12px;
-            margin: 25px 0;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background: rgba(255, 255, 255, 0.02);
-            transition: all 0.5s ease;
-        }
-        .online { color: #00ff00; border: 2px solid #00ff00; box-shadow: inset 0 0 20px rgba(0,255,0,0.2), 0 0 15px rgba(0,255,0,0.3); }
-        .offline { color: #ff3333; border: 2px solid #ff3333; box-shadow: 0 0 10px rgba(255,51,51,0.2); }
+        .wrapper { max-width: 1100px; margin: 50px auto; padding: 20px; }
 
-        /* كارت التحميل الذكي */
-        .recommendation {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(0, 255, 204, 0.3);
-            position: relative;
-            overflow: hidden;
+        /* الهيدر العملاق */
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 1px solid rgba(0, 255, 204, 0.1);
+            margin-bottom: 50px;
         }
-        .btn {
-            background: linear-gradient(45deg, var(--neon), #008877);
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            color: var(--main-color);
+            text-shadow: 0 0 30px var(--main-color);
+            margin: 0;
+            letter-spacing: 5px;
+        }
+
+        .version-badge {
+            background: var(--main-color);
             color: black;
-            padding: 15px 40px;
-            text-decoration: none;
-            border-radius: 50px;
+            padding: 5px 15px;
             font-weight: 900;
-            display: inline-block;
-            margin-top: 20px;
-            box-shadow: 0 5px 15px rgba(0, 255, 204, 0.4);
-            transition: 0.4s;
+            border-radius: 3px;
+            font-size: 1rem;
+            vertical-align: middle;
         }
-        .btn:hover { transform: translateY(-5px); box-shadow: 0 10px 25px var(--neon); }
 
-        /* سهم المواصفات بشكل Dashboard */
-        .specs-toggle {
-            cursor: pointer;
-            color: var(--neon);
-            margin: 30px 0 10px;
-            font-size: 1.1rem;
-            display: inline-block;
-            border-bottom: 1px dashed var(--neon);
-            padding-bottom: 5px;
-        }
-        #specs-content {
-            display: none;
-            background: #0a0a0a;
+        /* حالة الاتصال الاحترافية */
+        .status-container {
+            background: var(--card-gradient);
             padding: 25px;
             border-radius: 15px;
-            border: 1px solid #222;
-            text-align: right;
-            animation: slideDown 0.4s ease;
-        }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* شبكة المميزات الـ 40 (Grid) */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
-        }
-        .feature-item {
-            background: #0d0d0d;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 0.9rem;
+            margin-bottom: 40px;
             border: 1px solid #1a1a1a;
-            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .status-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #ff3333; /* الافتراضي أحمر */
+            box-shadow: 0 0 15px #ff3333;
+        }
+
+        .status-online .status-dot { background: #00ff00; box-shadow: 0 0 15px #00ff00; }
+        .status-text { font-size: 1.3rem; font-weight: bold; color: #ff3333; }
+        .status-online .status-text { color: #00ff00; }
+
+        /* منطقة التحميل والمواصفات */
+        .main-panel {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .download-card {
+            background: var(--card-gradient);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid #1a1a1a;
             position: relative;
         }
-        .feature-item:hover {
-            border-color: var(--neon);
-            background: #111;
-            transform: scale(1.03);
+
+        .download-card:hover { border-color: var(--main-color); box-shadow: var(--neon-shadow); }
+
+        .btn-main {
+            display: block;
+            width: 100%;
+            background: var(--main-color);
+            color: #000;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 900;
+            border-radius: 10px;
+            margin-top: 25px;
+            box-shadow: 0 10px 0 #008877;
         }
 
-        .os-badge {
-            background: #222;
-            padding: 5px 12px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            color: var(--neon);
-            margin-bottom: 10px;
-            display: inline-block;
+        .btn-main:active { transform: translateY(5px); box-shadow: 0 5px 0 #008877; }
+
+        /* سهم المواصفات المطور */
+        .specs-dropdown {
+            background: #0a0a0a;
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid #222;
         }
+
+        .specs-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--main-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        #specs-data {
+            margin-top: 20px;
+            display: none; /* مخفي في البداية */
+            border-top: 1px solid #222;
+            padding-top: 15px;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* شبكة الـ 40 ميزة */
+        .features-section h2 {
+            text-align: center;
+            color: var(--main-color);
+            margin-bottom: 40px;
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-left: 4px solid var(--main-color);
+            border-radius: 5px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .feature-box:hover { background: rgba(0, 255, 204, 0.05); transform: translateX(-10px); }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            opacity: 0.3;
+            font-size: 0.8rem;
+            border-top: 1px solid #1a1a1a;
+            margin-top: 100px;
+        }
+
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <h1>YAHYA OPTIMIZER <span style="font-weight: 100;">v4.0</span></h1>
-        <p class="subtitle">نسخة البلاتينيوم - السيطرة الكاملة على موارد الجهاز</p>
+<div class="wrapper">
+    <header>
+        <h1>YAHYA OPTIMIZER <span class="version-badge">V4.0</span></h1>
+        <p>الأداة الرقمية الأقوى لتحطيم حدود الأداء في مصر والشرق الأوسط</p>
+    </header>
+
+    <div id="status-container" class="status-container">
+        <div class="status-dot"></div>
+        <div id="status-text" class="status-text">الحالة: المحرك خامل (Idle) - يرجى تشغيل السكريبت ⚠️</div>
     </div>
 
-    <div id="status-box" class="offline">
-        الحالة: خامل - في انتظار تشغيل المحرك ⏳
-    </div>
-
-    <div class="recommendation">
-        <div class="os-badge" id="os-name-top">جاري الفحص...</div>
-        <h3 id="os-text" style="margin: 10px 0;">النسخة المتوافقة جاهزة للتحميل</h3>
-        <p>لقد قمنا بتخصيص أفضل إعدادات لبيئة تشغيل جهازك.</p>
-        <a href="#" id="download-link" class="btn">تحميل النسخة المتوافقة 🚀</a>
-    </div>
-
-    <div class="specs-toggle" onclick="toggleSpecs()">
-        + اضغط هنا لعرض شيفرة مواصفات جهازك
-    </div>
-    <div id="specs-content">
-        <p>💿 <strong>قوة المعالج (Cores):</strong> <span id="cores" style="color:var(--neon)">--</span></p>
-        <p>💾 <strong>الذاكرة العشوائية (RAM):</strong> <span id="ram" style="color:var(--neon)">--</span> GB</p>
-        <p>🖥️ <strong>أبعاد الشاشة:</strong> <span id="screen" style="color:var(--neon)">--</span></p>
-        <p>🐧 <strong>نظام التشغيل:</strong> <span id="os-name" style="color:var(--neon)">--</span></p>
-    </div>
-
-    <h2 style="margin-top: 60px; color: var(--neon);">ترسانة المميزات (40 ميزة) 🛡️</h2>
-    <div class="features-grid" id="features-list">
+    <div class="main-panel">
+        <div class="download-card">
+            <span style="color: #888;">النظام المكتشف: <b id="os-detected">جاري الفحص...</b></span>
+            <h2 style="margin: 15px 0;">جاهز لرفع كفاءة جهازك؟</h2>
+            <p>اضغط على الزر أدناه لتحميل النسخة المتوافقة تماماً مع إعدادات جهازك الحالية.</p>
+            <a href="#" id="main-dl" class="btn-main">تحميل الإصدار البلاتيني 🚀</a>
+            <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.5;">* يدعم Windows, Linux (Zorin/Ubuntu), macOS</p>
         </div>
 
-    <div style="margin-top: 50px; padding: 40px; opacity: 0.4; font-size: 0.8rem;">
-        YAHYA OPTIMIZER IS A PROFESSIONAL PERFORMANCE TOOL. ALL RIGHTS RESERVED 2026.
+        <div class="specs-dropdown">
+            <div class="specs-header" onclick="toggleSpecs()">
+                <span>عرض تحليل الهاردوير</span>
+                <span id="arrow-icon">▼</span>
+            </div>
+            <div id="specs-data">
+                <div class="spec-item"><span>أنوية المعالج (Cores):</span> <b id="cpu-cores">--</b></div>
+                <div class="spec-item"><span>الرامات المتاحة:</span> <b id="ram-size">--</b> GB</div>
+                <div class="spec-item"><span>دقة العرض:</span> <b id="res">--</b></div>
+                <div class="spec-item"><span>بنية النظام:</span> <b id="os-name">--</b></div>
+                <div style="color: var(--main-color); font-size: 0.7rem; margin-top: 10px; text-align: center;">
+                    تم تحديث البيانات بناءً على فحص المتصفح الآمن
+                </div>
+            </div>
+        </div>
     </div>
+
+    <section class="features-section">
+        <h2>قائمة التقنيات المستخدمة (40 ميزة) ⚔️</h2>
+        <div class="features-grid" id="f-grid">
+            </div>
+    </section>
+
+    <footer>
+        COPYRIGHT &copy; 2026 YAHYA OPTIMIZER - CREATED BY YAHYA THE DEVELOPER
+    </footer>
 </div>
 
 <script>
-    // نظام التعرف الذكي
-    const downloadBtn = document.getElementById('download-link');
-    const osTopBadge = document.getElementById('os-name-top');
-    let userOS = "Unknown System";
+    // 1. نظام كشف المواصفات (بدون اختصار)
+    function detectSpecs() {
+        const cores = navigator.hardwareConcurrency || "غير محدد";
+        const ram = navigator.deviceMemory || "4+";
+        const resolution = window.screen.width + "x" + window.screen.height;
+        let os = "نظام غير معروف";
 
-    if (navigator.userAgent.indexOf("Win") != -1) { userOS = "Windows Edition"; downloadBtn.href = "#win"; }
-    else if (navigator.userAgent.indexOf("Mac") != -1) { userOS = "macOS Edition"; downloadBtn.href = "#mac"; }
-    else if (navigator.userAgent.indexOf("Linux") != -1) { userOS = "Linux (Zorin/Ubuntu)"; downloadBtn.href = "#linux"; }
+        if (navigator.userAgent.indexOf("Win") != -1) os = "Windows OS";
+        if (navigator.userAgent.indexOf("Mac") != -1) os = "macOS";
+        if (navigator.userAgent.indexOf("Linux") != -1) os = "Linux (Zorin OS)";
 
-    osTopBadge.innerText = userOS;
-    document.getElementById('os-name').innerText = userOS;
+        document.getElementById('cpu-cores').innerText = cores;
+        document.getElementById('ram-size').innerText = ram;
+        document.getElementById('res').innerText = resolution;
+        document.getElementById('os-name').innerText = os;
+        document.getElementById('os-detected').innerText = os;
 
-    // قراءة الهاردوير
-    document.getElementById('cores').innerText = navigator.hardwareConcurrency || "4+";
-    document.getElementById('ram').innerText = navigator.deviceMemory || "8";
-    document.getElementById('screen').innerText = screen.width + "x" + screen.height;
+        // تعديل رابط التحميل بناء على النظام
+        const dlBtn = document.getElementById('main-dl');
+        if(os.includes("Windows")) dlBtn.href = "Yahya-Optimizer-Win.exe";
+        else if(os.includes("Linux")) dlBtn.href = "Yahya-Optimizer-Linux.sh";
+        else dlBtn.href = "Yahya-Optimizer-Mac.dmg";
+    }
 
     function toggleSpecs() {
-        const content = document.getElementById('specs-content');
-        content.style.display = content.style.display === "block" ? "none" : "block";
+        const data = document.getElementById('specs-data');
+        const arrow = document.getElementById('arrow-icon');
+        if (data.style.display === "block") {
+            data.style.display = "none";
+            arrow.innerText = "▼";
+        } else {
+            data.style.display = "block";
+            arrow.innerText = "▲";
+        }
     }
 
-    // الربط مع البرنامج (Polling)
-    async function checkProgram() {
+    // 2. مراقبة البرنامج (تواصل مع الـ Localhost)
+    async function monitorApp() {
         try {
-            const response = await fetch('http://localhost:12345/status'); 
+            const response = await fetch('http://localhost:12345/status');
             if (response.ok) {
-                const box = document.getElementById('status-box');
-                box.innerText = "الحالة: متصل بنجاح - BEAST MODE ACTIVE! 🔥";
-                box.className = "online";
+                document.getElementById('status-container').className = "status-container status-online";
+                document.getElementById('status-text').innerText = "الحالة: متصل بنجاح - BEAST MODE ACTIVE! 🔥";
             }
-        } catch (e) {}
+        } catch (error) {
+            // البرنامج مش مفتوح
+        }
     }
-    setInterval(checkProgram, 3000);
+    setInterval(monitorApp, 3000);
 
-    // قائمة الـ 40 ميزة الاحترافية
-    const features = [
-        "أولوية قصوى للنظام (Real-Time)", "تقليل الـ Ping بنسبة 30%", "وضع الاستجابة الفورية (0.1ms)",
-        "تنظيف الرام العميق (RAM Purge)", "تعطيل الخدمات غير الضرورية", "فك قيود الـ FPS بالكامل",
-        "استقرار النواة الفائق", "تحسين سجل النظام (Gaming Registry)", "تفعيل وضع Turbo للبروسيسور",
-        "تسريع استجابة الـ SSD/NVMe", "إزالة ملفات Cache النظام", "تحسين استهلاك الطاقة (High Performance)",
-        "تعزيز أداء كارت الشاشة (GPU Core)", "عزل العمليات الخلفية تماماً", "تفعيل DNS مخصص للجيمينج",
-        "تقليل الـ Input Lag بنسبة 50%", "تحسين دقة الفأرة (Pixel Perfect)", "وضع الأداء الأقصى (Ultimate)",
-        "تحسين واجهة Direct X12", "تحسين التبريد البرمجي للابتوب", "حظر تحديثات الويندوز المزعجة",
-        "تحسين الـ Network Buffer", "تفريغ ذاكرة المتصفح المؤقتة", "درع الحماية من ملفات التجسس",
-        "توزيع ذكي للأحمال (Core Parking)", "تسريع تحميل الخرائط (Map Loading)", "ضغط ملفات النظام غير الهامة",
-        "تثبيت الـ FPS في Minecraft", "دعم FPS Unlocker لـ Roblox", "تحسين محركات Unreal و Unity",
-        "ألوان جرافيك مشبعة (Digital Vibrance)", "تقليل حرارة المعالج برمجياً", "تسريع إقلاع الجهاز (Fast Boot)",
-        "إيقاف الـ Telemetry بالكامل", "تحسين أداء الهارد الـ HDD", "مزامنة الشاشة الذكية (G-Sync)",
-        "زيادة سلاسة الـ Refresh Rate", "إغلاق تطبيقات الـ Background", "إصلاح أخطاء الريجستري",
-        "دعم خاص لنظام Zorin OS & Linux"
+    // 3. قائمة الـ 40 ميزة (النص الكامل)
+    const featuresList = [
+        "أولوية قصوى للمعالج (CPU Priority)", "تقليل زمن استجابة الشبكة (Ping)", "وضع استجابة الألعاب الفوري",
+        "تنظيف ذاكرة الوصول العشوائي (RAM)", "تعطيل العمليات الخلفية للويندوز", "زيادة معدل الإطارات (FPS Boost)",
+        "تحسين استقرار أنوية المعالج", "تعديل سجل النظام الاحترافي", "تفعيل وضع الـ Turbo Mode",
+        "تحسين سرعة نقل بيانات الـ SSD", "إزالة الملفات المؤقتة Temp", "تحسين خطة الطاقة القصوى",
+        "تعزيز أداء معالج الرسوميات GPU", "عزل العمليات المسببة للـ Lag", "استخدام DNS مخصص للألعاب",
+        "تقليل تأخير استجابة لوحة المفاتيح", "تحسين دقة وسرعة الماوس DPI", "وضع الأداء الأسطوري المخصص",
+        "تحسين مكتبات Direct X12", "تحسين تبريد المعالج برمجياً", "إيقاف تحديثات النظام الإجبارية",
+        "تحسين حجم الـ Network Buffer", "تفريغ ذاكرة المتصفحات الكاذبة", "درع حماية ضد ملفات التجسس",
+        "توزيع المهام على الأنوية الخاملة", "تسريع إقلاع الألعاب الثقيلة", "ضغط بيانات النظام لسرعة الفتح",
+        "تثبيت الفريمات في Minecraft", "فتح معدل الفريمات في Roblox", "دعم كامل لمحركات الألعاب الحديثة",
+        "تحسين تباين الألوان في الألعاب", "خفض حرارة اللابتوب عند الضغط", "تسريع إقلاع الويندوز واللينكس",
+        "تعطيل الـ Telemetry للخصوصية", "تحسين أداء هاردات الـ HDD", "تفعيل تقنية G-Sync البرمجية",
+        "زيادة سلاسة الشاشة (Refresh Rate)", "إغلاق تطبيقات المترو غير الهامة", "إصلاح قيم الريجستري التالفة",
+        "توافق كامل مع Zorin OS و Linux"
     ];
 
-    const grid = document.getElementById('features-list');
-    features.forEach((f, index) => {
-        let div = document.createElement('div');
-        div.className = 'feature-item';
-        div.innerHTML = `<span style="color:var(--neon); font-size:0.7rem;">0${index+1}</span><br>${f}`;
-        grid.appendChild(div);
+    const grid = document.getElementById('f-grid');
+    featuresList.forEach((feat, i) => {
+        const box = document.createElement('div');
+        box.className = 'feature-box';
+        box.innerHTML = `<b>#${i+1}</b><br>${feat}`;
+        grid.appendChild(box);
     });
+
+    // تشغيل الفحص عند التحميل
+    window.onload = detectSpecs;
 </script>
 
 </body>

@@ -43,7 +43,6 @@
             letter-spacing: 5px;
         }
 
-        /* إضافة لمسة جوجل */
         .google-powered {
             display: inline-flex;
             align-items: center;
@@ -254,7 +253,7 @@
                 <div class="spec-item"><span>الأنوية المتاحة:</span> <b id="cpu-cores">--</b> Cores</div>
                 <div class="spec-item"><span>الرامات المتاحة:</span> <b id="ram-size">--</b> GB</div>
                 <div class="spec-item"><span>الهدف الذكي:</span> <b style="color: var(--main-color)">170 FPS STABLE</b></div>
-                <div class="spec-item"><span>دقة العرض الحالية:</span> <b id="res">--</b></div>
+                <div class="spec-item"><span>دقة الشاشة:</span> <b id="res">--</b></div>
             </div>
         </div>
     </div>
@@ -301,7 +300,6 @@
             </div>
         `;
 
-        // قراءة مواصفات الجهاز الحقيقي
         document.getElementById('ram-size').innerText = navigator.deviceMemory || "4";
         document.getElementById('cpu-cores').innerText = navigator.hardwareConcurrency || "2";
         document.getElementById('res').innerText = screen.width + "x" + screen.height;
@@ -339,24 +337,25 @@
         arrow.innerText = (data.style.display === "block") ? "▲" : "▼";
     }
 
-    // فحص الحالة الحقيقية وربطها بالهاردوير
+    // المستشعر الذكي: بيفضل شغال في الـ Background عشان يحس بالبرنامج
     async function monitorApp() {
         const statusCont = document.getElementById('status-container');
         const statusText = document.getElementById('status-text');
 
         try {
-            // محاولة التواصل مع السكريبت على بورت 12345
-            const response = await fetch('http://localhost:12345/status', { mode: 'no-cors' });
+            // "يشم" البرنامج على بورت 12345 بدون ما تعمله Refresh
+            await fetch('http://localhost:12345/status', { mode: 'no-cors' });
             statusCont.className = "status-container status-online";
-            statusText.innerText = "الحالة: متصل بنجاح - تم اكتشاف السكريبت (BEAST MODE ACTIVE) 🔥";
+            statusText.innerHTML = "الحالة: متصل بنجاح - تم اكتشاف السكريبت على <b>Dell 3521</b> 🔥";
         } catch (error) {
+            // لو البرنامج مش شغال يفضل Idle
             statusCont.className = "status-container";
             statusText.innerText = "الحالة: المحرك خامل (Idle) - يرجى تشغيل السكريبت ⚠️";
         }
     }
     
-    // الفحص كل 5 ثواني
-    setInterval(monitorApp, 5000);
+    // الفحص كل 3 ثواني عشان يكون "لايف"
+    setInterval(monitorApp, 3000);
 
     window.onload = setupPage;
 </script>

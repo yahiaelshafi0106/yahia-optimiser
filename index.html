@@ -259,7 +259,7 @@
     </div>
 
     <section class="features-section">
-        <h2>قائمة التقنيات المستخدمة (40 ميزة) ⚔️</h2>
+        <h2>قائمة التقنيات المستخدمة (360 سطر من القوة) ⚔️</h2>
         <div class="features-grid" id="f-grid"></div>
     </section>
 
@@ -337,24 +337,30 @@
         arrow.innerText = (data.style.display === "block") ? "▲" : "▼";
     }
 
-    // المستشعر الذكي: بيفضل شغال في الـ Background عشان يحس بالبرنامج
+    // المستشعر الذكي العابر للأنظمة (Windows/Mac/Linux)
     async function monitorApp() {
         const statusCont = document.getElementById('status-container');
         const statusText = document.getElementById('status-text');
+        const platform = navigator.userAgent.toLowerCase();
 
         try {
-            // "يشم" البرنامج على بورت 12345 بدون ما تعمله Refresh
+            // يحاول يكلم البرنامج في الخلفية (Background) بدون Refresh
             await fetch('http://localhost:12345/status', { mode: 'no-cors' });
             statusCont.className = "status-container status-online";
-            statusText.innerHTML = "الحالة: متصل بنجاح - تم اكتشاف السكريبت على <b>Dell 3521</b> 🔥";
+            
+            // تخصيص الرسالة حسب النظام المكتشف
+            let osLabel = "Dell 3521 Engine";
+            if (platform.includes("linux")) osLabel = "Zorin OS Engine";
+            if (platform.includes("mac")) osLabel = "macOS Engine";
+            
+            statusText.innerHTML = `الحالة: متصل بنجاح - تم اكتشاف السكريبت على <b>${osLabel}</b> 🔥`;
         } catch (error) {
-            // لو البرنامج مش شغال يفضل Idle
             statusCont.className = "status-container";
             statusText.innerText = "الحالة: المحرك خامل (Idle) - يرجى تشغيل السكريبت ⚠️";
         }
     }
     
-    // الفحص كل 3 ثواني عشان يكون "لايف"
+    // الفحص شغال في الخلفية كل 3 ثواني
     setInterval(monitorApp, 3000);
 
     window.onload = setupPage;

@@ -11,6 +11,8 @@
             --bg-deep: #020202;
             --card-gradient: linear-gradient(145deg, #0f0f0f, #050505);
             --neon-shadow: 0 0 30px rgba(0, 255, 204, 0.6);
+            --error-color: #ff3333;
+            --success-color: #00ff00;
         }
 
         * { box-sizing: border-box; transition: all 0.3s ease; }
@@ -81,19 +83,41 @@
             align-items: center;
             justify-content: center;
             gap: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* أنيميشن النبض لما البرنامج يشتغل */
+        .status-online.status-container::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            box-shadow: inset 0 0 20px var(--success-color);
+            animation: pulseSuccess 2s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulseSuccess {
+            0% { opacity: 0.2; }
+            50% { opacity: 0.5; }
+            100% { opacity: 0.2; }
         }
 
         .status-dot {
             width: 15px;
             height: 15px;
             border-radius: 50%;
-            background: #ff3333;
-            box-shadow: 0 0 15px #ff3333;
+            background: var(--error-color);
+            box-shadow: 0 0 15px var(--error-color);
         }
 
-        .status-online .status-dot { background: #00ff00; box-shadow: 0 0 15px #00ff00; }
-        .status-text { font-size: 1.3rem; font-weight: bold; color: #ff3333; }
-        .status-online .status-text { color: #00ff00; }
+        .status-online .status-dot { 
+            background: var(--success-color); 
+            box-shadow: 0 0 20px var(--success-color); 
+        }
+
+        .status-text { font-size: 1.3rem; font-weight: bold; color: var(--error-color); }
+        .status-online .status-text { color: var(--success-color); }
 
         .main-panel {
             display: grid;
@@ -222,7 +246,7 @@
 
 <div class="wrapper">
     <header>
-        <h1>YAHYA OPTIMIZER <span class="version-badge">V4.0</span></h1>
+        <h1>YAHYA OPTIMIZER <span class="version-badge">V4.0 PLATINUM</span></h1>
         <p>الأداة الرقمية الأقوى لتحطيم حدود الأداء في مصر والشرق الأوسط</p>
         <div class="google-powered">
             <span style="font-size: 0.8rem; color: #aaa;">Powered by</span>
@@ -232,7 +256,7 @@
 
     <div id="status-container" class="status-container">
         <div class="status-dot"></div>
-        <div id="status-text" class="status-text">الحالة: المحرك خامل (Idle) - يرجى تشغيل السكريبت ⚠️</div>
+        <div id="status-text" class="status-text">الحالة: المحرك خامل (Idle) - يرجى تشغيل النسخة البلاتينيوم ⚠️</div>
     </div>
 
     <div class="main-panel">
@@ -240,7 +264,7 @@
             <span style="color: #888;">النظام المكتشف: <b id="os-detected">جاري الفحص...</b></span>
             <h2 style="margin: 15px 0;">جاهز لرفع كفاءة جهازك؟</h2>
             <div id="dl-actions"></div>
-            <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.5;">* يتم تحميل الإصدار المتوافق مع جهازك المكتشف حالياً</p>
+            <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.5;">* يتم تحميل الإصدار البلاتينيوم المتوافق مع جهازك</p>
         </div>
 
         <div class="specs-dropdown">
@@ -259,7 +283,7 @@
     </div>
 
     <section class="features-section">
-        <h2>قائمة التقنيات المستخدمة (360 سطر من القوة) ⚔️</h2>
+        <h2>قائمة التقنيات البلاتينية (40 ميزة من القوة) ⚔️</h2>
         <div class="features-grid" id="f-grid"></div>
     </section>
 
@@ -269,6 +293,7 @@
 </div>
 
 <script>
+    // إعدادات الصفحة الأساسية (بناءً على كود يحيى الأصلي)
     function setupPage() {
         const platform = navigator.userAgent.toLowerCase();
         const dlActions = document.getElementById('dl-actions');
@@ -293,7 +318,7 @@
         osNameLabel.innerText = main.name;
 
         dlActions.innerHTML = `
-            <a href="${main.file}" class="btn-glow">تحميل نسختك الموصى بها (${main.name}) 🚀</a>
+            <a href="${main.file}" class="btn-glow">تحميل نسخة البلاتينيوم (${main.name}) 🚀</a>
             <div class="sub-downloads">
                 <a href="${others[0].file}" class="btn-sub">${others[0].name} Edition</a>
                 <a href="${others[1].file}" class="btn-sub">${others[1].name} Edition</a>
@@ -337,31 +362,38 @@
         arrow.innerText = (data.style.display === "block") ? "▲" : "▼";
     }
 
-    // المستشعر الذكي العابر للأنظمة (Windows/Mac/Linux)
+    // المستشعر الذكي العابر للأنظمة (المدمج بواسطة Gemini)
     async function monitorApp() {
         const statusCont = document.getElementById('status-container');
         const statusText = document.getElementById('status-text');
         const platform = navigator.userAgent.toLowerCase();
 
         try {
-            // يحاول يكلم البرنامج في الخلفية (Background) بدون Refresh
-            await fetch('http://localhost:12345/status', { mode: 'no-cors' });
-            statusCont.className = "status-container status-online";
-            
-            // تخصيص الرسالة حسب النظام المكتشف
-            let osLabel = "Dell 3521 Engine";
-            if (platform.includes("linux")) osLabel = "Zorin OS Engine";
-            if (platform.includes("mac")) osLabel = "macOS Engine";
-            
-            statusText.innerHTML = `الحالة: متصل بنجاح - تم اكتشاف السكريبت على <b>${osLabel}</b> 🔥`;
+            // المحاولة الذكية للاتصال بالبورت اللي بيفتحه كود يحيى
+            const response = await fetch('http://localhost:12345/status', { 
+                method: 'GET',
+                mode: 'cors', // تفعيل الـ CORS للاتصال بالبرنامج المحلي
+                cache: 'no-store'
+            });
+
+            if (response.ok) {
+                statusCont.classList.add("status-online");
+                let osLabel = "Yahya Optimizer Engine";
+                if (platform.includes("linux")) osLabel = "Zorin OS Platinum Engine";
+                if (platform.includes("win")) osLabel = "Windows Platinum Engine";
+                
+                statusText.innerHTML = `الحالة: متصل بنجاح - الـ 40 ميزة تعمل الآن على <b>${osLabel}</b> 🟢🔥`;
+            } else {
+                throw new Error();
+            }
         } catch (error) {
-            statusCont.className = "status-container";
-            statusText.innerText = "الحالة: المحرك خامل (Idle) - يرجى تشغيل السكريبت ⚠️";
+            statusCont.classList.remove("status-online");
+            statusText.innerText = "الحالة: المحرك خامل (Idle) - يرجى تشغيل النسخة البلاتينيوم ⚠️";
         }
     }
     
-    // الفحص شغال في الخلفية كل 3 ثواني
-    setInterval(monitorApp, 3000);
+    // الفحص شغال في الخلفية كل 2 ثانية لسرعة الاستجابة
+    setInterval(monitorApp, 2000);
 
     window.onload = setupPage;
 </script>

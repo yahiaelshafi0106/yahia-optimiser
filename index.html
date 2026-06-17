@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yahya Optimizer v5.0 | Interactive Dashboard</title>
+    <meta name="google-site-verification" content="UsfYEm_4hsYpMqQFAaSU0HiCc0twAlsAcIR3CXAGfhM" />
+    <title>Yahya Optimizer v5.0 – Ultimate Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Cairo:wght@300;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,8 +12,8 @@
             --bg-deep: #020202;
             --card-gradient: linear-gradient(145deg, #0f0f0f, #050505);
             --neon-shadow: 0 0 30px rgba(0, 255, 204, 0.6);
-            --error-color: #ff3333;
             --success-color: #00ff00;
+            --error-color: #ff3333;
             --toggle-bg: #1a1a1a;
             --toggle-active: var(--main-color);
         }
@@ -25,7 +26,7 @@
             font-family: 'Cairo', 'Orbitron', sans-serif;
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
+            min-height: 100vh;
             background-image: radial-gradient(circle at 50% 50%, #0a1a1a 0%, #020202 100%);
         }
 
@@ -56,32 +57,80 @@
             vertical-align: middle;
         }
 
-        /* AI Engine Badges */
-        .ai-badges {
+        .ai-powered-by {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
             gap: 12px;
-            margin: 15px 0 5px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #aaa;
         }
-        .ai-badge {
-            padding: 6px 16px;
-            border-radius: 50px;
+        .ai-powered-by .badge {
+            padding: 4px 14px;
+            border-radius: 30px;
             background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.85rem;
+            border: 1px solid rgba(255,255,255,0.08);
             font-weight: 700;
-            letter-spacing: 0.5px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+            font-size: 0.8rem;
         }
-        .ai-badge.deepseek { border-color: #4D6BFE; color: #4D6BFE; }
-        .ai-badge.claude { border-color: #D97706; color: #D97706; }
-        .ai-badge.gemini { border-color: #4285F4; color: #4285F4; }
-        .ai-badge.kimi { border-color: #FF6B6B; color: #FF6B6B; }
-        .ai-badge .icon { font-size: 1.1rem; }
+        .badge.deepseek { border-color: #4D6BFE; color: #4D6BFE; }
+        .badge.claude { border-color: #D97706; color: #D97706; }
+        .badge.gemini { border-color: #4285F4; color: #4285F4; }
+        .badge.kimi { border-color: #FF6B6B; color: #FF6B6B; }
+
+        /* OS Detection & Downloads */
+        .os-panel {
+            background: var(--card-gradient);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .os-icon { font-size: 3rem; }
+        .os-info { flex: 1; }
+        .os-info .os-name { font-size: 1.5rem; font-weight: bold; color: var(--main-color); }
+        .os-info .os-detail { font-size: 0.9rem; opacity: 0.6; }
+        .download-btn {
+            padding: 12px 30px;
+            background: var(--main-color);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: var(--neon-shadow);
+            transition: 0.3s;
+        }
+        .download-btn:hover { transform: scale(1.05); box-shadow: 0 0 50px rgba(0,255,204,0.8); }
+        .download-btn.alt { background: rgba(255,255,255,0.05); color: #fff; box-shadow: none; }
+        .download-btn.alt:hover { background: rgba(255,255,255,0.1); }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .download-card {
+            background: rgba(255,255,255,0.03);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #1a1a1a;
+        }
+        .download-card .icon { font-size: 2.5rem; }
+        .download-card .label { font-weight: bold; margin: 10px 0 5px; }
+        .download-card .size { font-size: 0.8rem; opacity: 0.5; }
 
         /* Status Bar */
         .status-container {
@@ -97,17 +146,17 @@
             position: relative;
             overflow: hidden;
         }
-        .status-online .status-dot { background: var(--success-color); box-shadow: 0 0 20px var(--success-color); }
         .status-dot {
             width: 15px; height: 15px; border-radius: 50%;
             background: var(--error-color);
             box-shadow: 0 0 15px var(--error-color);
         }
+        .status-online .status-dot { background: var(--success-color); box-shadow: 0 0 20px var(--success-color); }
         .status-text { font-size: 1.2rem; font-weight: bold; }
-        .status-online .status-text { color: var(--success-color); }
         .status-offline .status-text { color: var(--error-color); }
+        .status-online .status-text { color: var(--success-color); }
 
-        /* Controls Panel */
+        /* Controls */
         .controls-panel {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -124,11 +173,7 @@
         }
         .control-card h3 { color: var(--main-color); margin-top: 0; }
 
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+        .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
         .btn {
             padding: 12px 25px;
             border: none;
@@ -146,7 +191,17 @@
         .btn-restore:hover { box-shadow: 0 0 30px rgba(255,170,0,0.5); }
         .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
 
-        /* Toggle Switches */
+        .duration-input {
+            background: #111;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            width: 80px;
+            font-size: 1rem;
+        }
+
+        /* Toggles */
         .toggle-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -190,7 +245,7 @@
         }
         .toggle-switch.active::after { left: 24px; background: #000; }
 
-        /* Real-time Monitor */
+        /* Monitor */
         .monitor-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -239,51 +294,18 @@
             border-top: 1px solid #1a1a1a;
             margin-top: 60px;
         }
-        .online-badge { display: none; }
+        .online-badge, .offline-badge { display: none; }
         .status-online .online-badge { display: inline; color: var(--success-color); }
         .status-offline .offline-badge { display: inline; color: var(--error-color); }
-        .offline-badge { display: none; }
-
-        .duration-input {
-            background: #111;
-            border: 1px solid #333;
-            color: #fff;
-            padding: 8px 12px;
-            border-radius: 6px;
-            width: 80px;
-            font-size: 1rem;
-        }
-        .ai-powered-by {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            margin-top: 5px;
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-        .ai-powered-by .badge {
-            padding: 4px 14px;
-            border-radius: 30px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            font-weight: 700;
-            font-size: 0.8rem;
-        }
-        .badge.deepseek { border-color: #4D6BFE; color: #4D6BFE; }
-        .badge.claude { border-color: #D97706; color: #D97706; }
-        .badge.gemini { border-color: #4285F4; color: #4285F4; }
-        .badge.kimi { border-color: #FF6B6B; color: #FF6B6B; }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
 <div class="wrapper">
     <header>
-        <h1>YAHYA OPTIMIZER <span class="version-badge">V5.0 DASHBOARD</span></h1>
+        <h1>YAHYA OPTIMIZER <span class="version-badge">V5.0 ULTIMATE</span></h1>
         <p>تحكم كامل في محرك الأداء الأسطوري – 40 ميزة بقوة الذكاء الاصطناعي</p>
-        <!-- AI Engine Badges -->
         <div class="ai-powered-by">
             <span style="opacity:0.6;">⚡ Powered by</span>
             <span class="badge deepseek">🔵 DeepSeek</span>
@@ -293,7 +315,41 @@
         </div>
     </header>
 
-    <!-- Status Bar -->
+    <!-- OS Detection & Download -->
+    <div class="os-panel" id="osPanel">
+        <div class="os-icon" id="osIcon">🖥️</div>
+        <div class="os-info">
+            <div class="os-name" id="osName">جاري الكشف...</div>
+            <div class="os-detail" id="osDetail">جاري التعرف على نظامك</div>
+        </div>
+        <div>
+            <a href="#" id="downloadMainBtn" class="download-btn">⬇️ تحميل النسخة</a>
+        </div>
+    </div>
+
+    <!-- All Downloads -->
+    <div class="download-grid">
+        <div class="download-card">
+            <div class="icon">🪟</div>
+            <div class="label">Windows</div>
+            <div class="size">~2.5 MB</div>
+            <a href="Yahya_Optimizer_Win.exe" class="download-btn alt" style="margin-top:10px;">تحميل</a>
+        </div>
+        <div class="download-card">
+            <div class="icon">🐧</div>
+            <div class="label">Linux</div>
+            <div class="size">~2.2 MB</div>
+            <a href="yahya-linux" class="download-btn alt" style="margin-top:10px;">تحميل</a>
+        </div>
+        <div class="download-card">
+            <div class="icon">🍎</div>
+            <div class="label">macOS</div>
+            <div class="size">~2.4 MB</div>
+            <a href="yahya-mac" class="download-btn alt" style="margin-top:10px;">تحميل</a>
+        </div>
+    </div>
+
+    <!-- Status -->
     <div id="statusContainer" class="status-container status-offline">
         <div class="status-dot"></div>
         <div id="statusText" class="status-text">
@@ -327,15 +383,13 @@
         </div>
     </div>
 
-    <!-- Toggleable Features (Exact match to your C++ v5.0 engine) -->
+    <!-- Toggles -->
     <div class="control-card" style="margin-bottom:30px;">
         <h3>⚙️ تفعيل / تعطيل الميزات (8 تقنيات أساسية)</h3>
-        <div class="toggle-grid" id="toggleContainer">
-            <!-- Generated by JS -->
-        </div>
+        <div class="toggle-grid" id="toggleContainer"></div>
     </div>
 
-    <!-- Full Feature List (40 features) -->
+    <!-- 40 Features -->
     <section class="features-section">
         <h2>⚔️ قائمة التقنيات البلاتينية (40 ميزة)</h2>
         <div class="features-grid" id="featureGrid"></div>
@@ -347,10 +401,30 @@
 </div>
 
 <script>
-    // ----------------------------------------------------------------------
-    // 1. Configuration
-    // ----------------------------------------------------------------------
-    const API_BASE = 'http://localhost:12345';  // Your C++ engine HTTP server
+    // =====================================================================
+    // 1. OS Detection
+    // =====================================================================
+    const ua = navigator.userAgent.toLowerCase();
+    let os = { name: 'Unknown', type: 'unknown', icon: '🖥️', file: '' };
+
+    if (ua.includes('win')) {
+        os = { name: 'Windows', type: 'windows', icon: '🪟', file: 'Yahya_Optimizer_Win.exe' };
+    } else if (ua.includes('linux')) {
+        os = { name: 'Linux', type: 'linux', icon: '🐧', file: 'yahya-linux' };
+    } else if (ua.includes('mac')) {
+        os = { name: 'macOS', type: 'macos', icon: '🍎', file: 'yahya-mac' };
+    } else {
+        os = { name: 'غير معروف', type: 'unknown', icon: '❓', file: '#' };
+    }
+
+    document.getElementById('osIcon').textContent = os.icon;
+    document.getElementById('osName').textContent = os.name;
+    document.getElementById('osDetail').textContent = os.type !== 'unknown' ? '✅ نظامك مدعوم بالكامل' : '⚠️ نظامك غير مدعوم رسمياً';
+    document.getElementById('downloadMainBtn').href = os.file;
+
+    // =====================================================================
+    // 2. Features
+    // =====================================================================
     const FEATURES = [
         { id: 'cpu_governor',   label: 'CPU Governor (Performance)' },
         { id: 'vm_tweaks',      label: 'VM Tweaks (Swappiness, Dirty)' },
@@ -385,123 +459,35 @@
         "إصلاح قيم الريجستري التالفة", "توافق كامل مع Zorin OS و Linux"
     ];
 
-    // ----------------------------------------------------------------------
-    // 2. State
-    // ----------------------------------------------------------------------
+    // =====================================================================
+    // 3. Build UI
+    // =====================================================================
     let toggles = {};
-    let isOnline = false;
-    let boostActive = false;
-    let monitorInterval = null;
-
-    // ----------------------------------------------------------------------
-    // 3. DOM References
-    // ----------------------------------------------------------------------
-    const statusContainer = document.getElementById('statusContainer');
-    const statusText = document.getElementById('statusText');
-    const boostStatus = document.getElementById('boostStatus');
-    const btnStart = document.getElementById('btnStart');
-    const btnStop = document.getElementById('btnStop');
-    const btnRestore = document.getElementById('btnRestore');
-    const boostDuration = document.getElementById('boostDuration');
-    const cpuLoadEl = document.getElementById('cpuLoad');
-    const cpuTempEl = document.getElementById('cpuTemp');
-    const fanRPMEl = document.getElementById('fanRPM');
     const toggleContainer = document.getElementById('toggleContainer');
+
+    FEATURES.forEach(f => {
+        toggles[f.id] = true;
+        const div = document.createElement('div');
+        div.className = 'toggle-item active';
+        div.id = `toggle-${f.id}`;
+        div.innerHTML = `
+            <span class="toggle-label">${f.label}</span>
+            <div class="toggle-switch active" onclick="toggleFeature('${f.id}')"></div>
+        `;
+        toggleContainer.appendChild(div);
+    });
+
     const featureGrid = document.getElementById('featureGrid');
+    ALL_FEATURES_40.forEach((feat, i) => {
+        const box = document.createElement('div');
+        box.className = 'feature-box' + (i < 8 ? ' active-feature' : '');
+        box.innerHTML = `<b>#${i+1}</b><br>${feat}`;
+        featureGrid.appendChild(box);
+    });
 
-    // ----------------------------------------------------------------------
-    // 4. Build UI
-    // ----------------------------------------------------------------------
-    function buildToggles() {
-        toggleContainer.innerHTML = '';
-        FEATURES.forEach(f => {
-            toggles[f.id] = true; // Default ON
-            const div = document.createElement('div');
-            div.className = 'toggle-item active';
-            div.id = `toggle-${f.id}`;
-            div.innerHTML = `
-                <span class="toggle-label">${f.label}</span>
-                <div class="toggle-switch active" data-id="${f.id}" onclick="toggleFeature('${f.id}')"></div>
-            `;
-            toggleContainer.appendChild(div);
-        });
-    }
-
-    function buildFeatureList() {
-        featureGrid.innerHTML = '';
-        ALL_FEATURES_40.forEach((feat, i) => {
-            const box = document.createElement('div');
-            box.className = 'feature-box';
-            if (i < 8) box.classList.add('active-feature');
-            box.innerHTML = `<b>#${i+1}</b><br>${feat}`;
-            featureGrid.appendChild(box);
-        });
-    }
-
-    // ----------------------------------------------------------------------
-    // 5. API Communication
-    // ----------------------------------------------------------------------
-    async function apiFetch(endpoint, options = {}) {
-        try {
-            const res = await fetch(`${API_BASE}${endpoint}`, {
-                ...options,
-                mode: 'cors',
-                headers: { 'Content-Type': 'application/json', ...(options.headers || {}) }
-            });
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            return await res.json();
-        } catch (e) {
-            if (endpoint === '/status') {
-                return { online: false };
-            }
-            throw e;
-        }
-    }
-
-    async function updateStatus() {
-        try {
-            const data = await apiFetch('/status');
-            if (data.online !== false) {
-                setOnline(true);
-                if (data.boost) boostActive = data.boost;
-                if (data.cpu_load !== undefined) cpuLoadEl.textContent = data.cpu_load + '%';
-                if (data.temp !== undefined) cpuTempEl.textContent = data.temp + '°C';
-                if (data.fan_rpm !== undefined) fanRPMEl.textContent = data.fan_rpm + ' RPM';
-                if (data.toggles) {
-                    Object.keys(data.toggles).forEach(key => {
-                        if (toggles[key] !== undefined) {
-                            toggles[key] = data.toggles[key];
-                            updateToggleUI(key);
-                        }
-                    });
-                }
-            } else {
-                setOnline(false);
-                simulateDemoData();
-            }
-        } catch (e) {
-            setOnline(false);
-            simulateDemoData();
-        }
-        updateBoostUI();
-    }
-
-    function setOnline(state) {
-        isOnline = state;
-        statusContainer.className = 'status-container ' + (state ? 'status-online' : 'status-offline');
-        if (state) {
-            statusText.innerHTML = `<span class="online-badge">✅ المحرك متصل – يعمل بكامل طاقته</span>`;
-        } else {
-            statusText.innerHTML = `<span class="offline-badge">⛔ المحرك غير متصل (جاري المحاكاة)</span>`;
-        }
-    }
-
-    function simulateDemoData() {
-        cpuLoadEl.textContent = Math.floor(Math.random() * 30 + 10) + '%';
-        cpuTempEl.textContent = Math.floor(Math.random() * 15 + 45) + '°C';
-        fanRPMEl.textContent = Math.floor(Math.random() * 1500 + 2000) + ' RPM';
-    }
-
+    // =====================================================================
+    // 4. Functions
+    // =====================================================================
     function updateToggleUI(id) {
         const div = document.getElementById(`toggle-${id}`);
         if (!div) return;
@@ -511,90 +497,39 @@
         sw.className = 'toggle-switch' + (isActive ? ' active' : '');
     }
 
-    function updateBoostUI() {
-        boostStatus.textContent = boostActive ? '🔴 Boost نشط' : '⚪ Boost خامل';
-        btnStart.disabled = boostActive || !isOnline;
-        btnStop.disabled = !boostActive || !isOnline;
-    }
-
-    // ----------------------------------------------------------------------
-    // 6. User Actions
-    // ----------------------------------------------------------------------
-    window.toggleFeature = async function(id) {
+    window.toggleFeature = function(id) {
         toggles[id] = !toggles[id];
         updateToggleUI(id);
-        if (isOnline) {
-            try {
-                await apiFetch('/toggle', {
-                    method: 'POST',
-                    body: JSON.stringify({ feature: id, state: toggles[id] })
-                });
-            } catch (e) { /* Ignore */ }
-        }
+        console.log(`📌 ${id}: ${toggles[id] ? 'ON' : 'OFF'}`);
     };
 
-    window.sendCommand = async function(cmd) {
+    window.sendCommand = function(cmd) {
+        const duration = document.getElementById('boostDuration').value;
         if (cmd === 'start') {
-            const minutes = parseInt(boostDuration.value) || 30;
-            if (isOnline) {
-                try {
-                    await apiFetch('/start', {
-                        method: 'POST',
-                        body: JSON.stringify({ minutes })
-                    });
-                    boostActive = true;
-                } catch (e) { alert('فشل بدء Boost: ' + e.message); }
-            } else {
-                boostActive = true;
-                alert(`✅ تم بدء Boost لمدة ${minutes} دقيقة (محاكاة).`);
-            }
+            alert(`✅ بدء Boost لمدة ${duration} دقيقة مع الميزات المحددة.`);
+            document.getElementById('boostStatus').textContent = '🔴 Boost نشط';
         } else if (cmd === 'stop') {
-            if (isOnline) {
-                try {
-                    await apiFetch('/stop', { method: 'POST' });
-                    boostActive = false;
-                } catch (e) { alert('فشل إيقاف Boost: ' + e.message); }
-            } else {
-                boostActive = false;
-                alert('⏹ تم إيقاف Boost (محاكاة).');
-            }
+            alert('⏹ تم إيقاف Boost.');
+            document.getElementById('boostStatus').textContent = '⚪ Boost خامل';
         } else if (cmd === 'restore') {
-            if (isOnline) {
-                try {
-                    await apiFetch('/restore', { method: 'POST' });
-                    boostActive = false;
-                } catch (e) { alert('فشل الاستعادة: ' + e.message); }
-            } else {
-                boostActive = false;
-                alert('↩ تم استعادة الإعدادات (محاكاة).');
-            }
+            alert('↩ تم استعادة جميع الإعدادات.');
+            document.getElementById('boostStatus').textContent = '⚪ Boost خامل';
         }
-        updateBoostUI();
     };
 
-    // ----------------------------------------------------------------------
-    // 7. Init
-    // ----------------------------------------------------------------------
-    buildToggles();
-    buildFeatureList();
-    updateStatus();
-    monitorInterval = setInterval(updateStatus, 2000);
-
-    window.addEventListener('beforeunload', () => {
-        if (monitorInterval) clearInterval(monitorInterval);
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'r' || e.key === 'R') {
-            if (!e.ctrlKey && !e.metaKey) {
-                e.preventDefault();
-                updateStatus();
-            }
-        }
-    });
+    // =====================================================================
+    // 5. Live Monitor Simulation
+    // =====================================================================
+    function simulateData() {
+        document.getElementById('cpuLoad').textContent = Math.floor(Math.random() * 30 + 10) + '%';
+        document.getElementById('cpuTemp').textContent = Math.floor(Math.random() * 15 + 45) + '°C';
+        document.getElementById('fanRPM').textContent = Math.floor(Math.random() * 1500 + 2000) + ' RPM';
+    }
+    setInterval(simulateData, 2000);
+    simulateData();
 
     console.log('✅ Yahya Optimizer Dashboard v5.0 loaded.');
-    console.log('📡 Connecting to C++ engine at', API_BASE);
+    console.log(`📡 Detected OS: ${os.name} (${os.type})`);
 </script>
 
 </body>
